@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names
 
-import '/backend/schema/structs/index.dart';
 
 /// Scope of where the event is being handled
 enum FFAppEventScope {

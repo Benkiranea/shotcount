@@ -39,4 +39,7 @@ class InstagramPostsRow extends SupabaseDataRow {
   String? get profilePictureUrl => getField<String>('profile_picture_url');
   set profilePictureUrl(String? value) =>
       setField<String>('profile_picture_url', value);
+
+  dynamic get childrenUrls => getField<dynamic>('children_urls');
+  set childrenUrls(dynamic value) => setField<dynamic>('children_urls', value);
 }

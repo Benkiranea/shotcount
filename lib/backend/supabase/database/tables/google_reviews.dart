@@ -54,8 +54,8 @@ class GoogleReviewsRow extends SupabaseDataRow {
   set ownerReplyUpdatedAt(DateTime? value) =>
       setField<DateTime>('owner_reply_updated_at', value);
 
-  dynamic? get rawData => getField<dynamic>('raw_data');
-  set rawData(dynamic? value) => setField<dynamic>('raw_data', value);
+  dynamic get rawData => getField<dynamic>('raw_data');
+  set rawData(dynamic value) => setField<dynamic>('raw_data', value);
 
   DateTime? get createdAt => getField<DateTime>('created_at');
   set createdAt(DateTime? value) => setField<DateTime>('created_at', value);

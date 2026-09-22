@@ -3,13 +3,10 @@ import '/backend/supabase/supabase.dart';
 import '/components/choice_container/choice_container_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/steps_pages/steps_container/steps_container_widget.dart';
-import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -461,12 +458,8 @@ class _Step1WidgetState extends State<Step1Widget> {
                                         }
 
                                         if ((_model.uploadedFileUrl_uploadRoomImage !=
-                                                    null &&
-                                                _model.uploadedFileUrl_uploadRoomImage !=
                                                     '') &&
                                             (_model.uploadedFileUrl_uploadWallpaper !=
-                                                    null &&
-                                                _model.uploadedFileUrl_uploadWallpaper !=
                                                     '')) {
                                           _model.isLoading = true;
                                           safeSetState(() {});
@@ -661,12 +654,8 @@ class _Step1WidgetState extends State<Step1Widget> {
                                         }
 
                                         if ((_model.uploadedFileUrl_uploadRoomImage !=
-                                                    null &&
-                                                _model.uploadedFileUrl_uploadRoomImage !=
                                                     '') &&
                                             (_model.uploadedFileUrl_uploadWallpaper !=
-                                                    null &&
-                                                _model.uploadedFileUrl_uploadWallpaper !=
                                                     '')) {
                                           _model.isLoading = true;
                                           safeSetState(() {});

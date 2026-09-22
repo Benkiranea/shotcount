@@ -3,18 +3,11 @@ import '/backend/supabase/supabase.dart';
 import '/components/choice_container/choice_container_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_data.dart';
 import '/steps_pages/steps_container/steps_container_widget.dart';
-import 'dart:ui';
-import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'step1_widget.dart' show Step1Widget;
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:provider/provider.dart';
 
 class Step1Model extends FlutterFlowModel<Step1Widget> {
   ///  Local state fields for this page.
@@ -160,7 +153,7 @@ class Step1Model extends FlutterFlowModel<Step1Widget> {
   // Stores action output result for [Validate Form] action in Container widget.
   bool? formValidate;
   // Stores action output result for [Custom Action - uploadFilesToSupabase] action in Container widget.
-  dynamic? uploadFilesToSupabase;
+  dynamic uploadFilesToSupabase;
   // Stores action output result for [Backend Call - Insert Row] action in Container widget.
   ProjectsRow? projectCreated;
 
@@ -235,12 +228,12 @@ class Step1Model extends FlutterFlowModel<Step1Widget> {
       wallpaperUrl: uploadedFileUrl_uploadWallpaper,
     );
 
-    if ((imageRes?.succeeded ?? true)) {
+    if ((imageRes.succeeded ?? true)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
             getJsonField(
-              (imageRes?.jsonBody ?? ''),
+              (imageRes.jsonBody ?? ''),
               r'''$.result_url''',
             ).toString(),
             style: TextStyle(

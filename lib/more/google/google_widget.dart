@@ -1,11 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'google_model.dart';
 export 'google_model.dart';
 
@@ -74,7 +71,7 @@ class _GoogleWidgetState extends State<GoogleWidget> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.network(
-                        widget!.image!,
+                        widget.image!,
                         width: 45.0,
                         height: 45.0,
                         fit: BoxFit.cover,
@@ -86,7 +83,7 @@ class _GoogleWidgetState extends State<GoogleWidget> {
                       children: [
                         Text(
                           valueOrDefault<String>(
-                            widget!.name,
+                            widget.name,
                             'Name',
                           ),
                           style:
@@ -108,7 +105,7 @@ class _GoogleWidgetState extends State<GoogleWidget> {
                         ),
                         Text(
                           valueOrDefault<String>(
-                            widget!.date,
+                            widget.date,
                             'Date',
                           ),
                           style:
@@ -163,7 +160,7 @@ class _GoogleWidgetState extends State<GoogleWidget> {
             ),
             Text(
               valueOrDefault<String>(
-                widget!.note,
+                widget.note,
                 'Note',
               ),
               style: FlutterFlowTheme.of(context).bodyMedium.override(
