@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/your_projects/project_detail_card/project_detail_card_widget.dart';
 import '/your_projects/your_detail_card/your_detail_card_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -428,20 +429,35 @@ class _YourProjectDetailPageWidgetState
                                   width: 30.0,
                                   height: 30.0,
                                   decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).borderClr,
+                                    color: FlutterFlowTheme.of(context).primary,
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: FlutterFlowTheme.of(context)
-                                          .borderClr,
                                       width: 1.0,
                                     ),
                                   ),
                                   alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: Icon(
-                                    Icons.check,
-                                    color: FlutterFlowTheme.of(context).success,
-                                    size: 12.0,
+                                  child: Text(
+                                    '2',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.playfair(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .containerClr,
+                                          fontSize: 24.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
                                   ),
                                 ),
                                 Expanded(
@@ -457,11 +473,10 @@ class _YourProjectDetailPageWidgetState
                                   width: 30.0,
                                   height: 30.0,
                                   decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context).primary,
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
                                       width: 1.0,
                                     ),
                                   ),
@@ -687,19 +702,54 @@ class _YourProjectDetailPageWidgetState
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  width: 30.0,
-                                  height: 30.0,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).borderClr,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: Icon(
-                                    Icons.check,
-                                    color: FlutterFlowTheme.of(context).success,
-                                    size: 12.0,
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed(
+                                      Step3Widget.routeName,
+                                      queryParameters: {
+                                        'projectId': serializeParam(
+                                          widget.projectId,
+                                          ParamType.String,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 30.0,
+                                    height: 30.0,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Text(
+                                      '3',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            font: GoogleFonts.playfair(
+                                              fontWeight: FontWeight.w600,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .containerClr,
+                                            fontSize: 24.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                    ),
                                   ),
                                 ),
                                 Expanded(
@@ -715,8 +765,10 @@ class _YourProjectDetailPageWidgetState
                                   width: 30.0,
                                   height: 30.0,
                                   decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context).primary,
                                     shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: FlutterFlowTheme.of(context).info,
+                                    ),
                                   ),
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Text(
@@ -923,15 +975,32 @@ class _YourProjectDetailPageWidgetState
                                   width: 30.0,
                                   height: 30.0,
                                   decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).borderClr,
+                                    color: FlutterFlowTheme.of(context).primary,
                                     shape: BoxShape.circle,
                                   ),
                                   alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: Icon(
-                                    Icons.check,
-                                    color: FlutterFlowTheme.of(context).success,
-                                    size: 12.0,
+                                  child: Text(
+                                    '4',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.playfair(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .containerClr,
+                                          fontSize: 24.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
                                   ),
                                 ),
                                 Expanded(
@@ -947,11 +1016,10 @@ class _YourProjectDetailPageWidgetState
                                   width: 30.0,
                                   height: 30.0,
                                   decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context).primary,
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
                                       width: 1.0,
                                     ),
                                   ),
@@ -1158,20 +1226,37 @@ class _YourProjectDetailPageWidgetState
                                   width: 30.0,
                                   height: 30.0,
                                   decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).borderClr,
+                                    color: FlutterFlowTheme.of(context).primary,
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: FlutterFlowTheme.of(context)
-                                          .borderClr,
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
                                       width: 1.0,
                                     ),
                                   ),
                                   alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: Icon(
-                                    Icons.check,
-                                    color: FlutterFlowTheme.of(context).success,
-                                    size: 12.0,
+                                  child: Text(
+                                    '5',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.playfair(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .containerClr,
+                                          fontSize: 24.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
                                   ),
                                 ),
                                 Expanded(
@@ -1187,11 +1272,9 @@ class _YourProjectDetailPageWidgetState
                                   width: 30.0,
                                   height: 30.0,
                                   decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context).primary,
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
+                                      color: FlutterFlowTheme.of(context).info,
                                       width: 1.0,
                                     ),
                                   ),
@@ -2070,19 +2153,50 @@ class _YourProjectDetailPageWidgetState
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .borderClr,
+                                                                .primary,
                                                         shape: BoxShape.circle,
+                                                        border: Border.all(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          width: 1.0,
+                                                        ),
                                                       ),
                                                       alignment:
                                                           AlignmentDirectional(
                                                               0.0, 0.0),
-                                                      child: Icon(
-                                                        Icons.check,
-                                                        color:
+                                                      child: Text(
+                                                        '2',
+                                                        style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .success,
-                                                        size: 12.0,
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .playfair(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .containerClr,
+                                                                  fontSize:
+                                                                      24.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
                                                       ),
                                                     ),
                                                     Container(
@@ -2102,7 +2216,7 @@ class _YourProjectDetailPageWidgetState
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primary,
+                                                                .borderClr,
                                                         shape: BoxShape.circle,
                                                       ),
                                                       alignment:
@@ -2389,26 +2503,72 @@ class _YourProjectDetailPageWidgetState
                                                                 .primary,
                                                       ),
                                                     ),
-                                                    Container(
-                                                      width: 30.0,
-                                                      height: 30.0,
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .borderClr,
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              0.0, 0.0),
-                                                      child: Icon(
-                                                        Icons.check,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .success,
-                                                        size: 12.0,
+                                                    InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        context.pushNamed(
+                                                          Step3Widget.routeName,
+                                                          queryParameters: {
+                                                            'projectId':
+                                                                serializeParam(
+                                                              widget.projectId,
+                                                              ParamType.String,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
+                                                      },
+                                                      child: Container(
+                                                        width: 30.0,
+                                                        height: 30.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                0.0, 0.0),
+                                                        child: Text(
+                                                          '3',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .playfair(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .containerClr,
+                                                                fontSize: 24.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
+                                                        ),
                                                       ),
                                                     ),
                                                     Container(
@@ -2428,7 +2588,7 @@ class _YourProjectDetailPageWidgetState
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primary,
+                                                                .borderClr,
                                                         shape: BoxShape.circle,
                                                       ),
                                                       alignment:
@@ -2697,19 +2857,44 @@ class _YourProjectDetailPageWidgetState
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .borderClr,
+                                                                .primary,
                                                         shape: BoxShape.circle,
                                                       ),
                                                       alignment:
                                                           AlignmentDirectional(
                                                               0.0, 0.0),
-                                                      child: Icon(
-                                                        Icons.check,
-                                                        color:
+                                                      child: Text(
+                                                        '4',
+                                                        style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .success,
-                                                        size: 12.0,
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .playfair(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .containerClr,
+                                                                  fontSize:
+                                                                      24.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
                                                       ),
                                                     ),
                                                     Container(
@@ -2729,7 +2914,7 @@ class _YourProjectDetailPageWidgetState
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primary,
+                                                                .borderClr,
                                                         shape: BoxShape.circle,
                                                       ),
                                                       alignment:
@@ -2973,19 +3158,46 @@ class _YourProjectDetailPageWidgetState
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .borderClr,
+                                                                .primary,
                                                         shape: BoxShape.circle,
                                                       ),
                                                       alignment:
                                                           AlignmentDirectional(
                                                               0.0, 0.0),
-                                                      child: Icon(
-                                                        Icons.check,
-                                                        color:
+                                                      child: Text(
+                                                        '5',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .success,
-                                                        size: 12.0,
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .playfair(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .containerClr,
+                                                                  fontSize:
+                                                                      24.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
                                                       ),
                                                     ),
                                                     Container(
@@ -3005,7 +3217,7 @@ class _YourProjectDetailPageWidgetState
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primary,
+                                                                .borderClr,
                                                         shape: BoxShape.circle,
                                                       ),
                                                       alignment:
