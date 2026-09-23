@@ -1,10 +1,9 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/steps_pages/time_slot/time_slot_widget.dart';
-import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +59,8 @@ class _Step4WidgetState extends State<Step4Widget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -737,6 +738,26 @@ class _Step4WidgetState extends State<Step4Widget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
+                                      _model.profileData =
+                                          await ProfilesTable().queryRows(
+                                        queryFn: (q) => q.eqOrNull(
+                                          'id',
+                                          FFAppState().userId,
+                                        ),
+                                      );
+                                      _model.hubspotBooking =
+                                          await HubspotBookMeetingCall.call(
+                                        email: _model
+                                            .profileData?.firstOrNull?.email,
+                                        firstName: _model
+                                            .profileData?.firstOrNull?.fullName,
+                                        startTime: _model.selectedTime,
+                                        lastName: functions.getLastName(_model
+                                            .profileData!
+                                            .firstOrNull!
+                                            .fullName!),
+                                      );
+
                                       await ProjectsTable().update(
                                         data: {
                                           'appointment_date':
@@ -748,7 +769,7 @@ class _Step4WidgetState extends State<Step4Widget> {
                                         },
                                         matchingRows: (rows) => rows.eqOrNull(
                                           'id',
-                                          widget!.projectId,
+                                          widget.projectId,
                                         ),
                                       );
 
@@ -756,11 +777,13 @@ class _Step4WidgetState extends State<Step4Widget> {
                                         Step5Widget.routeName,
                                         queryParameters: {
                                           'projectId': serializeParam(
-                                            widget!.projectId,
+                                            widget.projectId,
                                             ParamType.String,
                                           ),
                                         }.withoutNulls,
                                       );
+
+                                      safeSetState(() {});
                                     },
                                     child: Container(
                                       width: double.infinity,

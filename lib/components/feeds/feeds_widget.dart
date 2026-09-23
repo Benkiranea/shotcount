@@ -1,14 +1,11 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'feeds_model.dart';
 export 'feeds_model.dart';
 
@@ -20,6 +17,7 @@ class FeedsWidget extends StatefulWidget {
     required this.caption,
     required this.mediaType,
     required this.singleImage,
+    this.childrenUrl,
   });
 
   final String? userName;
@@ -27,6 +25,7 @@ class FeedsWidget extends StatefulWidget {
   final String? caption;
   final String? mediaType;
   final String? singleImage;
+  final String? childrenUrl;
 
   @override
   State<FeedsWidget> createState() => _FeedsWidgetState();
@@ -70,7 +69,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(
-                    widget!.profileImage!,
+                    widget.profileImage!,
                     width: 36.0,
                     height: 36.0,
                     fit: BoxFit.cover,
@@ -78,7 +77,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                 ),
                 Text(
                   valueOrDefault<String>(
-                    widget!.userName,
+                    widget.userName,
                     'Shotcount',
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -115,113 +114,136 @@ class _FeedsWidgetState extends State<FeedsWidget> {
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Expanded(
-                child: Builder(
-                  builder: (context) {
-                    if (widget!.mediaType == 'CAROUSEL_ALBUM') {
-                      return Builder(
-                        builder: (context) {
-                          final images = List.generate(
-                                  random_data.randomInteger(5, 5),
-                                  (index) => random_data.randomInteger(0, 3))
-                              .toList();
-
-                          return Container(
-                            width: double.infinity,
-                            height: 352.0,
-                            child: Stack(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 30.0),
-                                  child: PageView.builder(
-                                    controller: _model.pageViewController ??=
-                                        PageController(
-                                            initialPage: max(
-                                                0, min(0, images.length - 1))),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: images.length,
-                                    itemBuilder: (context, imagesIndex) {
-                                      final imagesItem = images[imagesIndex];
-                                      return Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Expanded(
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(0.0),
-                                              child: Image.network(
-                                                'https://picsum.photos/seed/739/600',
-                                                width: double.infinity,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(0.0, 1.0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
-                                    child: smooth_page_indicator
-                                        .SmoothPageIndicator(
-                                      controller: _model.pageViewController ??=
-                                          PageController(
-                                              initialPage: max(0,
-                                                  min(0, images.length - 1))),
-                                      count: images.length,
-                                      axisDirection: Axis.horizontal,
-                                      onDotClicked: (i) async {
-                                        await _model.pageViewController!
-                                            .animateToPage(
-                                          i,
-                                          duration: Duration(milliseconds: 500),
-                                          curve: Curves.ease,
-                                        );
-                                        safeSetState(() {});
-                                      },
-                                      effect: smooth_page_indicator.SlideEffect(
-                                        spacing: 4.0,
-                                        radius: 8.0,
-                                        dotWidth: 6.0,
-                                        dotHeight: 6.0,
-                                        dotColor: FlutterFlowTheme.of(context)
-                                            .iconClr,
-                                        activeDotColor:
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                        paintStyle: PaintingStyle.fill,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    } else {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.network(
-                            widget!.singleImage!,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
-                        ],
-                      );
-                    }
-                  },
+              Container(
+                width: MediaQuery.sizeOf(context).width * 1.0,
+                height: 352.0,
+                child: custom_widgets.InstagramMediaViewer(
+                  width: MediaQuery.sizeOf(context).width * 1.0,
+                  height: 352.0,
+                  mediaType: widget.mediaType!,
+                  mediaUrl: widget.singleImage!,
+                  childrenUrl: widget.childrenUrl,
                 ),
               ),
             ],
           ),
         ),
+        if (false)
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: Builder(
+                    builder: (context) {
+                      if (widget.mediaType == 'CAROUSEL_ALBUM') {
+                        return Builder(
+                          builder: (context) {
+                            final images = List.generate(
+                                    random_data.randomInteger(5, 5),
+                                    (index) => random_data.randomInteger(0, 3))
+                                .toList();
+
+                            return Container(
+                              width: double.infinity,
+                              height: 352.0,
+                              child: Stack(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 30.0),
+                                    child: PageView.builder(
+                                      controller: _model.pageViewController ??=
+                                          PageController(
+                                              initialPage: max(0,
+                                                  min(0, images.length - 1))),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: images.length,
+                                      itemBuilder: (context, imagesIndex) {
+                                        final imagesItem = images[imagesIndex];
+                                        return Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Expanded(
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(0.0),
+                                                child: Image.network(
+                                                  'https://picsum.photos/seed/739/600',
+                                                  width: double.infinity,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0.0, 1.0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 16.0),
+                                      child: smooth_page_indicator
+                                          .SmoothPageIndicator(
+                                        controller: _model
+                                                .pageViewController ??=
+                                            PageController(
+                                                initialPage: max(0,
+                                                    min(0, images.length - 1))),
+                                        count: images.length,
+                                        axisDirection: Axis.horizontal,
+                                        onDotClicked: (i) async {
+                                          await _model.pageViewController!
+                                              .animateToPage(
+                                            i,
+                                            duration:
+                                                Duration(milliseconds: 500),
+                                            curve: Curves.ease,
+                                          );
+                                          safeSetState(() {});
+                                        },
+                                        effect:
+                                            smooth_page_indicator.SlideEffect(
+                                          spacing: 4.0,
+                                          radius: 8.0,
+                                          dotWidth: 6.0,
+                                          dotHeight: 6.0,
+                                          dotColor: FlutterFlowTheme.of(context)
+                                              .iconClr,
+                                          activeDotColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          paintStyle: PaintingStyle.fill,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      } else {
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.network(
+                              'https://picsum.photos/seed/739/600',
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
+                          ],
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
         Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
           child: Row(
@@ -267,7 +289,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(8.0, 6.0, 8.0, 0.0),
             child: Text(
               valueOrDefault<String>(
-                widget!.caption,
+                widget.caption,
                 'Shotcount’s artistic interpretation of American Pie transforms one of music’s most iconic images into a minimalist Van Gogh Impressionist mural.... ',
               ),
               style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -293,7 +315,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
           child: custom_widgets.ReadMoreWidget(
             width: double.infinity,
             height: 16.0,
-            data: widget!.caption,
+            data: widget.caption,
             color: FlutterFlowTheme.of(context).primary,
           ),
         ),

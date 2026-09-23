@@ -1,12 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:provider/provider.dart';
 import 'your_detail_card_model.dart';
 export 'your_detail_card_model.dart';
 
@@ -87,7 +83,7 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.network(
-                          widget!.image!,
+                          widget.image!,
                           width: 79.0,
                           height: 79.0,
                           fit: BoxFit.cover,
@@ -103,7 +99,7 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                             children: [
                               Text(
                                 valueOrDefault<String>(
-                                  widget!.title,
+                                  widget.title,
                                   'Title',
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -127,7 +123,7 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                               ),
                               Text(
                                 valueOrDefault<String>(
-                                  widget!.description,
+                                  widget.description,
                                   'Description',
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -187,7 +183,7 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                                           ),
                                     ),
                                     TextSpan(
-                                      text: widget!.date!,
+                                      text: widget.date!,
                                       style: GoogleFonts.inter(
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
@@ -247,7 +243,7 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                                         ),
                                         Text(
                                           valueOrDefault<String>(
-                                            widget!.status,
+                                            widget.status,
                                             'Status',
                                           ),
                                           style: FlutterFlowTheme.of(context)
@@ -334,7 +330,7 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                         ),
                         TextSpan(
                           text: valueOrDefault<String>(
-                            widget!.projectID,
+                            widget.projectID,
                             'ProjectId',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -392,7 +388,7 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                       ),
                       Text(
                         valueOrDefault<String>(
-                          widget!.address,
+                          widget.address,
                           'Project Address',
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -430,7 +426,7 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                       children: [
                         TextSpan(
                           text: valueOrDefault<String>(
-                            widget!.progressValue?.toString(),
+                            widget.progressValue?.toString(),
                             '0',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -537,7 +533,7 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                       children: [
                         TextSpan(
                           text: valueOrDefault<String>(
-                            widget!.currentStep,
+                            widget.currentStep,
                             '0',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -586,7 +582,7 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                         ),
                         TextSpan(
                           text: valueOrDefault<String>(
-                            widget!.totalStep,
+                            widget.totalStep,
                             '10',
                           ),
                           style: GoogleFonts.inter(

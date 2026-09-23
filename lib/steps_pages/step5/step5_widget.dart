@@ -1,13 +1,10 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/steps_pages/steps_container/steps_container_widget.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'step5_model.dart';
 export 'step5_model.dart';
 
@@ -364,7 +361,7 @@ class _Step5WidgetState extends State<Step5Widget> {
                               0.0, 18.0, 0.0, 0.0),
                           child: FutureBuilder<ApiCallResponse>(
                             future: GetProjectDetailsCall.call(
-                              pProjectId: widget!.projectId,
+                              pProjectId: widget.projectId,
                             ),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.

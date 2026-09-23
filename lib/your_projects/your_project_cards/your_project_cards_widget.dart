@@ -1,12 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:provider/provider.dart';
 import 'your_project_cards_model.dart';
 export 'your_project_cards_model.dart';
 
@@ -95,7 +91,7 @@ class _YourProjectCardsWidgetState extends State<YourProjectCardsWidget> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
-                            widget!.image!,
+                            widget.image!,
                             width: 79.0,
                             height: 79.0,
                             fit: BoxFit.cover,
@@ -111,7 +107,7 @@ class _YourProjectCardsWidgetState extends State<YourProjectCardsWidget> {
                               children: [
                                 Text(
                                   valueOrDefault<String>(
-                                    widget!.title,
+                                    widget.title,
                                     'Title',
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -136,7 +132,7 @@ class _YourProjectCardsWidgetState extends State<YourProjectCardsWidget> {
                                 ),
                                 Text(
                                   valueOrDefault<String>(
-                                    widget!.description,
+                                    widget.description,
                                     'Description',
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -166,7 +162,7 @@ class _YourProjectCardsWidgetState extends State<YourProjectCardsWidget> {
                                 ),
                                 Text(
                                   valueOrDefault<String>(
-                                    widget!.date,
+                                    widget.date,
                                     'Date',
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -221,7 +217,7 @@ class _YourProjectCardsWidgetState extends State<YourProjectCardsWidget> {
                                           ),
                                           Text(
                                             valueOrDefault<String>(
-                                              widget!.status,
+                                              widget.status,
                                               'In Review',
                                             ),
                                             style: FlutterFlowTheme.of(context)
@@ -285,7 +281,7 @@ class _YourProjectCardsWidgetState extends State<YourProjectCardsWidget> {
                         children: [
                           TextSpan(
                             text: valueOrDefault<String>(
-                              widget!.progresText,
+                              widget.progresText,
                               '0',
                             ),
                             style: FlutterFlowTheme.of(context)
@@ -333,7 +329,7 @@ class _YourProjectCardsWidgetState extends State<YourProjectCardsWidget> {
                     ),
                     Expanded(
                       child: LinearPercentIndicator(
-                        percent: widget!.progressPercentage!,
+                        percent: widget.progressPercentage!,
                         lineHeight: 4.0,
                         animation: true,
                         animateFromLastPercent: true,
@@ -372,7 +368,7 @@ class _YourProjectCardsWidgetState extends State<YourProjectCardsWidget> {
                         children: [
                           TextSpan(
                             text: valueOrDefault<String>(
-                              widget!.currentStep,
+                              widget.currentStep,
                               '0',
                             ),
                             style: FlutterFlowTheme.of(context)
@@ -421,7 +417,7 @@ class _YourProjectCardsWidgetState extends State<YourProjectCardsWidget> {
                           ),
                           TextSpan(
                             text: valueOrDefault<String>(
-                              widget!.totalStep,
+                              widget.totalStep,
                               '0',
                             ),
                             style: GoogleFonts.inter(

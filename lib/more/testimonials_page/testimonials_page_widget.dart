@@ -3,14 +3,11 @@ import '/backend/schema/enums/enums.dart';
 import '/components/app_header/app_header_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/more/google/google_widget.dart';
 import '/more/yelp/yelp_widget.dart';
-import 'dart:ui';
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'testimonials_page_model.dart';
 export 'testimonials_page_model.dart';
 

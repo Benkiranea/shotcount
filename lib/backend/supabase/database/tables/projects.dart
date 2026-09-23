@@ -36,8 +36,8 @@ class ProjectsRow extends SupabaseDataRow {
   String? get address => getField<String>('address');
   set address(String? value) => setField<String>('address', value);
 
-  dynamic? get uploadFiles => getField<dynamic>('upload_files');
-  set uploadFiles(dynamic? value) => setField<dynamic>('upload_files', value);
+  dynamic get uploadFiles => getField<dynamic>('upload_files');
+  set uploadFiles(dynamic value) => setField<dynamic>('upload_files', value);
 
   String? get visualizeRoom => getField<String>('visualize_room');
   set visualizeRoom(String? value) => setField<String>('visualize_room', value);
