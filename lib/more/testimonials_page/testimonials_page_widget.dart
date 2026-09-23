@@ -1,11 +1,9 @@
-import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/enums/enums.dart';
 import '/components/app_header/app_header_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/more/google/google_widget.dart';
-import '/more/yelp/yelp_widget.dart';
-import '/flutter_flow/random_data_util.dart' as random_data;
+import '/flutter_flow/flutter_flow_web_view.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'testimonials_page_model.dart';
@@ -254,106 +252,20 @@ class _TestimonialsPageWidgetState extends State<TestimonialsPageWidget> {
                       builder: (context) {
                         if (_model.selectedTestimonial ==
                             TestimonialSelection.Google) {
-                          return FutureBuilder<ApiCallResponse>(
-                            future: GetGoogleReviewsCall.call(),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                );
-                              }
-                              final listViewGetGoogleReviewsResponse =
-                                  snapshot.data!;
-
-                              return Builder(
-                                builder: (context) {
-                                  final googleReviews = getJsonField(
-                                    listViewGetGoogleReviewsResponse.jsonBody,
-                                    r'''$.reviews''',
-                                  ).toList();
-
-                                  return ListView.separated(
-                                    padding: EdgeInsets.fromLTRB(
-                                      0,
-                                      0,
-                                      0,
-                                      32.0,
-                                    ),
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: googleReviews.length,
-                                    separatorBuilder: (_, __) =>
-                                        SizedBox(height: 12.0),
-                                    itemBuilder: (context, googleReviewsIndex) {
-                                      final googleReviewsItem =
-                                          googleReviews[googleReviewsIndex];
-                                      return GoogleWidget(
-                                        key: Key(
-                                            'Keyto2_${googleReviewsIndex}_of_${googleReviews.length}'),
-                                        name: getJsonField(
-                                          googleReviewsItem,
-                                          r'''$.author_name''',
-                                        ).toString(),
-                                        date: getJsonField(
-                                          googleReviewsItem,
-                                          r'''$.publish_time''',
-                                        ).toString(),
-                                        note: getJsonField(
-                                          googleReviewsItem,
-                                          r'''$.text''',
-                                        ).toString(),
-                                        image:
-                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shot-tracker-9ge9rk/assets/6qjg4fqtml7v/Ellipse_9.png',
-                                      );
-                                    },
-                                  );
-                                },
-                              );
-                            },
+                          return FlutterFlowWebView(
+                            content: functions.encodeGoogleReviewsHtml(),
+                            bypass: false,
+                            height: 500.0,
+                            verticalScroll: false,
+                            horizontalScroll: false,
                           );
                         } else if (_model.selectedTestimonial ==
                             TestimonialSelection.Yelp) {
-                          return Builder(
-                            builder: (context) {
-                              final yelpReviews = List.generate(
-                                      random_data.randomInteger(5, 5),
-                                      (index) =>
-                                          random_data.randomInteger(0, 10))
-                                  .toList();
-
-                              return ListView.separated(
-                                padding: EdgeInsets.fromLTRB(
-                                  0,
-                                  0,
-                                  0,
-                                  32.0,
-                                ),
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemCount: yelpReviews.length,
-                                separatorBuilder: (_, __) =>
-                                    SizedBox(height: 12.0),
-                                itemBuilder: (context, yelpReviewsIndex) {
-                                  final yelpReviewsItem =
-                                      yelpReviews[yelpReviewsIndex];
-                                  return YelpWidget(
-                                    key: Key(
-                                        'Key15n_${yelpReviewsIndex}_of_${yelpReviews.length}'),
-                                    name: 'K U.',
-                                    date: '10 November 2024',
-                                    note:
-                                        'We were very excited to use shotcount... his policies were clear, his estimate based on our photos seemed fair. But when he emailed a docusign document...',
-                                    image:
-                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shot-tracker-9ge9rk/assets/6qjg4fqtml7v/Ellipse_9.png',
-                                  );
-                                },
-                              );
-                            },
+                          return FlutterFlowWebView(
+                            content: functions.encodeHtmlForWebView(),
+                            height: 500.0,
+                            verticalScroll: false,
+                            horizontalScroll: false,
                           );
                         } else {
                           return SingleChildScrollView(

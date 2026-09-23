@@ -76,6 +76,10 @@ dependencies:
   pdfx: 2.9.2
   percent_indicator: 4.2.2
   plugin_platform_interface: 2.1.8
+  pointer_interceptor: 0.10.1+2
+  pointer_interceptor_ios: 0.10.1
+  pointer_interceptor_platform_interface: 0.10.0+1
+  pointer_interceptor_web: 0.10.2+1
   postgrest: 2.4.2
   provider: 6.1.5
   readmore: ^3.0.0
@@ -118,6 +122,10 @@ dependencies:
   webview_flutter_android: 4.7.0
   webview_flutter_platform_interface: 2.13.1
   webview_flutter_wkwebview: 3.22.0
+  webviewx_plus: 
+    git:
+      url: https://github.com/FlutterFlow/webviewx_plus.git
+      ref: 4f84ece5e06d52643c5d844f41880baf8440c584
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

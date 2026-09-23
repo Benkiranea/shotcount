@@ -486,7 +486,9 @@ class _Step4WidgetState extends State<Step4Widget> {
                                     _model.calendarSelectedDay =
                                         newSelectedDate;
                                     _model.selectedDate =
-                                        _model.calendarSelectedDay?.start;
+                                        _model.selectedDate == null
+                                            ? getCurrentTimestamp
+                                            : _model.calendarSelectedDay?.start;
                                     _model.timeSlots = functions
                                         .generateTimeSlots(_model.selectedDate!)
                                         .toList()
