@@ -548,6 +548,15 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                           FFAppState().userId,
                         ),
                       );
+                      print('===== BEFORE HUBSPOT API CALL =====');
+                      print('Email: ${_model.userData?.firstOrNull?.email}');
+                      print('First Name: ${functions.getFirstName(
+                        _model.userData!.firstOrNull!.fullName!,
+                      )}');
+                      print('Last Name: ${functions.getLastName(
+                        _model.userData!.firstOrNull!.fullName!,
+                      )}');
+
                       _model.chatToken = await ChatUserTokenHubspotCall.call(
                         email: _model.userData?.firstOrNull?.email != null &&
                                 _model.userData?.firstOrNull?.email != ''
@@ -558,6 +567,9 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                         lastName: functions.getLastName(
                             _model.userData!.firstOrNull!.fullName!),
                       );
+
+                      print('===== AFTER HUBSPOT API CALL =====');
+                      print('Chat Token Response: ${_model.chatToken}');
 
                       if ((_model.chatToken?.succeeded ?? true)) {
                         await actions.identifyHubSpotUser(
