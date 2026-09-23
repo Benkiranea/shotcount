@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'index_conatainer_model.dart';
 export 'index_conatainer_model.dart';
 
@@ -97,7 +94,7 @@ class _IndexConatainerWidgetState extends State<IndexConatainerWidget> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.network(
-                              widget!.image!,
+                              widget.image!,
                               width: 34.0,
                               height: 34.0,
                               fit: BoxFit.cover,
@@ -113,7 +110,7 @@ class _IndexConatainerWidgetState extends State<IndexConatainerWidget> {
                         children: [
                           Text(
                             valueOrDefault<String>(
-                              widget!.title,
+                              widget.title,
                               'Title',
                             ),
                             style: FlutterFlowTheme.of(context)
@@ -137,7 +134,7 @@ class _IndexConatainerWidgetState extends State<IndexConatainerWidget> {
                           ),
                           Text(
                             valueOrDefault<String>(
-                              widget!.description,
+                              widget.description,
                               'Description',
                             ),
                             style: FlutterFlowTheme.of(context)

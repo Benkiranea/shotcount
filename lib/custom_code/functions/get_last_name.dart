@@ -18,13 +18,13 @@ String? getLastName(String fullName) {
   final name = fullName.trim();
 
   if (name.isEmpty) {
-    return null;
+    return "";
   }
 
   final parts = name.split(RegExp(r'\s+'));
 
   if (parts.length <= 1) {
-    return null;
+    return "";
   }
 
   return parts.sublist(1).join(' ');

@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'choice_container_model.dart';
 export 'choice_container_model.dart';
 
@@ -61,12 +58,12 @@ class _ChoiceContainerWidgetState extends State<ChoiceContainerWidget> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: widget!.isSelected
+          color: widget.isSelected
               ? Color(0x1AD7A94F)
               : FlutterFlowTheme.of(context).containerClr,
           borderRadius: BorderRadius.circular(8.0),
           border: Border.all(
-            color: widget!.isSelected
+            color: widget.isSelected
                 ? FlutterFlowTheme.of(context).primary
                 : FlutterFlowTheme.of(context).conBorderClr,
             width: 1.0,
@@ -82,11 +79,11 @@ class _ChoiceContainerWidgetState extends State<ChoiceContainerWidget> {
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    widget!.icon!,
+                    widget.icon!,
                     Expanded(
                       child: Text(
                         valueOrDefault<String>(
-                          widget!.category,
+                          widget.category,
                           'Category',
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -114,7 +111,7 @@ class _ChoiceContainerWidgetState extends State<ChoiceContainerWidget> {
                   ].divide(SizedBox(width: 5.0)),
                 ),
               ),
-              if (!widget!.isSelected)
+              if (!widget.isSelected)
                 Container(
                   width: 16.0,
                   height: 16.0,
@@ -127,7 +124,7 @@ class _ChoiceContainerWidgetState extends State<ChoiceContainerWidget> {
                     ),
                   ),
                 ),
-              if (widget!.isSelected)
+              if (widget.isSelected)
                 Container(
                   width: 16.0,
                   height: 16.0,

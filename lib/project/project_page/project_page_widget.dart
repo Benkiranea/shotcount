@@ -4,12 +4,9 @@ import '/components/app_header/app_header_widget.dart';
 import '/components/feeds/feeds_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'project_page_model.dart';
 export 'project_page_model.dart';
 
@@ -124,6 +121,8 @@ class _ProjectPageWidgetState extends State<ProjectPageWidget> {
                           caption: listViewInstagramPostsRow.caption!,
                           mediaType: listViewInstagramPostsRow.mediaType!,
                           singleImage: listViewInstagramPostsRow.mediaUrl!,
+                          childrenUrl: listViewInstagramPostsRow.childrenUrls
+                              ?.toString(),
                         );
                       },
                     );

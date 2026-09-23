@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'time_slot_model.dart';
 export 'time_slot_model.dart';
 
@@ -62,11 +59,11 @@ class _TimeSlotWidgetState extends State<TimeSlotWidget> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: widget!.fillClr,
+          color: widget.fillClr,
           borderRadius: BorderRadius.circular(6.0),
           border: Border.all(
             color: valueOrDefault<Color>(
-              widget!.borderClr,
+              widget.borderClr,
               Color(0x66252E3D),
             ),
           ),
@@ -78,7 +75,7 @@ class _TimeSlotWidgetState extends State<TimeSlotWidget> {
             children: [
               Text(
                 valueOrDefault<String>(
-                  widget!.time,
+                  widget.time,
                   'Time',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -88,7 +85,7 @@ class _TimeSlotWidgetState extends State<TimeSlotWidget> {
                         fontStyle:
                             FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                       ),
-                      color: widget!.textClr,
+                      color: widget.textClr,
                       fontSize: 12.0,
                       letterSpacing: 0.0,
                       fontWeight:

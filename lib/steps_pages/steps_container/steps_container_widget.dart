@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'steps_container_model.dart';
 export 'steps_container_model.dart';
 
@@ -66,7 +63,7 @@ class _StepsContainerWidgetState extends State<StepsContainerWidget> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.network(
-                  widget!.image!,
+                  widget.image!,
                   width: 24.0,
                   height: 24.0,
                   fit: BoxFit.cover,
@@ -82,7 +79,7 @@ class _StepsContainerWidgetState extends State<StepsContainerWidget> {
             children: [
               Text(
                 valueOrDefault<String>(
-                  widget!.title,
+                  widget.title,
                   'Title',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -101,7 +98,7 @@ class _StepsContainerWidgetState extends State<StepsContainerWidget> {
               ),
               Text(
                 valueOrDefault<String>(
-                  widget!.description,
+                  widget.description,
                   'Description',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(

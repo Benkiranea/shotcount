@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
-import '../schema/structs/index.dart';
 
 import 'package:flutter/foundation.dart';
 
@@ -213,6 +211,134 @@ class ChatUserTokenHubspotCall {
           'https://cpwuclmclkbuwpnhdkha.supabase.co/functions/v1/hubspot-visitor-token',
       callType: ApiCallType.POST,
       headers: {
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class MailchimpSubscribeCall {
+  static Future<ApiCallResponse> call({
+    String? email = '',
+    String? firstName = '',
+    String? lastName = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "email": "${escapeStringForJson(email)}",
+  "first_name": "${escapeStringForJson(firstName)}",
+  "last_name": "${escapeStringForJson(lastName)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'MailchimpSubscribe',
+      apiUrl:
+          'https://cpwuclmclkbuwpnhdkha.supabase.co/functions/v1/mailchimp-subscribe',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class HubspotMeetingInfoCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'hubspotMeetingInfo',
+      apiUrl:
+          'https://cpwuclmclkbuwpnhdkha.supabase.co/functions/v1/hubspot-meeting-info',
+      callType: ApiCallType.GET,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class HubspotAvailabilityCall {
+  static Future<ApiCallResponse> call({
+    int? monthOffset,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'hubspotAvailability',
+      apiUrl:
+          'https://cpwuclmclkbuwpnhdkha.supabase.co/functions/v1/hubspot-availability',
+      callType: ApiCallType.GET,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'monthOffset': monthOffset,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class HubspotBookMeetingCall {
+  static Future<ApiCallResponse> call({
+    String? email = '',
+    String? firstName = '',
+    String? startTime = '',
+    String? lastName = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "email": "${escapeStringForJson(email)}",
+  "firstName": "${escapeStringForJson(firstName)}",
+  "lastName": "${escapeStringForJson(lastName)}",
+  "startTime": "${escapeStringForJson(startTime)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'hubspotBookMeeting',
+      apiUrl:
+          'https://cpwuclmclkbuwpnhdkha.supabase.co/functions/v1/hubspot-book-meeting',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
         'Authorization':
             'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
         'Content-Type': 'application/json',
