@@ -753,37 +753,62 @@ class _Step4WidgetState extends State<Step4Widget> {
                                             .profileData?.firstOrNull?.email,
                                         firstName: _model
                                             .profileData?.firstOrNull?.fullName,
-                                        startTime: _model.selectedTime,
+                                        startTime: functions.timeToISO8601(
+                                            _model.selectedTime!,
+                                            _model.selectedDate!),
                                         lastName: functions.getLastName(_model
                                             .profileData!
                                             .firstOrNull!
                                             .fullName!),
                                       );
 
-                                      await ProjectsTable().update(
-                                        data: {
-                                          'appointment_date':
-                                              supaSerialize<DateTime>(
-                                                  _model.selectedDate),
-                                          'appointment_time':
-                                              _model.selectedTime,
-                                          'current_steps': 5,
-                                        },
-                                        matchingRows: (rows) => rows.eqOrNull(
-                                          'id',
-                                          widget.projectId,
-                                        ),
-                                      );
-
-                                      context.pushNamed(
-                                        Step5Widget.routeName,
-                                        queryParameters: {
-                                          'projectId': serializeParam(
+                                      if ((_model.hubspotBooking?.succeeded ??
+                                          true)) {
+                                        await ProjectsTable().update(
+                                          data: {
+                                            'appointment_date':
+                                                supaSerialize<DateTime>(
+                                                    _model.selectedDate),
+                                            'appointment_time':
+                                                _model.selectedTime,
+                                            'current_steps': 5,
+                                          },
+                                          matchingRows: (rows) => rows.eqOrNull(
+                                            'id',
                                             widget.projectId,
-                                            ParamType.String,
                                           ),
-                                        }.withoutNulls,
-                                      );
+                                        );
+
+                                        context.pushNamed(
+                                          Step5Widget.routeName,
+                                          queryParameters: {
+                                            'projectId': serializeParam(
+                                              widget.projectId,
+                                              ParamType.String,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Hubspot booking failed !',
+                                              style: GoogleFonts.inter(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .info,
+                                                fontSize: 14.0,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .error,
+                                          ),
+                                        );
+                                      }
 
                                       safeSetState(() {});
                                     },
