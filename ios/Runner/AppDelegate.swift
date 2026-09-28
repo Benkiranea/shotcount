@@ -1,5 +1,7 @@
 import UIKit
 import Flutter
+import SwiftUI
+import HubspotMobileSDK
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -102,11 +104,21 @@ import Flutter
         )
     }
 
-    // MARK: - HubSpot
+    // MARK: - HubSpot Implementation
 
     private func initializeHubSpot(result: @escaping FlutterResult) {
-        // HubSpot SDK initialization will go here.
-        result(nil)
+        do {
+            try HubspotManager.shared.configure()
+            result(nil)
+        } catch {
+            result(
+                FlutterError(
+                    code: "CONFIG_ERROR",
+                    message: "Failed to configure HubSpot: \(error.localizedDescription)",
+                    details: nil
+                )
+            )
+        }
     }
 
     private func setChatProperties(
@@ -114,7 +126,11 @@ import Flutter
         deviceId: String,
         result: @escaping FlutterResult
     ) {
-        // HubSpot chat properties implementation will go here.
+        let properties = [
+            "user_id": userId,
+            "device_id": deviceId
+        ]
+        HubspotManager.shared.setChatProperties(data: properties)
         result(nil)
     }
 
@@ -123,17 +139,48 @@ import Flutter
         identityToken: String,
         result: @escaping FlutterResult
     ) {
-        // HubSpot visitor identity implementation will go here.
+        HubspotManager.shared.setUserIdentity(identityToken: identityToken, email: email)
         result(nil)
     }
 
     private func openChat(result: @escaping FlutterResult) {
-        // HubSpot chat presentation implementation will go here.
-        result(nil)
+        DispatchQueue.main.async {
+            guard let rootViewController = self.window?.rootViewController else {
+                result(
+                    FlutterError(
+                        code: "PRESENTATION_ERROR",
+                        message: "Root view controller not found",
+                        details: nil
+                    )
+                )
+                return
+            }
+
+
+            // Initialize HubSpot Chat View Controller and present modally in a Navigation Controller
+            let chatVC = HubspotChatView()
+            let hostingController = UIHostingController(rootView: chatVC)
+            let navController = UINavigationController(rootViewController: hostingController)
+
+            // Add a Done/Close button to allow closing the chat UI
+            hostingController.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .done,
+                target: self,
+                action: #selector(self.dismissChat)
+            )
+
+            rootViewController.present(navController, animated: true) {
+                result(nil)
+            }
+        }
+    }
+
+    @objc private func dismissChat() {
+        window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
 
     private func logout(result: @escaping FlutterResult) {
-        // HubSpot logout implementation will go here.
+        HubspotManager.shared.clearUserData()
         result(nil)
     }
 }

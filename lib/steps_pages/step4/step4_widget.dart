@@ -740,6 +740,11 @@ class _Step4WidgetState extends State<Step4Widget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
+                                      print('========== BOOKING START ==========');
+
+                                      print('User ID: ${FFAppState().userId}');
+                                      print('Selected Date: ${_model.selectedDate}');
+                                      print('Selected Time: ${_model.selectedTime}');
                                       _model.profileData =
                                           await ProfilesTable().queryRows(
                                         queryFn: (q) => q.eqOrNull(
@@ -747,6 +752,48 @@ class _Step4WidgetState extends State<Step4Widget> {
                                           FFAppState().userId,
                                         ),
                                       );
+
+                                      // print('Profile Data: ${_model.profileData}');
+                                      // print('Profile Email: ${_model.profileData?.firstOrNull?.email}');
+                                      // print('Profile Full Name: ${_model.profileData?.firstOrNull?.fullName}');
+                                      //
+                                      // print('========== CALLING HUBSPOT ==========');
+                                      //
+                                      // print(
+                                      //   'Email: ${_model.profileData?.firstOrNull?.email}',
+                                      // );
+                                      //
+                                      // print(
+                                      //   'First Name: ${_model.profileData?.firstOrNull?.fullName}',
+                                      // );
+                                      //
+                                      // print(
+                                      //   'Last Name: ${functions.getLastName(
+                                      //     _model.profileData!.firstOrNull!.fullName!,
+                                      //   )}',
+                                      // );
+                                      //
+                                      // print(
+                                      //   'Start Time: ${functions.timeToISO8601(
+                                      //     _model.selectedTime!,
+                                      //     _model.selectedDate!,
+                                      //   )}',
+                                      // );
+                                      final requestBody = {
+                                        "email": _model.profileData?.firstOrNull?.email,
+                                        "firstName": _model.profileData?.firstOrNull?.fullName,
+                                        "lastName": functions.getLastName(
+                                          _model.profileData!.firstOrNull!.fullName!,
+                                        ),
+                                        "startTime": functions.timeToISO8601(
+                                          _model.selectedTime!,
+                                          _model.selectedDate!,
+                                        ),
+                                      };
+
+                                      print('========== HUBSPOT REQUEST BODY ==========');
+                                      print(jsonEncode(requestBody));
+                                      print('===========================================');
                                       _model.hubspotBooking =
                                           await HubspotBookMeetingCall.call(
                                         email: _model
@@ -761,6 +808,19 @@ class _Step4WidgetState extends State<Step4Widget> {
                                             .firstOrNull!
                                             .fullName!),
                                       );
+
+                                      print('========== HUBSPOT RESPONSE ==========');
+                                      print('HubSpot Booking Response: ${_model.hubspotBooking}');
+                                      print(
+                                        'Succeeded: ${_model.hubspotBooking?.succeeded}',
+                                      );
+                                      print(
+                                        'Status Code: ${_model.hubspotBooking?.statusCode}',
+                                      );
+                                      print(
+                                        'JSON Body: ${_model.hubspotBooking?.jsonBody}',
+                                      );
+                                      print('=======================================');
 
                                       if ((_model.hubspotBooking?.succeeded ??
                                           true)) {
