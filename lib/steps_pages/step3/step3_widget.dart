@@ -395,16 +395,6 @@ class _Step3WidgetState extends State<Step3Widget> {
                           child: BillContainerWidget(
                             pdfPath: billContainerProjectsRow!.appointmentPdf!,
                             onTap: () async {
-                              context.pushNamed(
-                                Step4Widget.routeName,
-                                queryParameters: {
-                                  'projectId': serializeParam(
-                                    widget.projectId,
-                                    ParamType.String,
-                                  ),
-                                }.withoutNulls,
-                              );
-
                               await ProjectsTable().update(
                                 data: {
                                   'current_steps': 4,
@@ -413,6 +403,16 @@ class _Step3WidgetState extends State<Step3Widget> {
                                   'id',
                                   widget.projectId,
                                 ),
+                              );
+
+                              context.pushNamed(
+                                Step4Widget.routeName,
+                                queryParameters: {
+                                  'projectId': serializeParam(
+                                    widget.projectId,
+                                    ParamType.String,
+                                  ),
+                                }.withoutNulls,
                               );
                             },
                             openChat: () async {

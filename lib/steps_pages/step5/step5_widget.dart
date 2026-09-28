@@ -1,4 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/supabase/supabase.dart';
+import '/flutter_flow/ff_builtin_enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/steps_pages/steps_container/steps_container_widget.dart';
@@ -253,6 +255,13 @@ class _Step5WidgetState extends State<Step5Widget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        await ProjectsTable().update(
+                          data: {
+                            'current_steps': 6,
+                          },
+                          matchingRows: (rows) => rows,
+                        );
+
                         context.pushNamed(Step6Widget.routeName);
                       },
                       child: Container(
@@ -465,6 +474,11 @@ class _Step5WidgetState extends State<Step5Widget> {
                                               ),
                                               Column(
                                                 mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    (FFCrossAxisAlignment.end)
+                                                        .flutterValue,
+                                                textBaseline:
+                                                    TextBaseline.alphabetic,
                                                 children: [
                                                   Text(
                                                     getJsonField(

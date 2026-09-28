@@ -249,6 +249,8 @@ class MailchimpSubscribeCall {
         'Content-Type': 'application/json',
         'apikey':
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
       },
       params: {},
       body: ffApiRequestBody,

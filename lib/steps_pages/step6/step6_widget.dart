@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'step6_model.dart';
@@ -60,7 +61,7 @@ class _Step6WidgetState extends State<Step6Widget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.safePop();
+                        context.pushNamed(IndexPageWidget.routeName);
                       },
                       child: Container(
                         width: 40.0,
