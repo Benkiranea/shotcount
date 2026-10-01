@@ -67,7 +67,7 @@ class _Step2WidgetState extends State<Step2Widget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.safePop();
+                        context.goNamed(YourProjectsPageWidget.routeName);
                       },
                       child: Container(
                         width: 40.0,

@@ -121,8 +121,7 @@ class _ProjectPageWidgetState extends State<ProjectPageWidget> {
                           caption: listViewInstagramPostsRow.caption!,
                           mediaType: listViewInstagramPostsRow.mediaType!,
                           singleImage: listViewInstagramPostsRow.mediaUrl!,
-                          childrenUrl: listViewInstagramPostsRow.childrenUrls
-                              ?.toString(),
+                          childrenUrl: listViewInstagramPostsRow.childrenUrls,
                         );
                       },
                     );

@@ -1,3 +1,4 @@
+import '/flutter_flow/ff_builtin_enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
@@ -55,7 +56,9 @@ class _CustomerRightsPageWidgetState extends State<CustomerRightsPageWidget> {
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment:
+                      (FFCrossAxisAlignment.center).flutterValue,
+                  textBaseline: TextBaseline.alphabetic,
                   children: [
                     InkWell(
                       splashColor: Colors.transparent,

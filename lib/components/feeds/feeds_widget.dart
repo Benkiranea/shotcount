@@ -25,7 +25,7 @@ class FeedsWidget extends StatefulWidget {
   final String? caption;
   final String? mediaType;
   final String? singleImage;
-  final String? childrenUrl;
+  final dynamic childrenUrl;
 
   @override
   State<FeedsWidget> createState() => _FeedsWidgetState();
@@ -122,7 +122,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                   height: 352.0,
                   mediaType: widget.mediaType!,
                   mediaUrl: widget.singleImage!,
-                  childrenUrl: widget.childrenUrl,
+                  childrenUrl: widget.childrenUrl!,
                 ),
               ),
             ],

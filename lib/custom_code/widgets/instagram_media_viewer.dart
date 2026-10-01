@@ -34,7 +34,9 @@ class InstagramMediaViewer extends StatefulWidget {
 
   final String mediaType;
   final String mediaUrl;
-  final String? childrenUrl;
+
+  // FlutterFlow JSON parameter
+  final dynamic childrenUrl;
 
   @override
   State<InstagramMediaViewer> createState() => _InstagramMediaViewerState();
@@ -50,6 +52,7 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
   @override
   void initState() {
     super.initState();
+
     _prepareMedia();
   }
 
@@ -66,48 +69,149 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
     }
   }
 
-  void _prepareMedia() {
-    List<Map<String, dynamic>> items = [];
+  // ============================================================
+  // PREPARE MEDIA
+  // ============================================================
 
-    // CAROUSEL
-    if (widget.mediaType.toUpperCase() == 'CAROUSEL_ALBUM' &&
-        widget.childrenUrl != null &&
-        widget.childrenUrl!.trim().isNotEmpty &&
-        widget.childrenUrl != 'null') {
+  void _prepareMedia() {
+    final List<Map<String, dynamic>> items = [];
+
+    // ==========================================================
+    // CAROUSEL ALBUM
+    // ==========================================================
+
+    if (widget.mediaType.toUpperCase() == 'CAROUSEL_ALBUM') {
       try {
-        final decoded = jsonDecode(widget.childrenUrl!);
+        dynamic decoded = widget.childrenUrl;
+
+        // ------------------------------------------------------
+        // FlutterFlow normally sends JSON directly.
+        //
+        // If FlutterFlow sends it as a String, decode it.
+        // ------------------------------------------------------
+
+        if (decoded is String) {
+          final String value = decoded.trim();
+
+          if (value.isNotEmpty && value != 'null') {
+            decoded = jsonDecode(value);
+          }
+        }
+
+        // ------------------------------------------------------
+        // childrenUrl should contain a List
+        // ------------------------------------------------------
 
         if (decoded is List) {
           for (final item in decoded) {
-            if (item is Map) {
-              final url = item['media_url'];
-
-              if (url != null && url.toString().trim().isNotEmpty) {
-                items.add({
-                  'id': item['id']?.toString() ?? '',
-                  'media_url': url.toString(),
-                  'media_type':
-                      item['media_type']?.toString().toUpperCase() ?? 'IMAGE',
-                });
-              }
+            if (item is! Map) {
+              continue;
             }
+
+            final dynamic urlValue = item['media_url'];
+
+            if (urlValue == null) {
+              continue;
+            }
+
+            String url = urlValue.toString().trim();
+
+            if (url.isEmpty) {
+              continue;
+            }
+
+            // --------------------------------------------------
+            // Handle accidental Markdown URL format:
+            //
+            // [https://example.com/image.jpg](https://example.com/image.jpg)
+            //
+            // If your DB contains normal URLs, this does nothing.
+            // --------------------------------------------------
+
+            url = _cleanUrl(url);
+
+            if (url.isEmpty) {
+              continue;
+            }
+
+            final String id = item['id']?.toString() ?? '';
+
+            final String type =
+                item['media_type']?.toString().toUpperCase() ?? 'IMAGE';
+
+            items.add({
+              'id': id,
+              'media_url': url,
+              'media_type': type,
+            });
           }
         }
       } catch (e) {
         debugPrint(
-          'childrenUrl JSON error: $e',
+          'InstagramMediaViewer childrenUrl error: $e',
         );
       }
     }
 
+    // ==========================================================
     // NORMAL IMAGE / FALLBACK
+    // ==========================================================
+
     if (items.isEmpty && widget.mediaUrl.trim().isNotEmpty) {
-      items.add({
-        'id': '',
-        'media_url': widget.mediaUrl,
-        'media_type': 'IMAGE',
-      });
+      String url = widget.mediaUrl.trim();
+
+      url = _cleanUrl(url);
+
+      if (url.isNotEmpty) {
+        items.add({
+          'id': '',
+          'media_url': url,
+          'media_type': _normalizeMediaType(
+            widget.mediaType,
+          ),
+        });
+      }
     }
+
+    // ==========================================================
+    // DEBUG
+    // ==========================================================
+
+    debugPrint(
+      '========== INSTAGRAM MEDIA VIEWER ==========',
+    );
+
+    debugPrint(
+      'Media Type: ${widget.mediaType}',
+    );
+
+    debugPrint(
+      'Media URL: ${widget.mediaUrl}',
+    );
+
+    debugPrint(
+      'Children URL Type: ${widget.childrenUrl.runtimeType}',
+    );
+
+    debugPrint(
+      'Children URL: ${widget.childrenUrl}',
+    );
+
+    debugPrint(
+      'FINAL MEDIA ITEMS: $items',
+    );
+
+    debugPrint(
+      'TOTAL MEDIA ITEMS: ${items.length}',
+    );
+
+    debugPrint(
+      '============================================',
+    );
+
+    // ==========================================================
+    // UPDATE STATE
+    // ==========================================================
 
     if (mounted) {
       setState(() {
@@ -117,8 +221,57 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
     }
   }
 
+  // ============================================================
+  // CLEAN URL
+  // ============================================================
+
+  String _cleanUrl(String url) {
+    String cleaned = url.trim();
+
+    // Handle Markdown-style URL:
+    // [https://example.com](https://example.com)
+
+    final RegExp markdownUrlRegex = RegExp(
+      r'^\[(.*?)\]\((.*?)\)$',
+    );
+
+    final Match? match = markdownUrlRegex.firstMatch(cleaned);
+
+    if (match != null) {
+      final String markdownUrl = match.group(2)?.trim() ?? '';
+
+      if (markdownUrl.isNotEmpty) {
+        cleaned = markdownUrl;
+      }
+    }
+
+    return cleaned;
+  }
+
+  // ============================================================
+  // NORMALIZE MEDIA TYPE
+  // ============================================================
+
+  String _normalizeMediaType(String type) {
+    final String value = type.trim().toUpperCase();
+
+    if (value == 'VIDEO') {
+      return 'VIDEO';
+    }
+
+    return 'IMAGE';
+  }
+
+  // ============================================================
+  // BUILD
+  // ============================================================
+
   @override
   Widget build(BuildContext context) {
+    // ----------------------------------------------------------
+    // No media
+    // ----------------------------------------------------------
+
     if (mediaItems.isEmpty) {
       return SizedBox(
         width: widget.width,
@@ -131,11 +284,19 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
       );
     }
 
+    // ----------------------------------------------------------
+    // Media viewer
+    // ----------------------------------------------------------
+
     return SizedBox(
       width: widget.width ?? double.infinity,
       height: widget.height ?? MediaQuery.of(context).size.width,
       child: Stack(
         children: [
+          // ====================================================
+          // PAGE VIEW
+          // ====================================================
+
           PageView.builder(
             controller: _pageController,
             itemCount: mediaItems.length,
@@ -145,25 +306,43 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
               });
             },
             itemBuilder: (context, index) {
-              final item = mediaItems[index];
+              final Map<String, dynamic> item = mediaItems[index];
 
-              final String url = item['media_url'];
+              final String url = item['media_url']?.toString() ?? '';
 
-              final String type = item['media_type'];
+              final String type =
+                  item['media_type']?.toString().toUpperCase() ?? 'IMAGE';
+
+              // ------------------------------------------------
+              // VIDEO
+              // ------------------------------------------------
 
               if (type == 'VIDEO') {
                 return InstagramVideo(
+                  key: ValueKey(
+                    item['id']?.toString() ?? url,
+                  ),
                   url: url,
                 );
               }
 
+              // ------------------------------------------------
+              // IMAGE
+              // ------------------------------------------------
+
               return InstagramImage(
+                key: ValueKey(
+                  item['id']?.toString() ?? url,
+                ),
                 url: url,
               );
             },
           ),
 
-          // 1 / 3 indicator
+          // ====================================================
+          // TOP RIGHT COUNTER
+          // ====================================================
+
           if (mediaItems.length > 1)
             Positioned(
               top: 12,
@@ -188,7 +367,10 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
               ),
             ),
 
-          // Instagram dots
+          // ====================================================
+          // INSTAGRAM DOTS
+          // ====================================================
+
           if (mediaItems.length > 1)
             Positioned(
               bottom: 12,
@@ -199,7 +381,7 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
                 children: List.generate(
                   mediaItems.length,
                   (index) {
-                    final selected = index == currentIndex;
+                    final bool selected = index == currentIndex;
 
                     return AnimatedContainer(
                       duration: const Duration(
@@ -224,16 +406,21 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
     );
   }
 
+  // ============================================================
+  // DISPOSE
+  // ============================================================
+
   @override
   void dispose() {
     _pageController.dispose();
+
     super.dispose();
   }
 }
 
-// --------------------------------------------------
+// ================================================================
 // IMAGE
-// --------------------------------------------------
+// ================================================================
 
 class InstagramImage extends StatelessWidget {
   const InstagramImage({
@@ -252,7 +439,16 @@ class InstagramImage extends StatelessWidget {
       child: Image.network(
         url,
         fit: BoxFit.cover,
-        loadingBuilder: (context, child, loadingProgress) {
+
+        // ------------------------------------------------------
+        // LOADING
+        // ------------------------------------------------------
+
+        loadingBuilder: (
+          context,
+          child,
+          loadingProgress,
+        ) {
           if (loadingProgress == null) {
             return child;
           }
@@ -263,7 +459,24 @@ class InstagramImage extends StatelessWidget {
             ),
           );
         },
-        errorBuilder: (context, error, stackTrace) {
+
+        // ------------------------------------------------------
+        // ERROR
+        // ------------------------------------------------------
+
+        errorBuilder: (
+          context,
+          error,
+          stackTrace,
+        ) {
+          debugPrint(
+            'Instagram image error: $error',
+          );
+
+          debugPrint(
+            'Instagram image URL: $url',
+          );
+
           return const Center(
             child: Icon(
               Icons.broken_image_outlined,
@@ -277,9 +490,9 @@ class InstagramImage extends StatelessWidget {
   }
 }
 
-// --------------------------------------------------
+// ================================================================
 // VIDEO
-// --------------------------------------------------
+// ================================================================
 
 class InstagramVideo extends StatefulWidget {
   const InstagramVideo({
@@ -310,25 +523,39 @@ class _InstagramVideoState extends State<InstagramVideo> {
     _initialize();
   }
 
+  // ============================================================
+  // INITIALIZE VIDEO
+  // ============================================================
+
   Future<void> _initialize() async {
     try {
       await controller.initialize();
 
-      if (!mounted) return;
+      if (!mounted) {
+        return;
+      }
 
-      controller.setLooping(true);
+      await controller.setLooping(true);
 
       setState(() {
         initialized = true;
       });
 
-      controller.play();
+      await controller.play();
     } catch (e) {
       debugPrint(
-        'Video error: $e',
+        'Instagram video error: $e',
+      );
+
+      debugPrint(
+        'Instagram video URL: ${widget.url}',
       );
     }
   }
+
+  // ============================================================
+  // BUILD VIDEO
+  // ============================================================
 
   @override
   Widget build(BuildContext context) {
@@ -356,12 +583,21 @@ class _InstagramVideoState extends State<InstagramVideo> {
         child: Stack(
           alignment: Alignment.center,
           children: [
+            // ==================================================
+            // VIDEO
+            // ==================================================
+
             Center(
               child: AspectRatio(
                 aspectRatio: controller.value.aspectRatio,
                 child: VideoPlayer(controller),
               ),
             ),
+
+            // ==================================================
+            // PLAY / PAUSE
+            // ==================================================
+
             if (showControls)
               IconButton(
                 onPressed: () {
@@ -381,6 +617,11 @@ class _InstagramVideoState extends State<InstagramVideo> {
                       : Icons.play_circle_outline,
                 ),
               ),
+
+            // ==================================================
+            // VIDEO PROGRESS
+            // ==================================================
+
             Positioned(
               left: 0,
               right: 0,
@@ -399,9 +640,14 @@ class _InstagramVideoState extends State<InstagramVideo> {
     );
   }
 
+  // ============================================================
+  // DISPOSE VIDEO
+  // ============================================================
+
   @override
   void dispose() {
     controller.dispose();
+
     super.dispose();
   }
 }

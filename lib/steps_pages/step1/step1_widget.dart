@@ -484,18 +484,19 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                 .showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  'Something went eorn g',
-                                                  style: TextStyle(
+                                                  'Please upload the room image.',
+                                                  style: GoogleFonts.inter(
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .primaryText,
+                                                        .info,
+                                                    fontSize: 14.0,
                                                   ),
                                                 ),
                                                 duration: Duration(
                                                     milliseconds: 4000),
                                                 backgroundColor:
                                                     FlutterFlowTheme.of(context)
-                                                        .info,
+                                                        .error,
                                               ),
                                             );
                                           }
@@ -681,18 +682,18 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                 .showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  'Something went eorn g',
-                                                  style: TextStyle(
+                                                  'Please upload the wallpaper image.',
+                                                  style: GoogleFonts.inter(
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .primaryText,
+                                                        .info,
                                                   ),
                                                 ),
                                                 duration: Duration(
                                                     milliseconds: 4000),
                                                 backgroundColor:
                                                     FlutterFlowTheme.of(context)
-                                                        .info,
+                                                        .error,
                                               ),
                                             );
                                           }
@@ -2234,6 +2235,25 @@ class _Step1WidgetState extends State<Step1Widget> {
                                             .toList()
                                             .cast<FFUploadedFile>();
                                         safeSetState(() {});
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Successfully Uploaded !',
+                                              style: GoogleFonts.inter(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .info,
+                                                fontSize: 14.0,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .success,
+                                          ),
+                                        );
 
                                         safeSetState(() {});
                                       },
@@ -2924,61 +2944,72 @@ class _Step1WidgetState extends State<Step1Widget> {
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
-                                        _model.formValidate = true;
-                                        if (_model.formKey.currentState ==
-                                                null ||
-                                            !_model.formKey.currentState!
-                                                .validate()) {
-                                          safeSetState(() =>
-                                              _model.formValidate = false);
-                                          return;
-                                        }
-                                        _model.uploadFilesToSupabase =
-                                            await actions.uploadFilesToSupabase(
-                                          _model.selectedFiles.toList(),
-                                        );
-                                        await ProfilesTable().update(
-                                          data: {
-                                            'full_name': _model
-                                                .fullNameTextController.text,
-                                            'email':
-                                                _model.emailTextController.text,
-                                            'phone_number':
-                                                _model.phoneTextController.text,
-                                          },
-                                          matchingRows: (rows) => rows.eqOrNull(
-                                            'id',
-                                            FFAppState().userId,
-                                          ),
-                                        );
-                                        _model.projectCreated =
-                                            await ProjectsTable().insert({
-                                          'project_name': _model
-                                              .projectNameTextController.text,
-                                          'user_id': FFAppState().userId,
-                                          'created_at': supaSerialize<DateTime>(
-                                              getCurrentTimestamp),
-                                          'room_description': _model
-                                              .describeRoomTextController.text,
-                                          'notes': _model
-                                              .aboutProjectTextController.text,
-                                          'room_type': _model.selectedValue,
-                                          'visualize_result': _model.image,
-                                          'upload_files':
-                                              _model.uploadFilesToSupabase,
-                                          'current_steps': 2,
-                                          'status': 'In Review',
-                                        });
-
-                                        context.pushNamed(
-                                          Step2Widget.routeName,
-                                          queryParameters: {
-                                            'projectId': serializeParam(
-                                              _model.projectCreated?.id,
-                                              ParamType.String,
+                                        if (!_model.onTap) {
+                                          _model.onTap = true;
+                                          safeSetState(() {});
+                                          _model.formValidate = true;
+                                          if (_model.formKey.currentState ==
+                                                  null ||
+                                              !_model.formKey.currentState!
+                                                  .validate()) {
+                                            safeSetState(() =>
+                                                _model.formValidate = false);
+                                            return;
+                                          }
+                                          _model.uploadFilesToSupabase =
+                                              await actions
+                                                  .uploadFilesToSupabase(
+                                            _model.selectedFiles.toList(),
+                                          );
+                                          await ProfilesTable().update(
+                                            data: {
+                                              'full_name': _model
+                                                  .fullNameTextController.text,
+                                              'email': _model
+                                                  .emailTextController.text,
+                                              'phone_number': _model
+                                                  .phoneTextController.text,
+                                            },
+                                            matchingRows: (rows) =>
+                                                rows.eqOrNull(
+                                              'id',
+                                              FFAppState().userId,
                                             ),
-                                          }.withoutNulls,
-                                        );
+                                          );
+                                          _model.projectCreated =
+                                              await ProjectsTable().insert({
+                                            'project_name': _model
+                                                .projectNameTextController.text,
+                                            'user_id': FFAppState().userId,
+                                            'created_at':
+                                                supaSerialize<DateTime>(
+                                                    getCurrentTimestamp),
+                                            'room_description': _model
+                                                .describeRoomTextController
+                                                .text,
+                                            'notes': _model
+                                                .aboutProjectTextController
+                                                .text,
+                                            'room_type': _model.selectedValue,
+                                            'visualize_result': _model.image,
+                                            'upload_files':
+                                                _model.uploadFilesToSupabase,
+                                            'current_steps': 2,
+                                            'status': 'In Review',
+                                          });
+                                          _model.onTap = false;
+                                          safeSetState(() {});
+
+                                          context.goNamed(
+                                            Step2Widget.routeName,
+                                            queryParameters: {
+                                              'projectId': serializeParam(
+                                                _model.projectCreated?.id,
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        }
 
                                         safeSetState(() {});
                                       },

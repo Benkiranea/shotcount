@@ -39,8 +39,8 @@ class GenerateWallpaperVisualizationCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "room_url": "${escapeStringForJson(roomUrl)}",
-  "wallpaper_url": "${escapeStringForJson(wallpaperUrl)}"
+  "room_url": ${roomUrl == null ? 'null' : '"${escapeStringForJson(roomUrl)}"'},
+  "wallpaper_url": ${wallpaperUrl == null ? 'null' : '"${escapeStringForJson(wallpaperUrl)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'GenerateWallpaperVisualization',
@@ -94,7 +94,7 @@ class GetProjectDetailsCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "p_project_id": "${escapeStringForJson(pProjectId)}"
+  "p_project_id": ${pProjectId == null ? 'null' : '"${escapeStringForJson(pProjectId)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'getProjectDetails',
@@ -127,7 +127,7 @@ class GetAllProjectsCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "p_user_id": "${escapeStringForJson(pUserId)}"
+  "p_user_id": ${pUserId == null ? 'null' : '"${escapeStringForJson(pUserId)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'getAllProjects',
@@ -201,9 +201,9 @@ class ChatUserTokenHubspotCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "email": "${escapeStringForJson(email)}",
-  "firstName": "${escapeStringForJson(firstName)}",
-  "lastName": "${escapeStringForJson(lastName)}"
+  "email": ${email == null ? 'null' : '"${escapeStringForJson(email)}"'},
+  "firstName": ${firstName == null ? 'null' : '"${escapeStringForJson(firstName)}"'},
+  "lastName": ${lastName == null ? 'null' : '"${escapeStringForJson(lastName)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'chatUserTokenHubspot',
@@ -236,9 +236,9 @@ class MailchimpSubscribeCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "email": "${escapeStringForJson(email)}",
-  "first_name": "${escapeStringForJson(firstName)}",
-  "last_name": "${escapeStringForJson(lastName)}"
+  "email": ${email == null ? 'null' : '"${escapeStringForJson(email)}"'},
+  "first_name": ${firstName == null ? 'null' : '"${escapeStringForJson(firstName)}"'},
+  "last_name": ${lastName == null ? 'null' : '"${escapeStringForJson(lastName)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'MailchimpSubscribe',
@@ -328,10 +328,10 @@ class HubspotBookMeetingCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "email": "${escapeStringForJson(email)}",
-  "firstName": "${escapeStringForJson(firstName)}",
-  "lastName": "${escapeStringForJson(lastName)}",
-  "startTime": "${escapeStringForJson(startTime)}"
+  "email": ${email == null ? 'null' : '"${escapeStringForJson(email)}"'},
+  "firstName": ${firstName == null ? 'null' : '"${escapeStringForJson(firstName)}"'},
+  "lastName": ${lastName == null ? 'null' : '"${escapeStringForJson(lastName)}"'},
+  "startTime": ${startTime == null ? 'null' : '"${escapeStringForJson(startTime)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'hubspotBookMeeting',

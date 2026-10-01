@@ -32,6 +32,8 @@ class Step1Model extends FlutterFlowModel<Step1Widget> {
           int index, Function(FFUploadedFile) updateFn) =>
       selectedFiles[index] = updateFn(selectedFiles[index]);
 
+  bool onTap = false;
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();

@@ -1,3 +1,4 @@
+import '/flutter_flow/ff_builtin_enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
@@ -56,7 +57,9 @@ class _GreatnessPageWidgetState extends State<GreatnessPageWidget> {
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment:
+                      (FFCrossAxisAlignment.center).flutterValue,
+                  textBaseline: TextBaseline.alphabetic,
                   children: [
                     InkWell(
                       splashColor: Colors.transparent,
@@ -93,6 +96,7 @@ class _GreatnessPageWidgetState extends State<GreatnessPageWidget> {
                     Expanded(
                       child: Text(
                         'WHERE GREATNESS BEGINS',
+                        textAlign: TextAlign.start,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               font: GoogleFonts.playfair(
                                 fontWeight: FontWeight.w600,

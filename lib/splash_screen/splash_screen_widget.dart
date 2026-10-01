@@ -50,6 +50,8 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
             _model.guestLogin,
             r'''$.device_id''',
           ).toString(),
+          'full_name': 'App User',
+          'email': 'appuser@shotcount.com',
         });
         FFAppState().userId = getJsonField(
           _model.guestLogin,
