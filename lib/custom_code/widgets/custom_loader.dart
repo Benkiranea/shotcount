@@ -58,6 +58,9 @@ class _CustomLoaderState extends State<CustomLoader>
       widget.height ?? 48,
     );
 
+    // Get Primary color from FlutterFlow Theme
+    final Color primaryColor = FlutterFlowTheme.of(context).primary;
+
     return SizedBox(
       width: widget.width ?? 48,
       height: widget.height ?? 48,
@@ -68,6 +71,7 @@ class _CustomLoaderState extends State<CustomLoader>
             size: Size(size, size),
             painter: _LoaderPainter(
               progress: _controller.value,
+              progressColor: primaryColor,
             ),
           );
         },
@@ -78,9 +82,11 @@ class _CustomLoaderState extends State<CustomLoader>
 
 class _LoaderPainter extends CustomPainter {
   final double progress;
+  final Color progressColor;
 
   _LoaderPainter({
     required this.progress,
+    required this.progressColor,
   });
 
   @override
@@ -94,7 +100,10 @@ class _LoaderPainter extends CustomPainter {
 
     final double radius = (math.min(size.width, size.height) - strokeWidth) / 2;
 
+    // ==========================================
     // Background ring
+    // ==========================================
+
     final Paint backgroundPaint = Paint()
       ..color = const Color(0xFFE8ECEF)
       ..style = PaintingStyle.stroke
@@ -106,9 +115,13 @@ class _LoaderPainter extends CustomPainter {
       backgroundPaint,
     );
 
-    // Teal animated arc
+    // ==========================================
+    // Animated progress arc
+    // Uses FlutterFlow Theme Primary color
+    // ==========================================
+
     final Paint progressPaint = Paint()
-      ..color = const Color(0xFF159A9C)
+      ..color = progressColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
@@ -130,7 +143,10 @@ class _LoaderPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _LoaderPainter oldDelegate) {
-    return oldDelegate.progress != progress;
+  bool shouldRepaint(
+    covariant _LoaderPainter oldDelegate,
+  ) {
+    return oldDelegate.progress != progress ||
+        oldDelegate.progressColor != progressColor;
   }
 }

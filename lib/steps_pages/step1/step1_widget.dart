@@ -1036,7 +1036,7 @@ class _Step1WidgetState extends State<Step1Widget> {
                                       ),
                                     ].divide(SizedBox(height: 10.0)),
                                   ),
-                                if (_model.image == null || _model.image == '')
+                                if (_model.isLoading == true)
                                   Align(
                                     alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
