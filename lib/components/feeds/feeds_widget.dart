@@ -120,9 +120,9 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                 child: custom_widgets.InstagramMediaViewer(
                   width: MediaQuery.sizeOf(context).width * 1.0,
                   height: 352.0,
-                  mediaType: widget.mediaType!,
-                  mediaUrl: widget.singleImage!,
-                  childrenUrl: widget.childrenUrl!,
+                  mediaType: widget.mediaType ?? '',
+                  mediaUrl: widget.singleImage ?? '',
+                  childrenUrl: widget.childrenUrl,
                 ),
               ),
             ],
