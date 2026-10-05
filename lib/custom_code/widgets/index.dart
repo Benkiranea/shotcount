@@ -3,3 +3,4 @@ export '/custom_code/widgets/custom_bottom_nav_bar.dart'
 export '/custom_code/widgets/read_more_widget.dart' show ReadMoreWidget;
 export '/custom_code/widgets/instagram_media_viewer.dart'
     show InstagramMediaViewer;
+export '/custom_code/widgets/custom_loader.dart' show CustomLoader;

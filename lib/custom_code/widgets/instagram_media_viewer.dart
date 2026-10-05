@@ -49,10 +49,11 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
 
   int currentIndex = 0;
 
+  bool isCarousel = false;
+
   @override
   void initState() {
     super.initState();
-
     _prepareMedia();
   }
 
@@ -66,6 +67,10 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
         oldWidget.mediaUrl != widget.mediaUrl ||
         oldWidget.childrenUrl != widget.childrenUrl) {
       _prepareMedia();
+
+      if (_pageController.hasClients) {
+        _pageController.jumpToPage(0);
+      }
     }
   }
 
@@ -76,39 +81,45 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
   void _prepareMedia() {
     final List<Map<String, dynamic>> items = [];
 
+    final String mainType = widget.mediaType.trim().toUpperCase();
+
+    final String mainUrl = _cleanUrl(
+      widget.mediaUrl.trim(),
+    );
+
+    bool carouselHasChildren = false;
+
     // ==========================================================
     // CAROUSEL ALBUM
     // ==========================================================
 
-    if (widget.mediaType.toUpperCase() == 'CAROUSEL_ALBUM') {
+    if (mainType == 'CAROUSEL_ALBUM') {
       try {
         dynamic decoded = widget.childrenUrl;
 
         // ------------------------------------------------------
-        // FlutterFlow normally sends JSON directly.
-        //
-        // If FlutterFlow sends it as a String, decode it.
+        // childrenUrl can come as JSON String
         // ------------------------------------------------------
 
         if (decoded is String) {
           final String value = decoded.trim();
 
-          if (value.isNotEmpty && value != 'null') {
+          if (value.isNotEmpty && value.toLowerCase() != 'null') {
             decoded = jsonDecode(value);
           }
         }
 
         // ------------------------------------------------------
-        // childrenUrl should contain a List
+        // childrenUrl should be a List
         // ------------------------------------------------------
 
-        if (decoded is List) {
+        if (decoded is List && decoded.isNotEmpty) {
           for (final item in decoded) {
             if (item is! Map) {
               continue;
             }
 
-            final dynamic urlValue = item['media_url'];
+            dynamic urlValue = item['media_url'];
 
             if (urlValue == null) {
               continue;
@@ -120,14 +131,6 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
               continue;
             }
 
-            // --------------------------------------------------
-            // Handle accidental Markdown URL format:
-            //
-            // [https://example.com/image.jpg](https://example.com/image.jpg)
-            //
-            // If your DB contains normal URLs, this does nothing.
-            // --------------------------------------------------
-
             url = _cleanUrl(url);
 
             if (url.isEmpty) {
@@ -136,8 +139,9 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
 
             final String id = item['id']?.toString() ?? '';
 
-            final String type =
-                item['media_type']?.toString().toUpperCase() ?? 'IMAGE';
+            final String type = _normalizeMediaType(
+              item['media_type']?.toString() ?? 'IMAGE',
+            );
 
             items.add({
               'id': id,
@@ -148,29 +152,29 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
         }
       } catch (e) {
         debugPrint(
-          'InstagramMediaViewer childrenUrl error: $e',
+          'InstagramMediaViewer childrenUrl parse error: $e',
         );
+      }
+
+      // --------------------------------------------------------
+      // Only treat it as carousel if we actually have children
+      // --------------------------------------------------------
+
+      if (items.isNotEmpty) {
+        carouselHasChildren = true;
       }
     }
 
     // ==========================================================
-    // NORMAL IMAGE / FALLBACK
+    // FINAL STATE
     // ==========================================================
 
-    if (items.isEmpty && widget.mediaUrl.trim().isNotEmpty) {
-      String url = widget.mediaUrl.trim();
-
-      url = _cleanUrl(url);
-
-      if (url.isNotEmpty) {
-        items.add({
-          'id': '',
-          'media_url': url,
-          'media_type': _normalizeMediaType(
-            widget.mediaType,
-          ),
-        });
-      }
+    if (mounted) {
+      setState(() {
+        mediaItems = items;
+        currentIndex = 0;
+        isCarousel = carouselHasChildren;
+      });
     }
 
     // ==========================================================
@@ -198,27 +202,20 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
     );
 
     debugPrint(
-      'FINAL MEDIA ITEMS: $items',
+      'Is Carousel: $isCarousel',
     );
 
     debugPrint(
-      'TOTAL MEDIA ITEMS: ${items.length}',
+      'FINAL MEDIA ITEMS: $mediaItems',
+    );
+
+    debugPrint(
+      'TOTAL MEDIA ITEMS: ${mediaItems.length}',
     );
 
     debugPrint(
       '============================================',
     );
-
-    // ==========================================================
-    // UPDATE STATE
-    // ==========================================================
-
-    if (mounted) {
-      setState(() {
-        mediaItems = items;
-        currentIndex = 0;
-      });
-    }
   }
 
   // ============================================================
@@ -228,8 +225,12 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
   String _cleanUrl(String url) {
     String cleaned = url.trim();
 
-    // Handle Markdown-style URL:
-    // [https://example.com](https://example.com)
+    if (cleaned.isEmpty) {
+      return '';
+    }
+
+    // Handle:
+    // [https://example.com/image.jpg](https://example.com/image.jpg)
 
     final RegExp markdownUrlRegex = RegExp(
       r'^\[(.*?)\]\((.*?)\)$',
@@ -259,6 +260,11 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
       return 'VIDEO';
     }
 
+    if (value == 'IMAGE') {
+      return 'IMAGE';
+    }
+
+    // Unknown child type defaults to IMAGE
     return 'IMAGE';
   }
 
@@ -268,39 +274,106 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
 
   @override
   Widget build(BuildContext context) {
-    // ----------------------------------------------------------
-    // No media
-    // ----------------------------------------------------------
+    final String type = widget.mediaType.trim().toUpperCase();
 
-    if (mediaItems.isEmpty) {
-      return SizedBox(
-        width: widget.width,
-        height: widget.height,
-        child: const Center(
-          child: Icon(
-            Icons.image_not_supported_outlined,
-          ),
-        ),
+    final String url = _cleanUrl(widget.mediaUrl);
+
+    // ==========================================================
+    // CAROUSEL ALBUM
+    // ==========================================================
+
+    if (type == 'CAROUSEL_ALBUM') {
+      // --------------------------------------------------------
+      // Valid children -> PageView
+      // --------------------------------------------------------
+
+      if (isCarousel && mediaItems.isNotEmpty) {
+        return _buildCarousel();
+      }
+
+      // --------------------------------------------------------
+      // No children -> fallback to mediaUrl as IMAGE
+      // --------------------------------------------------------
+
+      if (url.isNotEmpty) {
+        return InstagramImage(
+          key: ValueKey(url),
+          url: url,
+        );
+      }
+
+      // No media at all
+      return _buildNoMedia();
+    }
+
+    // ==========================================================
+    // IMAGE
+    // ==========================================================
+
+    if (type == 'IMAGE') {
+      if (url.isEmpty) {
+        return _buildNoMedia();
+      }
+
+      return InstagramImage(
+        key: ValueKey(url),
+        url: url,
       );
     }
 
-    // ----------------------------------------------------------
-    // Media viewer
-    // ----------------------------------------------------------
+    // ==========================================================
+    // VIDEO
+    // ==========================================================
 
+    if (type == 'VIDEO') {
+      if (url.isEmpty) {
+        return _buildNoMedia();
+      }
+
+      return InstagramVideo(
+        key: ValueKey(url),
+        url: url,
+      );
+    }
+
+    // ==========================================================
+    // UNKNOWN MEDIA TYPE
+    // ==========================================================
+
+    debugPrint(
+      'Unknown Instagram media type: ${widget.mediaType}',
+    );
+
+    // Safe fallback:
+    // If mediaUrl exists, try it as an image.
+    if (url.isNotEmpty) {
+      return InstagramImage(
+        key: ValueKey(url),
+        url: url,
+      );
+    }
+
+    return _buildNoMedia();
+  }
+
+  // ============================================================
+  // CAROUSEL
+  // ============================================================
+
+  Widget _buildCarousel() {
     return SizedBox(
       width: widget.width ?? double.infinity,
       height: widget.height ?? MediaQuery.of(context).size.width,
       child: Stack(
         children: [
-          // ====================================================
-          // PAGE VIEW
-          // ====================================================
-
           PageView.builder(
             controller: _pageController,
             itemCount: mediaItems.length,
             onPageChanged: (index) {
+              if (!mounted) {
+                return;
+              }
+
               setState(() {
                 currentIndex = index;
               });
@@ -308,31 +381,44 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
             itemBuilder: (context, index) {
               final Map<String, dynamic> item = mediaItems[index];
 
-              final String url = item['media_url']?.toString() ?? '';
+              final String url = _cleanUrl(
+                item['media_url']?.toString() ?? '',
+              );
 
-              final String type =
-                  item['media_type']?.toString().toUpperCase() ?? 'IMAGE';
+              final String itemType = _normalizeMediaType(
+                item['media_type']?.toString() ?? 'IMAGE',
+              );
+
+              final String id = item['id']?.toString() ?? '';
 
               // ------------------------------------------------
-              // VIDEO
+              // Invalid child URL
               // ------------------------------------------------
 
-              if (type == 'VIDEO') {
+              if (url.isEmpty) {
+                return _buildNoMedia();
+              }
+
+              // ------------------------------------------------
+              // CHILD VIDEO
+              // ------------------------------------------------
+
+              if (itemType == 'VIDEO') {
                 return InstagramVideo(
                   key: ValueKey(
-                    item['id']?.toString() ?? url,
+                    id.isNotEmpty ? id : url,
                   ),
                   url: url,
                 );
               }
 
               // ------------------------------------------------
-              // IMAGE
+              // CHILD IMAGE
               // ------------------------------------------------
 
               return InstagramImage(
                 key: ValueKey(
-                  item['id']?.toString() ?? url,
+                  id.isNotEmpty ? id : url,
                 ),
                 url: url,
               );
@@ -340,7 +426,7 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
           ),
 
           // ====================================================
-          // TOP RIGHT COUNTER
+          // COUNTER
           // ====================================================
 
           if (mediaItems.length > 1)
@@ -368,7 +454,7 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
             ),
 
           // ====================================================
-          // INSTAGRAM DOTS
+          // DOTS
           // ====================================================
 
           if (mediaItems.length > 1)
@@ -384,9 +470,7 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
                     final bool selected = index == currentIndex;
 
                     return AnimatedContainer(
-                      duration: const Duration(
-                        milliseconds: 200,
-                      ),
+                      duration: const Duration(milliseconds: 200),
                       margin: const EdgeInsets.symmetric(
                         horizontal: 3,
                       ),
@@ -407,6 +491,25 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
   }
 
   // ============================================================
+  // NO MEDIA
+  // ============================================================
+
+  Widget _buildNoMedia() {
+    return Container(
+      width: widget.width ?? double.infinity,
+      height: widget.height ?? MediaQuery.of(context).size.width,
+      color: Colors.black,
+      child: const Center(
+        child: Icon(
+          Icons.image_not_supported_outlined,
+          color: Colors.white70,
+          size: 40,
+        ),
+      ),
+    );
+  }
+
+  // ============================================================
   // DISPOSE
   // ============================================================
 
@@ -418,9 +521,9 @@ class _InstagramMediaViewerState extends State<InstagramMediaViewer> {
   }
 }
 
-// ================================================================
-// IMAGE
-// ================================================================
+// =================================================================
+// IMAGE WIDGET
+// =================================================================
 
 class InstagramImage extends StatelessWidget {
   const InstagramImage({
@@ -432,6 +535,16 @@ class InstagramImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ------------------------------------------------------------
+    // Invalid URL
+    // ------------------------------------------------------------
+
+    if (url.trim().isEmpty) {
+      return _imageErrorWidget(
+        message: 'Invalid image URL',
+      );
+    }
+
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -440,9 +553,9 @@ class InstagramImage extends StatelessWidget {
         url,
         fit: BoxFit.cover,
 
-        // ------------------------------------------------------
+        // ========================================================
         // LOADING
-        // ------------------------------------------------------
+        // ========================================================
 
         loadingBuilder: (
           context,
@@ -453,16 +566,29 @@ class InstagramImage extends StatelessWidget {
             return child;
           }
 
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Colors.white,
+          double? progress;
+
+          if (loadingProgress.expectedTotalBytes != null) {
+            progress = loadingProgress.cumulativeBytesLoaded /
+                loadingProgress.expectedTotalBytes!;
+          }
+
+          return Center(
+            child: SizedBox(
+              width: 28,
+              height: 28,
+              child: CircularProgressIndicator(
+                value: progress,
+                strokeWidth: 2.5,
+                color: Colors.white,
+              ),
             ),
           );
         },
 
-        // ------------------------------------------------------
+        // ========================================================
         // ERROR
-        // ------------------------------------------------------
+        // ========================================================
 
         errorBuilder: (
           context,
@@ -477,22 +603,49 @@ class InstagramImage extends StatelessWidget {
             'Instagram image URL: $url',
           );
 
-          return const Center(
-            child: Icon(
-              Icons.broken_image_outlined,
-              color: Colors.white,
-              size: 40,
-            ),
+          return _imageErrorWidget(
+            message: 'Unable to load image',
           );
         },
       ),
     );
   }
+
+  Widget _imageErrorWidget({
+    required String message,
+  }) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      color: Colors.black,
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.broken_image_outlined,
+              color: Colors.white70,
+              size: 40,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              message,
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 12,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
-// ================================================================
-// VIDEO
-// ================================================================
+// =================================================================
+// VIDEO WIDGET
+// =================================================================
 
 class InstagramVideo extends StatefulWidget {
   const InstagramVideo({
@@ -507,18 +660,18 @@ class InstagramVideo extends StatefulWidget {
 }
 
 class _InstagramVideoState extends State<InstagramVideo> {
-  late VideoPlayerController controller;
+  VideoPlayerController? controller;
 
   bool initialized = false;
+  bool loading = true;
+  bool hasError = false;
   bool showControls = true;
+
+  String errorMessage = 'Unable to load video';
 
   @override
   void initState() {
     super.initState();
-
-    controller = VideoPlayerController.networkUrl(
-      Uri.parse(widget.url),
-    );
 
     _initialize();
   }
@@ -528,20 +681,54 @@ class _InstagramVideoState extends State<InstagramVideo> {
   // ============================================================
 
   Future<void> _initialize() async {
+    final String url = widget.url.trim();
+
+    // ------------------------------------------------------------
+    // Invalid URL
+    // ------------------------------------------------------------
+
+    if (url.isEmpty) {
+      _setError(
+        'Invalid video URL',
+      );
+      return;
+    }
+
     try {
-      await controller.initialize();
+      final Uri uri = Uri.tryParse(url) ?? Uri();
+
+      if (!uri.hasScheme || (!uri.scheme.startsWith('http'))) {
+        _setError(
+          'Invalid video URL',
+        );
+        return;
+      }
+
+      final VideoPlayerController newController =
+          VideoPlayerController.networkUrl(uri);
+
+      controller = newController;
+
+      await newController.initialize();
+
+      if (!mounted) {
+        newController.dispose();
+        return;
+      }
+
+      await newController.setLooping(true);
 
       if (!mounted) {
         return;
       }
 
-      await controller.setLooping(true);
-
       setState(() {
         initialized = true;
+        loading = false;
+        hasError = false;
       });
 
-      await controller.play();
+      await newController.play();
     } catch (e) {
       debugPrint(
         'Instagram video error: $e',
@@ -550,17 +737,77 @@ class _InstagramVideoState extends State<InstagramVideo> {
       debugPrint(
         'Instagram video URL: ${widget.url}',
       );
+
+      _setError(
+        'Unable to load video',
+      );
     }
   }
 
   // ============================================================
-  // BUILD VIDEO
+  // SET ERROR
+  // ============================================================
+
+  void _setError(String message) {
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      loading = false;
+      initialized = false;
+      hasError = true;
+      errorMessage = message;
+    });
+  }
+
+  // ============================================================
+  // BUILD
   // ============================================================
 
   @override
   Widget build(BuildContext context) {
-    if (!initialized) {
+    // ----------------------------------------------------------
+    // ERROR
+    // ----------------------------------------------------------
+
+    if (hasError) {
       return Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: Colors.black,
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.videocam_off_outlined,
+                color: Colors.white70,
+                size: 40,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                errorMessage,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // ----------------------------------------------------------
+    // LOADING
+    // ----------------------------------------------------------
+
+    if (loading || !initialized || controller == null) {
+      return Container(
+        width: double.infinity,
+        height: double.infinity,
         color: Colors.black,
         child: const Center(
           child: CircularProgressIndicator(
@@ -570,8 +817,18 @@ class _InstagramVideoState extends State<InstagramVideo> {
       );
     }
 
+    final VideoPlayerController videoController = controller!;
+
+    // ----------------------------------------------------------
+    // VIDEO
+    // ----------------------------------------------------------
+
     return GestureDetector(
       onTap: () {
+        if (!mounted) {
+          return;
+        }
+
         setState(() {
           showControls = !showControls;
         });
@@ -589,8 +846,10 @@ class _InstagramVideoState extends State<InstagramVideo> {
 
             Center(
               child: AspectRatio(
-                aspectRatio: controller.value.aspectRatio,
-                child: VideoPlayer(controller),
+                aspectRatio: videoController.value.aspectRatio,
+                child: VideoPlayer(
+                  videoController,
+                ),
               ),
             ),
 
@@ -601,25 +860,29 @@ class _InstagramVideoState extends State<InstagramVideo> {
             if (showControls)
               IconButton(
                 onPressed: () {
+                  if (!mounted) {
+                    return;
+                  }
+
                   setState(() {
-                    if (controller.value.isPlaying) {
-                      controller.pause();
+                    if (videoController.value.isPlaying) {
+                      videoController.pause();
                     } else {
-                      controller.play();
+                      videoController.play();
                     }
                   });
                 },
                 iconSize: 55,
                 color: Colors.white,
                 icon: Icon(
-                  controller.value.isPlaying
+                  videoController.value.isPlaying
                       ? Icons.pause_circle_outline
                       : Icons.play_circle_outline,
                 ),
               ),
 
             // ==================================================
-            // VIDEO PROGRESS
+            // PROGRESS
             // ==================================================
 
             Positioned(
@@ -627,10 +890,15 @@ class _InstagramVideoState extends State<InstagramVideo> {
               right: 0,
               bottom: 0,
               child: VideoProgressIndicator(
-                controller,
+                videoController,
                 allowScrubbing: true,
                 padding: const EdgeInsets.symmetric(
                   vertical: 6,
+                ),
+                colors: const VideoProgressColors(
+                  playedColor: Colors.white,
+                  bufferedColor: Colors.white54,
+                  backgroundColor: Colors.white24,
                 ),
               ),
             ),
@@ -641,12 +909,12 @@ class _InstagramVideoState extends State<InstagramVideo> {
   }
 
   // ============================================================
-  // DISPOSE VIDEO
+  // DISPOSE
   // ============================================================
 
   @override
   void dispose() {
-    controller.dispose();
+    controller?.dispose();
 
     super.dispose();
   }
