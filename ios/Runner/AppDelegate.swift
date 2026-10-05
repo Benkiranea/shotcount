@@ -13,6 +13,7 @@ import HubspotMobileSDK
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
 
+
         GeneratedPluginRegistrant.register(with: self)
 
         guard let controller = window?.rootViewController as? FlutterViewController else {

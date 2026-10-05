@@ -117,12 +117,11 @@ class _ProjectPageWidgetState extends State<ProjectPageWidget> {
                               'Keyap2_${listViewIndex}_of_${listViewInstagramPostsRowList.length}'),
                           userName: listViewInstagramPostsRow.username!,
                           profileImage:
-                              listViewInstagramPostsRow.profilePictureUrl!,
+                          listViewInstagramPostsRow.profilePictureUrl!,
                           caption: listViewInstagramPostsRow.caption!,
                           mediaType: listViewInstagramPostsRow.mediaType!,
                           singleImage: listViewInstagramPostsRow.mediaUrl!,
-                          childrenUrl: listViewInstagramPostsRow.childrenUrls
-                              ?.toString(),
+                          childrenUrl: listViewInstagramPostsRow.childrenUrls,
                         );
                       },
                     );
