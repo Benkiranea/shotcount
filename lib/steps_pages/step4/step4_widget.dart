@@ -3,6 +3,7 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/steps_pages/time_slot/time_slot_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
@@ -734,17 +735,8 @@ class _Step4WidgetState extends State<Step4Widget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      print('========== BOOKING START ==========');
-
-                                      print('User ID: ${FFAppState().userId}');
-                                      print('Selected Date: ${_model.selectedDate}');
-                                      print('Selected Time: ${_model.selectedTime}');
+                                  child: FFButtonWidget(
+                                    onPressed: () async {
                                       _model.profileData =
                                           await ProfilesTable().queryRows(
                                         queryFn: (q) => q.eqOrNull(
@@ -752,48 +744,6 @@ class _Step4WidgetState extends State<Step4Widget> {
                                           FFAppState().userId,
                                         ),
                                       );
-
-                                      // print('Profile Data: ${_model.profileData}');
-                                      // print('Profile Email: ${_model.profileData?.firstOrNull?.email}');
-                                      // print('Profile Full Name: ${_model.profileData?.firstOrNull?.fullName}');
-                                      //
-                                      // print('========== CALLING HUBSPOT ==========');
-                                      //
-                                      // print(
-                                      //   'Email: ${_model.profileData?.firstOrNull?.email}',
-                                      // );
-                                      //
-                                      // print(
-                                      //   'First Name: ${_model.profileData?.firstOrNull?.fullName}',
-                                      // );
-                                      //
-                                      // print(
-                                      //   'Last Name: ${functions.getLastName(
-                                      //     _model.profileData!.firstOrNull!.fullName!,
-                                      //   )}',
-                                      // );
-                                      //
-                                      // print(
-                                      //   'Start Time: ${functions.timeToISO8601(
-                                      //     _model.selectedTime!,
-                                      //     _model.selectedDate!,
-                                      //   )}',
-                                      // );
-                                      final requestBody = {
-                                        "email": _model.profileData?.firstOrNull?.email,
-                                        "firstName": _model.profileData?.firstOrNull?.fullName,
-                                        "lastName": functions.getLastName(
-                                          _model.profileData!.firstOrNull!.fullName!,
-                                        ),
-                                        "startTime": functions.timeToISO8601(
-                                          _model.selectedTime!,
-                                          _model.selectedDate!,
-                                        ),
-                                      };
-
-                                      print('========== HUBSPOT REQUEST BODY ==========');
-                                      print(jsonEncode(requestBody));
-                                      print('===========================================');
                                       _model.hubspotBooking =
                                           await HubspotBookMeetingCall.call(
                                         email: _model
@@ -808,19 +758,6 @@ class _Step4WidgetState extends State<Step4Widget> {
                                             .firstOrNull!
                                             .fullName!),
                                       );
-
-                                      print('========== HUBSPOT RESPONSE ==========');
-                                      print('HubSpot Booking Response: ${_model.hubspotBooking}');
-                                      print(
-                                        'Succeeded: ${_model.hubspotBooking?.succeeded}',
-                                      );
-                                      print(
-                                        'Status Code: ${_model.hubspotBooking?.statusCode}',
-                                      );
-                                      print(
-                                        'JSON Body: ${_model.hubspotBooking?.jsonBody}',
-                                      );
-                                      print('=======================================');
 
                                       if ((_model.hubspotBooking?.succeeded ??
                                           true)) {
@@ -872,51 +809,45 @@ class _Step4WidgetState extends State<Step4Widget> {
 
                                       safeSetState(() {});
                                     },
-                                    child: Container(
+                                    text: 'Confirm and Schedule',
+                                    options: FFButtonOptions(
                                       width: double.infinity,
                                       height: 48.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 5.0,
-                                            color: Color(0x1E000000),
-                                            offset: Offset(
-                                              0.0,
-                                              1.0,
-                                            ),
-                                            spreadRadius: 0.0,
-                                          )
-                                        ],
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                      ),
-                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                      child: Text(
-                                        'Confirm and Schedule',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              font: GoogleFonts.playfair(
-                                                fontWeight: FontWeight.w500,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                              ),
-                                              color:
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 0.0, 16.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            font: GoogleFonts.playfair(
+                                              fontWeight:
                                                   FlutterFlowTheme.of(context)
-                                                      .warning,
-                                              fontSize: 18.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w500,
+                                                      .titleSmall
+                                                      .fontWeight,
                                               fontStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium
+                                                      .titleSmall
                                                       .fontStyle,
                                             ),
-                                      ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .warning,
+                                            fontSize: 18.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontStyle,
+                                          ),
+                                      elevation: 1.0,
+                                      borderRadius: BorderRadius.circular(12.0),
                                     ),
                                   ),
                                 ),

@@ -114,13 +114,13 @@ class _ProjectPageWidgetState extends State<ProjectPageWidget> {
                             listViewInstagramPostsRowList[listViewIndex];
                         return FeedsWidget(
                           key: Key(
-                            'Keyap2_${listViewIndex}_of_${listViewInstagramPostsRowList.length}',
-                          ),
-                          userName: listViewInstagramPostsRow.username ?? '',
-                          profileImage: listViewInstagramPostsRow.profilePictureUrl ?? '',
-                          caption: listViewInstagramPostsRow.caption ?? '',
-                          mediaType: listViewInstagramPostsRow.mediaType ?? '',
-                          singleImage: listViewInstagramPostsRow.mediaUrl ?? '',
+                              'Keyap2_${listViewIndex}_of_${listViewInstagramPostsRowList.length}'),
+                          userName: listViewInstagramPostsRow.username!,
+                          profileImage:
+                              listViewInstagramPostsRow.profilePictureUrl!,
+                          caption: listViewInstagramPostsRow.caption!,
+                          mediaType: listViewInstagramPostsRow.mediaType!,
+                          singleImage: listViewInstagramPostsRow.mediaUrl!,
                           childrenUrl: listViewInstagramPostsRow.childrenUrls,
                         );
                       },
