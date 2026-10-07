@@ -210,9 +210,16 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
     );
 
     if ((widget.icon != null || widget.iconData != null) && !loading) {
+      // Widget icon = widget.icon ??
+      //     FaIcon(
+      //       widget.iconData!,
+      //       size: widget.options.iconSize,
+      //       color: widget.options.iconColor,
+      //     );
+
       Widget icon = widget.icon ??
-          FaIcon(
-            FaIconData(widget.iconData!),
+          Icon(
+            widget.iconData!,
             size: widget.options.iconSize,
             color: widget.options.iconColor,
           );
