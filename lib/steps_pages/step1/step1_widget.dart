@@ -418,6 +418,11 @@ class _Step1WidgetState extends State<Step1Widget> {
 
                                           var downloadUrls = <String>[];
                                           try {
+                                            showUploadMessage(
+                                              context,
+                                              'Uploading file...',
+                                              showLoading: true,
+                                            );
                                             selectedUploadedFiles =
                                                 selectedMedia
                                                     .map((m) => FFUploadedFile(
@@ -441,6 +446,8 @@ class _Step1WidgetState extends State<Step1Widget> {
                                               selectedFiles: selectedMedia,
                                             );
                                           } finally {
+                                            ScaffoldMessenger.of(context)
+                                                .hideCurrentSnackBar();
                                             _model.isDataUploading_uploadRoomImage =
                                                 false;
                                           }
@@ -454,8 +461,12 @@ class _Step1WidgetState extends State<Step1Widget> {
                                               _model.uploadedFileUrl_uploadRoomImage =
                                                   downloadUrls.first;
                                             });
+                                            showUploadMessage(
+                                                context, 'Success!');
                                           } else {
                                             safeSetState(() {});
+                                            showUploadMessage(context,
+                                                'Failed to upload data');
                                             return;
                                           }
                                         }
@@ -615,6 +626,11 @@ class _Step1WidgetState extends State<Step1Widget> {
 
                                           var downloadUrls = <String>[];
                                           try {
+                                            showUploadMessage(
+                                              context,
+                                              'Uploading file...',
+                                              showLoading: true,
+                                            );
                                             selectedUploadedFiles =
                                                 selectedMedia
                                                     .map((m) => FFUploadedFile(
@@ -638,6 +654,8 @@ class _Step1WidgetState extends State<Step1Widget> {
                                               selectedFiles: selectedMedia,
                                             );
                                           } finally {
+                                            ScaffoldMessenger.of(context)
+                                                .hideCurrentSnackBar();
                                             _model.isDataUploading_uploadWallpaper =
                                                 false;
                                           }
@@ -651,8 +669,12 @@ class _Step1WidgetState extends State<Step1Widget> {
                                               _model.uploadedFileUrl_uploadWallpaper =
                                                   downloadUrls.first;
                                             });
+                                            showUploadMessage(
+                                                context, 'Success!');
                                           } else {
                                             safeSetState(() {});
+                                            showUploadMessage(context,
+                                                'Failed to upload data');
                                             return;
                                           }
                                         }
@@ -863,7 +885,7 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                     '${_model.image}',
                                                     width: double.infinity,
                                                     height: 208.0,
-                                                    fit: BoxFit.cover,
+                                                    fit: BoxFit.fill,
                                                   ),
                                                 ),
                                               ),
