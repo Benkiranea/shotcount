@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "mobile-chat-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Benkiranea/mobile-chat-sdk-ios",
+      "state" : {
+        "branch" : "main",
+        "revision" : "5783cf7a527de6903bec844510b56dede84cd8f7"
+      }
+    },
+    {
       "identity" : "sdwebimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage",
