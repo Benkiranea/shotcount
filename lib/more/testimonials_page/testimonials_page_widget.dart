@@ -311,22 +311,30 @@ class _TestimonialsPageWidgetState extends State<TestimonialsPageWidget> {
                                     ),
                                   ),
                                 ),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  child: Image.asset(
-                                    'assets/images/image_28.png',
-                                    width: double.infinity,
-                                    height: 220.0,
-                                    fit: BoxFit.fill,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 10.0, 0.0, 0.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    child: Image.asset(
+                                      'assets/images/image_28.png',
+                                      width: double.infinity,
+                                      height: 220.0,
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                 ),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  child: Image.asset(
-                                    'assets/images/Photo_Aug_13_2026,_9_23_39_AM_(4).png',
-                                    width: double.infinity,
-                                    height: 237.0,
-                                    fit: BoxFit.fill,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 10.0, 0.0, 0.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    child: Image.asset(
+                                      'assets/images/Photo_Aug_13_2026,_9_23_39_AM_(4).png',
+                                      width: double.infinity,
+                                      height: 237.0,
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                 ),
                                 Padding(
