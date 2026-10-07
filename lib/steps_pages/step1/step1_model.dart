@@ -152,11 +152,11 @@ class Step1Model extends FlutterFlowModel<Step1Widget> {
   FocusNode? describeRoomFocusNode;
   TextEditingController? describeRoomTextController;
   String? Function(BuildContext, String?)? describeRoomTextControllerValidator;
-  // Stores action output result for [Validate Form] action in Container widget.
+  // Stores action output result for [Validate Form] action in Button widget.
   bool? formValidate;
-  // Stores action output result for [Custom Action - uploadFilesToSupabase] action in Container widget.
+  // Stores action output result for [Custom Action - uploadFilesToSupabase] action in Button widget.
   dynamic uploadFilesToSupabase;
-  // Stores action output result for [Backend Call - Insert Row] action in Container widget.
+  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
   ProjectsRow? projectCreated;
 
   @override

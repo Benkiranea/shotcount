@@ -26,9 +26,9 @@ class Step4Model extends FlutterFlowModel<Step4Widget> {
 
   // State field(s) for Calendar widget.
   DateTimeRange? calendarSelectedDay;
-  // Stores action output result for [Backend Call - Query Rows] action in Container widget.
+  // Stores action output result for [Backend Call - Query Rows] action in Button widget.
   List<ProfilesRow>? profileData;
-  // Stores action output result for [Backend Call - API (hubspotBookMeeting)] action in Container widget.
+  // Stores action output result for [Backend Call - API (hubspotBookMeeting)] action in Button widget.
   ApiCallResponse? hubspotBooking;
 
   @override

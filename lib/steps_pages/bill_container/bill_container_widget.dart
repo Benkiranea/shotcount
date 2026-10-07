@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_pdf_viewer.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'bill_container_model.dart';
@@ -65,112 +66,77 @@ class _BillContainerWidgetState extends State<BillContainerWidget> {
             Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
+                FFButtonWidget(
+                  onPressed: () async {
                     await widget.onTap?.call();
                   },
-                  child: Container(
+                  text: 'Approve proposal and Schedule project',
+                  options: FFButtonOptions(
                     width: double.infinity,
                     height: 48.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).primary,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 5.0,
-                          color: Color(0x1E000000),
-                          offset: Offset(
-                            0.0,
-                            1.0,
-                          ),
-                          spreadRadius: 0.0,
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            'Approve proposal and Schedule project',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  font: GoogleFonts.playfair(
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
-                                  color: FlutterFlowTheme.of(context).warning,
-                                  fontSize: 18.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .fontStyle,
-                                ),
-                          ),
-                        ),
-                      ]
-                          .addToStart(SizedBox(width: 12.0))
-                          .addToEnd(SizedBox(width: 12.0)),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    await widget.openChat?.call();
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 48.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondary,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 5.0,
-                          color: Color(0x1E000000),
-                          offset: Offset(
-                            0.0,
-                            1.0,
-                          ),
-                          spreadRadius: 0.0,
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(12.0),
-                      border: Border.all(
-                        color: FlutterFlowTheme.of(context).borderClr,
-                        width: 1.0,
-                      ),
-                    ),
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Text(
-                      'Message us to request change',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            font: GoogleFonts.playfair(
-                              fontWeight: FontWeight.w500,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontStyle,
-                            ),
-                            color: FlutterFlowTheme.of(context).warning,
-                            fontSize: 18.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.w500,
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          font: GoogleFonts.playfair(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontWeight,
                             fontStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
+                                .titleSmall
                                 .fontStyle,
                           ),
+                          color: FlutterFlowTheme.of(context).warning,
+                          fontSize: 18.0,
+                          letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                        ),
+                    elevation: 1.0,
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+                FFButtonWidget(
+                  onPressed: () async {
+                    await widget.openChat?.call();
+                  },
+                  text: 'Message us to request change',
+                  options: FFButtonOptions(
+                    width: double.infinity,
+                    height: 48.0,
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).secondary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          font: GoogleFonts.playfair(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontStyle,
+                          ),
+                          color: FlutterFlowTheme.of(context).warning,
+                          fontSize: 18.0,
+                          letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                        ),
+                    elevation: 1.0,
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).borderClr,
                     ),
+                    borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
               ].divide(SizedBox(height: 11.0)),

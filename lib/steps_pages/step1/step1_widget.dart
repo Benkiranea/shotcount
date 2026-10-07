@@ -1,8 +1,10 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/choice_container/choice_container_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/steps_pages/steps_container/steps_container_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
@@ -825,14 +827,45 @@ class _Step1WidgetState extends State<Step1Widget> {
                                         height: 208.0,
                                         child: Stack(
                                           children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                              child: Image.network(
-                                                '${_model.image}',
-                                                width: double.infinity,
-                                                height: 208.0,
-                                                fit: BoxFit.cover,
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await Navigator.push(
+                                                  context,
+                                                  PageTransition(
+                                                    type:
+                                                        PageTransitionType.fade,
+                                                    child:
+                                                        FlutterFlowExpandedImageView(
+                                                      image: Image.network(
+                                                        '${_model.image}',
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                      allowRotation: false,
+                                                      tag: '${_model.image}',
+                                                      useHeroAnimation: true,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              child: Hero(
+                                                tag: '${_model.image}',
+                                                transitionOnUserGestures: true,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12.0),
+                                                  child: Image.network(
+                                                    '${_model.image}',
+                                                    width: double.infinity,
+                                                    height: 208.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
                                               ),
                                             ),
                                             Align(
@@ -864,44 +897,73 @@ class _Step1WidgetState extends State<Step1Widget> {
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Expanded(
-                                              child: Container(
-                                                width: 100.0,
-                                                height: 42.0,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .containerClr,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      blurRadius: 5.0,
-                                                      color: Color(0x1F000000),
-                                                      offset: Offset(
-                                                        0.0,
-                                                        1.0,
-                                                      ),
-                                                      spreadRadius: 0.0,
-                                                    )
-                                                  ],
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                  border: Border.all(
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await downloadFile(
+                                                    filename:
+                                                        'wallpaper_installed',
+                                                    url: _model.image!,
+                                                  );
+                                                },
+                                                child: Container(
+                                                  width: 100.0,
+                                                  height: 42.0,
+                                                  decoration: BoxDecoration(
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .primary,
-                                                    width: 1.0,
+                                                        .containerClr,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        blurRadius: 5.0,
+                                                        color:
+                                                            Color(0x1F000000),
+                                                        offset: Offset(
+                                                          0.0,
+                                                          1.0,
+                                                        ),
+                                                        spreadRadius: 0.0,
+                                                      )
+                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12.0),
+                                                    border: Border.all(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      width: 1.0,
+                                                    ),
                                                   ),
-                                                ),
-                                                alignment: AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Text(
-                                                  'Save Image',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        font: GoogleFonts
-                                                            .playfair(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Text(
+                                                    'Save Image',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .playfair(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          fontSize: 18.0,
+                                                          letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           fontStyle:
@@ -910,20 +972,7 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                                   .bodyMedium
                                                                   .fontStyle,
                                                         ),
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        fontSize: 18.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontStyle,
-                                                      ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -2970,114 +3019,104 @@ class _Step1WidgetState extends State<Step1Widget> {
                                         ),
                                       ],
                                     ),
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        if (!_model.onTap) {
-                                          _model.onTap = true;
-                                          safeSetState(() {});
-                                          _model.formValidate = true;
-                                          if (_model.formKey.currentState ==
-                                                  null ||
-                                              !_model.formKey.currentState!
-                                                  .validate()) {
-                                            safeSetState(() =>
-                                                _model.formValidate = false);
-                                            return;
-                                          }
-                                          _model.uploadFilesToSupabase =
-                                              await actions
-                                                  .uploadFilesToSupabase(
-                                            _model.selectedFiles.toList(),
-                                          );
-                                          await ProfilesTable().update(
-                                            data: {
-                                              'full_name': _model
-                                                  .fullNameTextController.text,
-                                              'email': _model
-                                                  .emailTextController.text,
-                                              'phone_number': _model
-                                                  .phoneTextController.text,
-                                            },
-                                            matchingRows: (rows) =>
-                                                rows.eqOrNull(
-                                              'id',
-                                              FFAppState().userId,
-                                            ),
-                                          );
-                                          _model.projectCreated =
-                                              await ProjectsTable().insert({
-                                            'project_name': _model
-                                                .projectNameTextController.text,
-                                            'user_id': FFAppState().userId,
-                                            'created_at':
-                                                supaSerialize<DateTime>(
-                                                    getCurrentTimestamp),
-                                            'room_description': _model
-                                                .describeRoomTextController
-                                                .text,
-                                            'notes': _model
-                                                .aboutProjectTextController
-                                                .text,
-                                            'room_type': _model.selectedValue,
-                                            'visualize_result': _model.image,
-                                            'upload_files':
-                                                _model.uploadFilesToSupabase,
-                                            'current_steps': 2,
-                                            'status': 'In Review',
-                                          });
-                                          _model.onTap = false;
-                                          safeSetState(() {});
-
-                                          context.goNamed(
-                                            Step2Widget.routeName,
-                                            queryParameters: {
-                                              'projectId': serializeParam(
-                                                _model.projectCreated?.id,
-                                                ParamType.String,
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 10.0, 0.0, 0.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          if (!_model.onTap) {
+                                            _model.onTap = true;
+                                            safeSetState(() {});
+                                            _model.formValidate = true;
+                                            if (_model.formKey.currentState ==
+                                                    null ||
+                                                !_model.formKey.currentState!
+                                                    .validate()) {
+                                              safeSetState(() =>
+                                                  _model.formValidate = false);
+                                              return;
+                                            }
+                                            _model.uploadFilesToSupabase =
+                                                await actions
+                                                    .uploadFilesToSupabase(
+                                              _model.selectedFiles.toList(),
+                                            );
+                                            await ProfilesTable().update(
+                                              data: {
+                                                'full_name': _model
+                                                    .fullNameTextController
+                                                    .text,
+                                                'email': _model
+                                                    .emailTextController.text,
+                                                'phone_number': _model
+                                                    .phoneTextController.text,
+                                              },
+                                              matchingRows: (rows) =>
+                                                  rows.eqOrNull(
+                                                'id',
+                                                FFAppState().userId,
                                               ),
-                                            }.withoutNulls,
-                                          );
-                                        }
+                                            );
+                                            _model.projectCreated =
+                                                await ProjectsTable().insert({
+                                              'project_name': _model
+                                                  .projectNameTextController
+                                                  .text,
+                                              'user_id': FFAppState().userId,
+                                              'created_at':
+                                                  supaSerialize<DateTime>(
+                                                      getCurrentTimestamp),
+                                              'room_description': _model
+                                                  .describeRoomTextController
+                                                  .text,
+                                              'notes': _model
+                                                  .aboutProjectTextController
+                                                  .text,
+                                              'room_type': _model.selectedValue,
+                                              'visualize_result': _model.image,
+                                              'upload_files':
+                                                  _model.uploadFilesToSupabase,
+                                              'current_steps': 2,
+                                              'status': 'In Review',
+                                            });
+                                            _model.onTap = false;
+                                            safeSetState(() {});
 
-                                        safeSetState(() {});
-                                      },
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 48.0,
-                                        decoration: BoxDecoration(
+                                            context.goNamed(
+                                              Step2Widget.routeName,
+                                              queryParameters: {
+                                                'projectId': serializeParam(
+                                                  _model.projectCreated?.id,
+                                                  ParamType.String,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+                                          }
+
+                                          safeSetState(() {});
+                                        },
+                                        text: 'Continue',
+                                        options: FFButtonOptions(
+                                          width: double.infinity,
+                                          height: 48.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 0.0, 16.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 5.0,
-                                              color: Color(0x1E000000),
-                                              offset: Offset(
-                                                0.0,
-                                                1.0,
-                                              ),
-                                              spreadRadius: 0.0,
-                                            )
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                        ),
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
-                                        child: Text(
-                                          'Continue',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
                                               .override(
                                                 font: GoogleFonts.playfair(
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyMedium
+                                                          .titleSmall
                                                           .fontStyle,
                                                 ),
                                                 color:
@@ -3088,9 +3127,12 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                 fontWeight: FontWeight.w600,
                                                 fontStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMedium
+                                                        .titleSmall
                                                         .fontStyle,
                                               ),
+                                          elevation: 1.0,
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
                                         ),
                                       ),
                                     ),
