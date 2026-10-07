@@ -1,0 +1,15 @@
+{
+  "originHash" : "00477d51b36d6de819afee0b919e05922736ecd7990e39d12526f7686c52095a",
+  "pins" : [
+    {
+      "identity" : "mobile-chat-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Benkiranea/mobile-chat-sdk-ios",
+      "state" : {
+        "branch" : "main",
+        "revision" : "5783cf7a527de6903bec844510b56dede84cd8f7"
+      }
+    }
+  ],
+  "version" : 3
+}

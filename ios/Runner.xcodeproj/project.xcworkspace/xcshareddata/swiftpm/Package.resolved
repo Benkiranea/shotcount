@@ -1,0 +1,15 @@
+{
+  "originHash" : "3cfe6b3b42bf43023e7cf1171deced6e114b0e286eaefd3065f0ba2683f9ffd1",
+  "pins" : [
+    {
+      "identity" : "mobile-chat-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/HubSpot/mobile-chat-sdk-ios.git",
+      "state" : {
+        "revision" : "be33ea03c2f14d9ae47079128edf1f3c7c11d6a8",
+        "version" : "1.0.7"
+      }
+    }
+  ],
+  "version" : 3
+}
