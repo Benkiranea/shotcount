@@ -518,7 +518,7 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                   ),
                   Expanded(
                     child: LinearPercentIndicator(
-                      percent: 0.5,
+                      percent: widget.progressValue!.toDouble(),
                       lineHeight: 4.0,
                       animation: true,
                       animateFromLastPercent: true,
