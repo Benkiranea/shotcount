@@ -1546,6 +1546,7 @@ class _YourProjectDetailPageWidgetState
                             wrapWithModel(
                               model: _model.yourDetailCardModel,
                               updateCallback: () => safeSetState(() {}),
+                              updateOnChange: true,
                               child: YourDetailCardWidget(
                                 title: getJsonField(
                                   columnGetProjectDetailsResponse.jsonBody,
