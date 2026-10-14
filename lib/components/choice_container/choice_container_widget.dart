@@ -117,7 +117,8 @@ class _ChoiceContainerWidgetState extends State<ChoiceContainerWidget> {
                   height: 16.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).containerClr,
-                    shape: BoxShape.circle,
+                    borderRadius: BorderRadius.circular(4.0),
+                    shape: BoxShape.rectangle,
                     border: Border.all(
                       color: FlutterFlowTheme.of(context).conBorderClr,
                       width: 1.0,
@@ -130,7 +131,8 @@ class _ChoiceContainerWidgetState extends State<ChoiceContainerWidget> {
                   height: 16.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).containerClr,
-                    shape: BoxShape.circle,
+                    borderRadius: BorderRadius.circular(4.0),
+                    shape: BoxShape.rectangle,
                     border: Border.all(
                       color: Color(0xFFA07D45),
                       width: 1.0,

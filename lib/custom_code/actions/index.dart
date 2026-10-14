@@ -7,3 +7,5 @@ export '/custom_code/actions/initialize_hub_spot_chat.dart'
 export '/custom_code/actions/identify_hub_spot_user.dart'
     show identifyHubSpotUser;
 export '/custom_code/actions/open_hub_spot_chat.dart' show openHubSpotChat;
+export '/custom_code/actions/save_image_to_gallery.dart'
+    show saveImageToGallery;

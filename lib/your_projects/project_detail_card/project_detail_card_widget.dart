@@ -23,7 +23,7 @@ class ProjectDetailCardWidget extends StatefulWidget {
   });
 
   final String? title;
-  final String? description;
+  final List<String>? description;
   final String? date;
   final String? status;
   final int? progressValue;
@@ -141,36 +141,59 @@ class _ProjectDetailCardWidgetState extends State<ProjectDetailCardWidget> {
                                       ),
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                                Text(
-                                  valueOrDefault<String>(
-                                    widget.description,
-                                    'Description',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 12.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
+                                Builder(
+                                  builder: (context) {
+                                    final projectType =
+                                        widget.description!.toList();
+
+                                    return SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children:
+                                            List.generate(projectType.length,
+                                                (projectTypeIndex) {
+                                          final projectTypeItem =
+                                              projectType[projectTypeIndex];
+                                          return Text(
+                                            projectTypeItem,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 12.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                            overflow: TextOverflow.ellipsis,
+                                          );
+                                        }).divide(SizedBox(width: 20.0)),
                                       ),
-                                  overflow: TextOverflow.ellipsis,
+                                    );
+                                  },
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(

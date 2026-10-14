@@ -34,6 +34,18 @@ class Step1Model extends FlutterFlowModel<Step1Widget> {
 
   bool onTap = false;
 
+  List<String> selectedProjectTypes = [];
+  void addToSelectedProjectTypes(String item) => selectedProjectTypes.add(item);
+  void removeFromSelectedProjectTypes(String item) =>
+      selectedProjectTypes.remove(item);
+  void removeAtIndexFromSelectedProjectTypes(int index) =>
+      selectedProjectTypes.removeAt(index);
+  void insertAtIndexInSelectedProjectTypes(int index, String item) =>
+      selectedProjectTypes.insert(index, item);
+  void updateSelectedProjectTypesAtIndex(
+          int index, Function(String) updateFn) =>
+      selectedProjectTypes[index] = updateFn(selectedProjectTypes[index]);
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
@@ -53,6 +65,8 @@ class Step1Model extends FlutterFlowModel<Step1Widget> {
 
   // Stores action output result for [Backend Call - API (GenerateWallpaperVisualization)] action in Container widget.
   ApiCallResponse? imageRes1;
+  // Stores action output result for [Custom Action - saveImageToGallery] action in Container widget.
+  bool? isSaved;
   // State field(s) for FullName widget.
   FocusNode? fullNameFocusNode;
   TextEditingController? fullNameTextController;
@@ -74,6 +88,9 @@ class Step1Model extends FlutterFlowModel<Step1Widget> {
       return 'Email address is required';
     }
 
+    if (!RegExp(kTextValidatorEmailRegex).hasMatch(val)) {
+      return 'Enter Valid email';
+    }
     return null;
   }
 
@@ -103,21 +120,26 @@ class Step1Model extends FlutterFlowModel<Step1Widget> {
     return null;
   }
 
+  // State field(s) for ProjectAddress widget.
+  FocusNode? projectAddressFocusNode;
+  TextEditingController? projectAddressTextController;
+  String? Function(BuildContext, String?)?
+      projectAddressTextControllerValidator;
+  String? _projectAddressTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Project Address is required';
+    }
+
+    return null;
+  }
+
   // Model for StepsContainer component.
   late StepsContainerModel stepsContainerModel2;
   // State field(s) for AboutProject widget.
   FocusNode? aboutProjectFocusNode;
   TextEditingController? aboutProjectTextController;
   String? Function(BuildContext, String?)? aboutProjectTextControllerValidator;
-  String? _aboutProjectTextControllerValidator(
-      BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Example: is required';
-    }
-
-    return null;
-  }
-
   // Model for StepsContainer component.
   late StepsContainerModel stepsContainerModel3;
   // Stores action output result for [Custom Action - pickAndAddFiles] action in Container widget.
@@ -166,8 +188,9 @@ class Step1Model extends FlutterFlowModel<Step1Widget> {
     emailTextControllerValidator = _emailTextControllerValidator;
     phoneTextControllerValidator = _phoneTextControllerValidator;
     projectNameTextControllerValidator = _projectNameTextControllerValidator;
+    projectAddressTextControllerValidator =
+        _projectAddressTextControllerValidator;
     stepsContainerModel2 = createModel(context, () => StepsContainerModel());
-    aboutProjectTextControllerValidator = _aboutProjectTextControllerValidator;
     stepsContainerModel3 = createModel(context, () => StepsContainerModel());
     stepsContainerModel4 = createModel(context, () => StepsContainerModel());
     choiceContainerModel1 = createModel(context, () => ChoiceContainerModel());
@@ -198,6 +221,9 @@ class Step1Model extends FlutterFlowModel<Step1Widget> {
 
     projectNameFocusNode?.dispose();
     projectNameTextController?.dispose();
+
+    projectAddressFocusNode?.dispose();
+    projectAddressTextController?.dispose();
 
     stepsContainerModel2.dispose();
     aboutProjectFocusNode?.dispose();

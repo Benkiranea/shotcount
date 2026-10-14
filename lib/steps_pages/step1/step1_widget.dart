@@ -50,6 +50,9 @@ class _Step1WidgetState extends State<Step1Widget> {
     _model.projectNameTextController ??= TextEditingController();
     _model.projectNameFocusNode ??= FocusNode();
 
+    _model.projectAddressTextController ??= TextEditingController();
+    _model.projectAddressFocusNode ??= FocusNode();
+
     _model.aboutProjectTextController ??= TextEditingController();
     _model.aboutProjectFocusNode ??= FocusNode();
 
@@ -885,7 +888,7 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                     '${_model.image}',
                                                     width: double.infinity,
                                                     height: 208.0,
-                                                    fit: BoxFit.fill,
+                                                    fit: BoxFit.contain,
                                                   ),
                                                 ),
                                               ),
@@ -926,11 +929,61 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
-                                                  await downloadFile(
-                                                    filename:
-                                                        'wallpaper_installed',
-                                                    url: _model.image!,
+                                                  _model.isSaved = await actions
+                                                      .saveImageToGallery(
+                                                    _model.image!,
                                                   );
+                                                  if (_model.isSaved!) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .clearSnackBars();
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          'Image saved to gallery!',
+                                                          style: TextStyle(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryBackground,
+                                                          ),
+                                                        ),
+                                                        duration: Duration(
+                                                            milliseconds: 4000),
+                                                        backgroundColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .clearSnackBars();
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          'Unable to save image to gallery',
+                                                          style: TextStyle(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryBackground,
+                                                          ),
+                                                        ),
+                                                        duration: Duration(
+                                                            milliseconds: 4000),
+                                                        backgroundColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
+                                                      ),
+                                                    );
+                                                  }
+
+                                                  safeSetState(() {});
                                                 },
                                                 child: Container(
                                                   width: 100.0,
@@ -1830,6 +1883,153 @@ class _Step1WidgetState extends State<Step1Widget> {
                                             .asValidator(context),
                                       ),
                                     ),
+                                    Container(
+                                      width: double.infinity,
+                                      child: TextFormField(
+                                        controller:
+                                            _model.projectAddressTextController,
+                                        focusNode:
+                                            _model.projectAddressFocusNode,
+                                        autofocus: false,
+                                        enabled: true,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          isDense: false,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.playfair(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintText: 'Project Address',
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.normal,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                fontSize: 14.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.normal,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .containerClr,
+                                          hoverColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .containerClr,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              fontSize: 14.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                        cursorColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                        enableInteractiveSelection: true,
+                                        validator: _model
+                                            .projectAddressTextControllerValidator
+                                            .asValidator(context),
+                                      ),
+                                    ),
                                     wrapWithModel(
                                       model: _model.stepsContainerModel2,
                                       updateCallback: () => safeSetState(() {}),
@@ -2481,13 +2681,22 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                         .primary,
                                                 size: 20.0,
                                               ),
-                                              isSelected:
-                                                  _model.selectedValue ==
-                                                      'Living Room',
+                                              isSelected: _model
+                                                  .selectedProjectTypes
+                                                  .contains('Living Room'),
                                               onTap: () async {
-                                                _model.selectedValue =
-                                                    'Living Room';
-                                                safeSetState(() {});
+                                                if (_model.selectedProjectTypes
+                                                    .contains('Living Room')) {
+                                                  _model
+                                                      .removeFromSelectedProjectTypes(
+                                                          'Living Room');
+                                                  safeSetState(() {});
+                                                } else {
+                                                  _model
+                                                      .addToSelectedProjectTypes(
+                                                          'Living Room');
+                                                  safeSetState(() {});
+                                                }
                                               },
                                             ),
                                           ),
@@ -2506,13 +2715,22 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                         .primary,
                                                 size: 20.0,
                                               ),
-                                              isSelected:
-                                                  _model.selectedValue ==
-                                                      'Dining Room',
+                                              isSelected: _model
+                                                  .selectedProjectTypes
+                                                  .contains('Dining Room'),
                                               onTap: () async {
-                                                _model.selectedValue =
-                                                    'Dining Room';
-                                                safeSetState(() {});
+                                                if (_model.selectedProjectTypes
+                                                    .contains('Dining Room')) {
+                                                  _model
+                                                      .removeFromSelectedProjectTypes(
+                                                          'Dining Room');
+                                                  safeSetState(() {});
+                                                } else {
+                                                  _model
+                                                      .addToSelectedProjectTypes(
+                                                          'Dining Room');
+                                                  safeSetState(() {});
+                                                }
                                               },
                                             ),
                                           ),
@@ -2536,13 +2754,22 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                         .primary,
                                                 size: 20.0,
                                               ),
-                                              isSelected:
-                                                  _model.selectedValue ==
-                                                      'Bed Room',
+                                              isSelected: _model
+                                                  .selectedProjectTypes
+                                                  .contains('Bed Room'),
                                               onTap: () async {
-                                                _model.selectedValue =
-                                                    'Bed Room';
-                                                safeSetState(() {});
+                                                if (_model.selectedProjectTypes
+                                                    .contains('Bed Room')) {
+                                                  _model
+                                                      .removeFromSelectedProjectTypes(
+                                                          'Bed Room');
+                                                  safeSetState(() {});
+                                                } else {
+                                                  _model
+                                                      .addToSelectedProjectTypes(
+                                                          'Bed Room');
+                                                  safeSetState(() {});
+                                                }
                                               },
                                             ),
                                           ),
@@ -2561,13 +2788,22 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                         .primary,
                                                 size: 20.0,
                                               ),
-                                              isSelected:
-                                                  _model.selectedValue ==
-                                                      'Kitchen',
+                                              isSelected: _model
+                                                  .selectedProjectTypes
+                                                  .contains('Kitchen'),
                                               onTap: () async {
-                                                _model.selectedValue =
-                                                    'Kitchen';
-                                                safeSetState(() {});
+                                                if (_model.selectedProjectTypes
+                                                    .contains('Kitchen')) {
+                                                  _model
+                                                      .removeFromSelectedProjectTypes(
+                                                          'Kitchen');
+                                                  safeSetState(() {});
+                                                } else {
+                                                  _model
+                                                      .addToSelectedProjectTypes(
+                                                          'Kitchen');
+                                                  safeSetState(() {});
+                                                }
                                               },
                                             ),
                                           ),
@@ -2591,13 +2827,22 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                         .primary,
                                                 size: 20.0,
                                               ),
-                                              isSelected:
-                                                  _model.selectedValue ==
-                                                      'Bathroom',
+                                              isSelected: _model
+                                                  .selectedProjectTypes
+                                                  .contains('Bathroom'),
                                               onTap: () async {
-                                                _model.selectedValue =
-                                                    'Bathroom';
-                                                safeSetState(() {});
+                                                if (_model.selectedProjectTypes
+                                                    .contains('Bathroom')) {
+                                                  _model
+                                                      .removeFromSelectedProjectTypes(
+                                                          'Bathroom');
+                                                  safeSetState(() {});
+                                                } else {
+                                                  _model
+                                                      .addToSelectedProjectTypes(
+                                                          'Bathroom');
+                                                  safeSetState(() {});
+                                                }
                                               },
                                             ),
                                           ),
@@ -2616,13 +2861,22 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                         .primary,
                                                 size: 20.0,
                                               ),
-                                              isSelected:
-                                                  _model.selectedValue ==
-                                                      'Powder Room',
+                                              isSelected: _model
+                                                  .selectedProjectTypes
+                                                  .contains('Powder Room'),
                                               onTap: () async {
-                                                _model.selectedValue =
-                                                    'Powder Room';
-                                                safeSetState(() {});
+                                                if (_model.selectedProjectTypes
+                                                    .contains('Powder Room')) {
+                                                  _model
+                                                      .removeFromSelectedProjectTypes(
+                                                          'Powder Room');
+                                                  safeSetState(() {});
+                                                } else {
+                                                  _model
+                                                      .addToSelectedProjectTypes(
+                                                          'Powder Room');
+                                                  safeSetState(() {});
+                                                }
                                               },
                                             ),
                                           ),
@@ -2646,12 +2900,22 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                         .primary,
                                                 size: 20.0,
                                               ),
-                                              isSelected:
-                                                  _model.selectedValue ==
-                                                      'Office',
+                                              isSelected: _model
+                                                  .selectedProjectTypes
+                                                  .contains('Office'),
                                               onTap: () async {
-                                                _model.selectedValue = 'Office';
-                                                safeSetState(() {});
+                                                if (_model.selectedProjectTypes
+                                                    .contains('Office')) {
+                                                  _model
+                                                      .removeFromSelectedProjectTypes(
+                                                          'Office');
+                                                  safeSetState(() {});
+                                                } else {
+                                                  _model
+                                                      .addToSelectedProjectTypes(
+                                                          'Office');
+                                                  safeSetState(() {});
+                                                }
                                               },
                                             ),
                                           ),
@@ -2670,13 +2934,22 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                         .primary,
                                                 size: 20.0,
                                               ),
-                                              isSelected:
-                                                  _model.selectedValue ==
-                                                      'Nursery',
+                                              isSelected: _model
+                                                  .selectedProjectTypes
+                                                  .contains('Nursery'),
                                               onTap: () async {
-                                                _model.selectedValue =
-                                                    'Nursery';
-                                                safeSetState(() {});
+                                                if (_model.selectedProjectTypes
+                                                    .contains('Nursery')) {
+                                                  _model
+                                                      .removeFromSelectedProjectTypes(
+                                                          'Nursery');
+                                                  safeSetState(() {});
+                                                } else {
+                                                  _model
+                                                      .addToSelectedProjectTypes(
+                                                          'Nursery');
+                                                  safeSetState(() {});
+                                                }
                                               },
                                             ),
                                           ),
@@ -2700,13 +2973,22 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                         .primary,
                                                 size: 20.0,
                                               ),
-                                              isSelected:
-                                                  _model.selectedValue ==
-                                                      'Hallway',
+                                              isSelected: _model
+                                                  .selectedProjectTypes
+                                                  .contains('Hallway'),
                                               onTap: () async {
-                                                _model.selectedValue =
-                                                    'Hallway';
-                                                safeSetState(() {});
+                                                if (_model.selectedProjectTypes
+                                                    .contains('Hallway')) {
+                                                  _model
+                                                      .removeFromSelectedProjectTypes(
+                                                          'Hallway');
+                                                  safeSetState(() {});
+                                                } else {
+                                                  _model
+                                                      .addToSelectedProjectTypes(
+                                                          'Hallway');
+                                                  safeSetState(() {});
+                                                }
                                               },
                                             ),
                                           ),
@@ -2726,13 +3008,22 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                         .primary,
                                                 size: 20.0,
                                               ),
-                                              isSelected:
-                                                  _model.selectedValue ==
-                                                      'Staircase',
+                                              isSelected: _model
+                                                  .selectedProjectTypes
+                                                  .contains('Staircase'),
                                               onTap: () async {
-                                                _model.selectedValue =
-                                                    'Staircase';
-                                                safeSetState(() {});
+                                                if (_model.selectedProjectTypes
+                                                    .contains('Staircase')) {
+                                                  _model
+                                                      .removeFromSelectedProjectTypes(
+                                                          'Staircase');
+                                                  safeSetState(() {});
+                                                } else {
+                                                  _model
+                                                      .addToSelectedProjectTypes(
+                                                          'Staircase');
+                                                  safeSetState(() {});
+                                                }
                                               },
                                             ),
                                           ),
@@ -2757,13 +3048,22 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                         .primary,
                                                 size: 20.0,
                                               ),
-                                              isSelected:
-                                                  _model.selectedValue ==
-                                                      'Commerical',
+                                              isSelected: _model
+                                                  .selectedProjectTypes
+                                                  .contains('Commercial'),
                                               onTap: () async {
-                                                _model.selectedValue =
-                                                    'Commercial';
-                                                safeSetState(() {});
+                                                if (_model.selectedProjectTypes
+                                                    .contains('Commercial')) {
+                                                  _model
+                                                      .removeFromSelectedProjectTypes(
+                                                          'Commercial');
+                                                  safeSetState(() {});
+                                                } else {
+                                                  _model
+                                                      .addToSelectedProjectTypes(
+                                                          'Commercial');
+                                                  safeSetState(() {});
+                                                }
                                               },
                                             ),
                                           ),
@@ -2783,12 +3083,22 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                         .primary,
                                                 size: 20.0,
                                               ),
-                                              isSelected:
-                                                  _model.selectedValue ==
-                                                      'Other',
+                                              isSelected: _model
+                                                  .selectedProjectTypes
+                                                  .contains('Other'),
                                               onTap: () async {
-                                                _model.selectedValue = 'Other';
-                                                safeSetState(() {});
+                                                if (_model.selectedProjectTypes
+                                                    .contains('Other')) {
+                                                  _model
+                                                      .removeFromSelectedProjectTypes(
+                                                          'Other');
+                                                  safeSetState(() {});
+                                                } else {
+                                                  _model
+                                                      .addToSelectedProjectTypes(
+                                                          'Other');
+                                                  safeSetState(() {});
+                                                }
                                               },
                                             ),
                                           ),
@@ -3047,8 +3357,6 @@ class _Step1WidgetState extends State<Step1Widget> {
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           if (!_model.onTap) {
-                                            _model.onTap = true;
-                                            safeSetState(() {});
                                             _model.formValidate = true;
                                             if (_model.formKey.currentState ==
                                                     null ||
@@ -3058,61 +3366,96 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                   _model.formValidate = false);
                                               return;
                                             }
-                                            _model.uploadFilesToSupabase =
-                                                await actions
-                                                    .uploadFilesToSupabase(
-                                              _model.selectedFiles.toList(),
-                                            );
-                                            await ProfilesTable().update(
-                                              data: {
-                                                'full_name': _model
-                                                    .fullNameTextController
-                                                    .text,
-                                                'email': _model
-                                                    .emailTextController.text,
-                                                'phone_number': _model
-                                                    .phoneTextController.text,
-                                              },
-                                              matchingRows: (rows) =>
-                                                  rows.eqOrNull(
-                                                'id',
-                                                FFAppState().userId,
-                                              ),
-                                            );
-                                            _model.projectCreated =
-                                                await ProjectsTable().insert({
-                                              'project_name': _model
-                                                  .projectNameTextController
-                                                  .text,
-                                              'user_id': FFAppState().userId,
-                                              'created_at':
-                                                  supaSerialize<DateTime>(
-                                                      getCurrentTimestamp),
-                                              'room_description': _model
-                                                  .describeRoomTextController
-                                                  .text,
-                                              'notes': _model
-                                                  .aboutProjectTextController
-                                                  .text,
-                                              'room_type': _model.selectedValue,
-                                              'visualize_result': _model.image,
-                                              'upload_files':
-                                                  _model.uploadFilesToSupabase,
-                                              'current_steps': 2,
-                                              'status': 'In Review',
-                                            });
-                                            _model.onTap = false;
-                                            safeSetState(() {});
-
-                                            context.goNamed(
-                                              Step2Widget.routeName,
-                                              queryParameters: {
-                                                'projectId': serializeParam(
-                                                  _model.projectCreated?.id,
-                                                  ParamType.String,
+                                            if (_model.selectedProjectTypes
+                                                .isNotEmpty) {
+                                              _model.onTap = true;
+                                              safeSetState(() {});
+                                              _model.uploadFilesToSupabase =
+                                                  await actions
+                                                      .uploadFilesToSupabase(
+                                                _model.selectedFiles.toList(),
+                                              );
+                                              await ProfilesTable().update(
+                                                data: {
+                                                  'full_name': _model
+                                                      .fullNameTextController
+                                                      .text,
+                                                  'email': _model
+                                                      .emailTextController.text,
+                                                  'phone_number': _model
+                                                      .phoneTextController.text,
+                                                },
+                                                matchingRows: (rows) =>
+                                                    rows.eqOrNull(
+                                                  'id',
+                                                  FFAppState().userId,
                                                 ),
-                                              }.withoutNulls,
-                                            );
+                                              );
+                                              _model.projectCreated =
+                                                  await ProjectsTable().insert({
+                                                'project_name': _model
+                                                    .projectNameTextController
+                                                    .text,
+                                                'user_id': FFAppState().userId,
+                                                'created_at':
+                                                    supaSerialize<DateTime>(
+                                                        getCurrentTimestamp),
+                                                'room_description': _model
+                                                    .describeRoomTextController
+                                                    .text,
+                                                'notes': _model
+                                                    .aboutProjectTextController
+                                                    .text,
+                                                'room_type': _model
+                                                    .selectedProjectTypes
+                                                    .firstOrNull,
+                                                'visualize_result':
+                                                    _model.image,
+                                                'upload_files': _model
+                                                    .uploadFilesToSupabase,
+                                                'current_steps': 2,
+                                                'status': 'In Review',
+                                                'address': _model
+                                                    .projectAddressTextController
+                                                    .text,
+                                                'project_types':
+                                                    _model.selectedProjectTypes,
+                                              });
+                                              _model.onTap = false;
+                                              safeSetState(() {});
+
+                                              context.goNamed(
+                                                Step2Widget.routeName,
+                                                queryParameters: {
+                                                  'projectId': serializeParam(
+                                                    _model.projectCreated?.id,
+                                                    ParamType.String,
+                                                  ),
+                                                }.withoutNulls,
+                                              );
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .clearSnackBars();
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Please select project type',
+                                                    style: TextStyle(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                    ),
+                                                  ),
+                                                  duration: Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .error,
+                                                ),
+                                              );
+                                            }
                                           }
 
                                           safeSetState(() {});

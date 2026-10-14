@@ -21,9 +21,7 @@ Future<List<FFUploadedFile>> pickAndAddFiles(
   List<FFUploadedFile> existingFiles,
 ) async {
   // Copy existing files so we don't modify the original list
-  final List<FFUploadedFile> allFiles = [
-    ...existingFiles,
-  ];
+  final List<FFUploadedFile> allFiles = [];
 
   // ==========================================
   // SHOW SOURCE SELECTION

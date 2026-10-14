@@ -70,4 +70,12 @@ class ProjectsRow extends SupabaseDataRow {
   String? get appointmentPdf => getField<String>('appointment_pdf');
   set appointmentPdf(String? value) =>
       setField<String>('appointment_pdf', value);
+
+  String? get adminReviewNote => getField<String>('admin_review_note');
+  set adminReviewNote(String? value) =>
+      setField<String>('admin_review_note', value);
+
+  List<String> get projectTypes => getListField<String>('project_types');
+  set projectTypes(List<String>? value) =>
+      setListField<String>('project_types', value);
 }
