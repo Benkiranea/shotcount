@@ -10,7 +10,7 @@ class YourDetailCardWidget extends StatefulWidget {
   const YourDetailCardWidget({
     super.key,
     required this.title,
-    required this.description,
+    this.description,
     required this.date,
     required this.projectID,
     required this.address,
@@ -22,7 +22,7 @@ class YourDetailCardWidget extends StatefulWidget {
   });
 
   final String? title;
-  final String? description;
+  final List<String>? description;
   final String? date;
   final String? projectID;
   final String? address;
@@ -121,33 +121,56 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                                           .fontStyle,
                                     ),
                               ),
-                              Text(
-                                valueOrDefault<String>(
-                                  widget.description,
-                                  'Description',
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      fontSize: 12.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
+                              Builder(
+                                builder: (context) {
+                                  final projectType =
+                                      widget.description?.toList() ?? [];
+
+                                  return SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children:
+                                          List.generate(projectType.length,
+                                              (projectTypeIndex) {
+                                        final projectTypeItem =
+                                            projectType[projectTypeIndex];
+                                        return Text(
+                                          projectTypeItem,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                font: GoogleFonts.inter(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 12.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                        );
+                                      }).divide(SizedBox(width: 20.0)),
                                     ),
+                                  );
+                                },
                               ),
                               RichText(
                                 textScaler: MediaQuery.of(context).textScaler,

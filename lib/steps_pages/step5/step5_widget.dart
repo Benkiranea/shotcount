@@ -637,7 +637,11 @@ class _Step5WidgetState extends State<Step5Widget> {
                                                       children: [
                                                         Expanded(
                                                           child: Text(
-                                                            '123 Cambridge St.\nAlexandria VA 22314',
+                                                            getJsonField(
+                                                              containerGetProjectDetailsResponse
+                                                                  .jsonBody,
+                                                              r'''$[0].address''',
+                                                            ).toString(),
                                                             textAlign:
                                                                 TextAlign.end,
                                                             style: FlutterFlowTheme
@@ -931,53 +935,69 @@ class _Step5WidgetState extends State<Step5Widget> {
                                                   ),
                                                 ].divide(SizedBox(width: 8.0)),
                                               ),
-                                              Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                children: [
-                                                  Text(
-                                                    getJsonField(
-                                                      containerGetProjectDetailsResponse
-                                                          .jsonBody,
-                                                      r'''$[0].project_type''',
-                                                    ).toString(),
-                                                    textAlign: TextAlign.end,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .accent1,
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                  ),
-                                                ].divide(SizedBox(height: 5.0)),
+                                              Builder(
+                                                builder: (context) {
+                                                  final projectType =
+                                                      getJsonField(
+                                                    containerGetProjectDetailsResponse
+                                                        .jsonBody,
+                                                    r'''$[0].project_types''',
+                                                  ).toList();
+
+                                                  return Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
+                                                    children: List.generate(
+                                                        projectType.length,
+                                                        (projectTypeIndex) {
+                                                      final projectTypeItem =
+                                                          projectType[
+                                                              projectTypeIndex];
+                                                      return Text(
+                                                        projectTypeItem
+                                                            .toString(),
+                                                        textAlign:
+                                                            TextAlign.end,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font:
+                                                                      GoogleFonts
+                                                                          .inter(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .accent1,
+                                                                  fontSize:
+                                                                      12.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                      );
+                                                    }).divide(
+                                                        SizedBox(height: 5.0)),
+                                                  );
+                                                },
                                               ),
                                             ],
                                           ),

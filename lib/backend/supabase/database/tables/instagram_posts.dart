@@ -42,4 +42,7 @@ class InstagramPostsRow extends SupabaseDataRow {
 
   dynamic get childrenUrls => getField<dynamic>('children_urls');
   set childrenUrls(dynamic value) => setField<dynamic>('children_urls', value);
+
+  DateTime? get updatedAt => getField<DateTime>('updated_at');
+  set updatedAt(DateTime? value) => setField<DateTime>('updated_at', value);
 }

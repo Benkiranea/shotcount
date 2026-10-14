@@ -131,10 +131,14 @@ class _YourProjectsPageWidgetState extends State<YourProjectsPageWidget> {
                                   projectCardsItem,
                                   r'''$.project_title''',
                                 ).toString(),
-                                description: getJsonField(
+                                description: (getJsonField(
                                   projectCardsItem,
-                                  r'''$.project_type''',
-                                ).toString(),
+                                  r'''$.project_types''',
+                                  true,
+                                ) as List?)
+                                    ?.map<String>((e) => e.toString())
+                                    .toList()
+                                    .cast<String>(),
                                 date: getJsonField(
                                   projectCardsItem,
                                   r'''$.updated_date''',

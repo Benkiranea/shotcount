@@ -53,28 +53,51 @@ class _CustomLoaderState extends State<CustomLoader>
 
   @override
   Widget build(BuildContext context) {
-    final double size = math.min(
-      widget.width ?? 48,
-      widget.height ?? 48,
-    );
+    final double width = widget.width ?? 100;
+    final double height = widget.height ?? 100;
 
-    // Get Primary color from FlutterFlow Theme
+    final double size = math.min(width, height);
+
     final Color primaryColor = FlutterFlowTheme.of(context).primary;
 
     return SizedBox(
-      width: widget.width ?? 48,
-      height: widget.height ?? 48,
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) {
-          return CustomPaint(
-            size: Size(size, size),
-            painter: _LoaderPainter(
-              progress: _controller.value,
-              progressColor: primaryColor,
+      width: width,
+      height: height,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          // Animated circular loader
+          SizedBox(
+            width: size,
+            height: size,
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (context, child) {
+                return CustomPaint(
+                  size: Size(size, size),
+                  painter: _LoaderPainter(
+                    progress: _controller.value,
+                    progressColor: primaryColor,
+                  ),
+                );
+              },
             ),
-          );
-        },
+          ),
+
+          // Center text
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text(
+              'Generating Image',
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).bodyMedium.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: primaryColor,
+                  ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -91,7 +114,7 @@ class _LoaderPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final double strokeWidth = 6.0;
+    const double strokeWidth = 6.0;
 
     final Offset center = Offset(
       size.width / 2,
@@ -100,10 +123,7 @@ class _LoaderPainter extends CustomPainter {
 
     final double radius = (math.min(size.width, size.height) - strokeWidth) / 2;
 
-    // ==========================================
     // Background ring
-    // ==========================================
-
     final Paint backgroundPaint = Paint()
       ..color = const Color(0xFFE8ECEF)
       ..style = PaintingStyle.stroke
@@ -115,11 +135,7 @@ class _LoaderPainter extends CustomPainter {
       backgroundPaint,
     );
 
-    // ==========================================
     // Animated progress arc
-    // Uses FlutterFlow Theme Primary color
-    // ==========================================
-
     final Paint progressPaint = Paint()
       ..color = progressColor
       ..style = PaintingStyle.stroke

@@ -1551,10 +1551,14 @@ class _YourProjectDetailPageWidgetState
                                   columnGetProjectDetailsResponse.jsonBody,
                                   r'''$[0].project_name''',
                                 ).toString(),
-                                description: getJsonField(
+                                description: (getJsonField(
                                   columnGetProjectDetailsResponse.jsonBody,
-                                  r'''$[0].project_type''',
-                                ).toString(),
+                                  r'''$[0].project_types''',
+                                  true,
+                                ) as List?)
+                                    ?.map<String>((e) => e.toString())
+                                    .toList()
+                                    .cast<String>(),
                                 date: getJsonField(
                                   columnGetProjectDetailsResponse.jsonBody,
                                   r'''$[0].created_date''',
@@ -1563,7 +1567,10 @@ class _YourProjectDetailPageWidgetState
                                   columnGetProjectDetailsResponse.jsonBody,
                                   r'''$[0].project_id''',
                                 ).toString(),
-                                address: 'Project Address',
+                                address: getJsonField(
+                                  columnGetProjectDetailsResponse.jsonBody,
+                                  r'''$[0].address''',
+                                ).toString(),
                                 status: getJsonField(
                                   columnGetProjectDetailsResponse.jsonBody,
                                   r'''$[0].status''',
@@ -4398,10 +4405,15 @@ class _YourProjectDetailPageWidgetState
                                               yourProjectsItem,
                                               r'''$.project_title''',
                                             ).toString(),
-                                            description: getJsonField(
+                                            description: (getJsonField(
                                               yourProjectsItem,
-                                              r'''$.project_type''',
-                                            ).toString(),
+                                              r'''$.project_types''',
+                                              true,
+                                            ) as List?)!
+                                                .map<String>(
+                                                    (e) => e.toString())
+                                                .toList()
+                                                .cast<String>(),
                                             date: getJsonField(
                                               yourProjectsItem,
                                               r'''$.updated_date''',
