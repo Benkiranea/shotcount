@@ -9,7 +9,7 @@ import PackageDescription
 let package = Package(
     name: "FlutterGeneratedPluginSwiftPackage",
     platforms: [
-        .iOS("15.0.0")
+        .iOS("13.0")
     ],
     products: [
         .library(name: "FlutterGeneratedPluginSwiftPackage", type: .static, targets: ["FlutterGeneratedPluginSwiftPackage"])
@@ -24,6 +24,7 @@ let package = Package(
         .package(name: "shared_preferences_foundation", path: "../.packages/shared_preferences_foundation-2.5.4"),
         .package(name: "path_provider_foundation", path: "../.packages/path_provider_foundation-2.4.0"),
         .package(name: "image_picker_ios", path: "../.packages/image_picker_ios-0.8.12+2"),
+        .package(name: "gal", path: "../.packages/gal-2.3.3"),
         .package(name: "file_picker", path: "../.packages/file_picker-10.1.9"),
         .package(name: "device_info_plus", path: "../.packages/device_info_plus-11.5.0"),
         .package(name: "FlutterFramework", path: "../.packages/FlutterFramework")
@@ -41,6 +42,7 @@ let package = Package(
                 .product(name: "shared-preferences-foundation", package: "shared_preferences_foundation"),
                 .product(name: "path-provider-foundation", package: "path_provider_foundation"),
                 .product(name: "image-picker-ios", package: "image_picker_ios"),
+                .product(name: "gal", package: "gal"),
                 .product(name: "file-picker", package: "file_picker"),
                 .product(name: "device-info-plus", package: "device_info_plus"),
                 .product(name: "FlutterFramework", package: "FlutterFramework")
