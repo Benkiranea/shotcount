@@ -325,13 +325,15 @@ class HubspotBookMeetingCall {
     String? firstName = '',
     String? startTime = '',
     String? lastName = '',
+    String? projectId = '',
   }) async {
     final ffApiRequestBody = '''
 {
   "email": ${email == null ? 'null' : '"${escapeStringForJson(email)}"'},
   "firstName": ${firstName == null ? 'null' : '"${escapeStringForJson(firstName)}"'},
   "lastName": ${lastName == null ? 'null' : '"${escapeStringForJson(lastName)}"'},
-  "startTime": ${startTime == null ? 'null' : '"${escapeStringForJson(startTime)}"'}
+  "startTime": ${startTime == null ? 'null' : '"${escapeStringForJson(startTime)}"'},
+  "project_id": ${projectId == null ? 'null' : '"${escapeStringForJson(projectId)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'hubspotBookMeeting',

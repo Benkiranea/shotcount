@@ -17,6 +17,8 @@ class IndexPageModel extends FlutterFlowModel<IndexPageWidget> {
   late IndexConatainerModel indexConatainerModel3;
   // Model for IndexConatainer component.
   late IndexConatainerModel indexConatainerModel4;
+  // Model for IndexConatainer component.
+  late IndexConatainerModel indexConatainerModel5;
   // Stores action output result for [Backend Call - Query Rows] action in Image widget.
   List<ProfilesRow>? userData;
   // Stores action output result for [Backend Call - API (chatUserTokenHubspot)] action in Image widget.
@@ -28,6 +30,7 @@ class IndexPageModel extends FlutterFlowModel<IndexPageWidget> {
     indexConatainerModel2 = createModel(context, () => IndexConatainerModel());
     indexConatainerModel3 = createModel(context, () => IndexConatainerModel());
     indexConatainerModel4 = createModel(context, () => IndexConatainerModel());
+    indexConatainerModel5 = createModel(context, () => IndexConatainerModel());
   }
 
   @override
@@ -36,5 +39,6 @@ class IndexPageModel extends FlutterFlowModel<IndexPageWidget> {
     indexConatainerModel2.dispose();
     indexConatainerModel3.dispose();
     indexConatainerModel4.dispose();
+    indexConatainerModel5.dispose();
   }
 }

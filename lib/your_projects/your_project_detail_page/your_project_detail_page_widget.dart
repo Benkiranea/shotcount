@@ -89,7 +89,10 @@ class _YourProjectDetailPageWidgetState
                       model: _model.appHeaderModel,
                       updateCallback: () => safeSetState(() {}),
                       child: AppHeaderWidget(
-                        heading: 'Modern Hillside Home',
+                        heading: getJsonField(
+                          columnGetProjectDetailsResponse.jsonBody,
+                          r'''$[0].project_name''',
+                        ).toString(),
                       ),
                     ),
                     Padding(
@@ -1543,53 +1546,162 @@ class _YourProjectDetailPageWidgetState
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            wrapWithModel(
-                              model: _model.yourDetailCardModel,
-                              updateCallback: () => safeSetState(() {}),
-                              updateOnChange: true,
-                              child: YourDetailCardWidget(
-                                title: getJsonField(
-                                  columnGetProjectDetailsResponse.jsonBody,
-                                  r'''$[0].project_name''',
-                                ).toString(),
-                                description: (getJsonField(
-                                  columnGetProjectDetailsResponse.jsonBody,
-                                  r'''$[0].project_types''',
-                                  true,
-                                ) as List?)
-                                    ?.map<String>((e) => e.toString())
-                                    .toList()
-                                    .cast<String>(),
-                                date: getJsonField(
-                                  columnGetProjectDetailsResponse.jsonBody,
-                                  r'''$[0].created_date''',
-                                ).toString(),
-                                projectID: getJsonField(
-                                  columnGetProjectDetailsResponse.jsonBody,
-                                  r'''$[0].project_id''',
-                                ).toString(),
-                                address: getJsonField(
-                                  columnGetProjectDetailsResponse.jsonBody,
-                                  r'''$[0].address''',
-                                ).toString(),
-                                status: getJsonField(
-                                  columnGetProjectDetailsResponse.jsonBody,
-                                  r'''$[0].status''',
-                                ).toString(),
-                                currentStep: getJsonField(
-                                  columnGetProjectDetailsResponse.jsonBody,
-                                  r'''$[0].current_steps''',
-                                ).toString(),
-                                progressValue: getJsonField(
-                                  columnGetProjectDetailsResponse.jsonBody,
-                                  r'''$[0].progress_percentage''',
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                await Future.wait([
+                                  Future(() async {
+                                    if ('${getJsonField(
+                                          columnGetProjectDetailsResponse
+                                              .jsonBody,
+                                          r'''$[0].current_steps''',
+                                        ).toString()}' ==
+                                        '2') {
+                                      context.pushNamed(
+                                        Step2Widget.routeName,
+                                        queryParameters: {
+                                          'projectId': serializeParam(
+                                            getJsonField(
+                                              columnGetProjectDetailsResponse
+                                                  .jsonBody,
+                                              r'''$[0].project_id''',
+                                            ).toString(),
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    }
+                                  }),
+                                  Future(() async {
+                                    if ('${getJsonField(
+                                          columnGetProjectDetailsResponse
+                                              .jsonBody,
+                                          r'''$[0].current_steps''',
+                                        ).toString()}' ==
+                                        '3') {
+                                      context.pushNamed(
+                                        Step3Widget.routeName,
+                                        queryParameters: {
+                                          'projectId': serializeParam(
+                                            getJsonField(
+                                              columnGetProjectDetailsResponse
+                                                  .jsonBody,
+                                              r'''$[0].project_id''',
+                                            ).toString(),
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    }
+                                  }),
+                                  Future(() async {
+                                    if ('${getJsonField(
+                                          columnGetProjectDetailsResponse
+                                              .jsonBody,
+                                          r'''$[0].current_steps''',
+                                        ).toString()}' ==
+                                        '4') {
+                                      context.pushNamed(
+                                        Step4Widget.routeName,
+                                        queryParameters: {
+                                          'projectId': serializeParam(
+                                            getJsonField(
+                                              columnGetProjectDetailsResponse
+                                                  .jsonBody,
+                                              r'''$[0].project_id''',
+                                            ).toString(),
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    }
+                                  }),
+                                  Future(() async {
+                                    if ('${getJsonField(
+                                          columnGetProjectDetailsResponse
+                                              .jsonBody,
+                                          r'''$[0].current_steps''',
+                                        ).toString()}' ==
+                                        '5') {
+                                      context.pushNamed(
+                                        Step5Widget.routeName,
+                                        queryParameters: {
+                                          'projectId': serializeParam(
+                                            getJsonField(
+                                              columnGetProjectDetailsResponse
+                                                  .jsonBody,
+                                              r'''$[0].project_id''',
+                                            ).toString(),
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    }
+                                  }),
+                                  Future(() async {
+                                    if ('${getJsonField(
+                                          columnGetProjectDetailsResponse
+                                              .jsonBody,
+                                          r'''$[0].current_steps''',
+                                        ).toString()}' ==
+                                        '6') {
+                                      context.pushNamed(Step6Widget.routeName);
+                                    }
+                                  }),
+                                ]);
+                              },
+                              child: wrapWithModel(
+                                model: _model.yourDetailCardModel,
+                                updateCallback: () => safeSetState(() {}),
+                                updateOnChange: true,
+                                child: YourDetailCardWidget(
+                                  title: getJsonField(
+                                    columnGetProjectDetailsResponse.jsonBody,
+                                    r'''$[0].project_name''',
+                                  ).toString(),
+                                  description: (getJsonField(
+                                    columnGetProjectDetailsResponse.jsonBody,
+                                    r'''$[0].project_types''',
+                                    true,
+                                  ) as List?)
+                                      ?.map<String>((e) => e.toString())
+                                      .toList()
+                                      .cast<String>(),
+                                  date: getJsonField(
+                                    columnGetProjectDetailsResponse.jsonBody,
+                                    r'''$[0].created_date''',
+                                  ).toString(),
+                                  projectID: getJsonField(
+                                    columnGetProjectDetailsResponse.jsonBody,
+                                    r'''$[0].project_id''',
+                                  ).toString(),
+                                  address: getJsonField(
+                                    columnGetProjectDetailsResponse.jsonBody,
+                                    r'''$[0].address''',
+                                  ).toString(),
+                                  status: getJsonField(
+                                    columnGetProjectDetailsResponse.jsonBody,
+                                    r'''$[0].status''',
+                                  ).toString(),
+                                  currentStep: getJsonField(
+                                    columnGetProjectDetailsResponse.jsonBody,
+                                    r'''$[0].current_steps''',
+                                  ).toString(),
+                                  progressValue:
+                                      functions.percentToDecimal(getJsonField(
+                                    columnGetProjectDetailsResponse.jsonBody,
+                                    r'''$[0].progress_percentage''',
+                                  )),
+                                  image:
+                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shot-tracker-9ge9rk/assets/fbn46h40yfhq/Rectangle_10752.png',
+                                  totalStep: getJsonField(
+                                    columnGetProjectDetailsResponse.jsonBody,
+                                    r'''$[0].total_steps''',
+                                  ).toString(),
                                 ),
-                                image:
-                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shot-tracker-9ge9rk/assets/fbn46h40yfhq/Rectangle_10752.png',
-                                totalStep: getJsonField(
-                                  columnGetProjectDetailsResponse.jsonBody,
-                                  r'''$[0].total_steps''',
-                                ).toString(),
                               ),
                             ),
                             Container(
@@ -1700,11 +1812,49 @@ class _YourProjectDetailPageWidgetState
                                                 ),
                                           ),
                                           TextSpan(
-                                            text: ' of 6-Project Under Review',
+                                            text: ' of 6-',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
                                                   font: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  fontSize: 12.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                          ),
+                                          TextSpan(
+                                            text: getJsonField(
+                                              columnGetProjectDetailsResponse
+                                                  .jsonBody,
+                                              r'''$[0].status''',
+                                            ).toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: GoogleFonts.playfair(
                                                     fontWeight:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -1747,6 +1897,9 @@ class _YourProjectDetailPageWidgetState
                                                         .bodyMedium
                                                         .fontStyle,
                                               ),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
                                               letterSpacing: 0.0,
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)

@@ -43,18 +43,29 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     pageIndex = widget.currentPage;
   }
 
+  // List<IconData> navIcons = [
+  //   Icons.folder_rounded,
+  //   Icons.access_time_rounded,
+  //   Icons.person_rounded,
+  // ];
+
   List<IconData> navIcons = [
     Icons.folder_rounded,
-    Icons.access_time_rounded,
     Icons.person_rounded,
   ];
 
-  List<String> navLabels = ["Project", "Your Projects", "More"];
+  // List<String> navLabels = ["Project", "Your Projects", "More"];
+  List<String> navLabels = ["Project", "More"];
 
   // TODO: replace with your actual page widgets
+  // List<Widget> _appPages = [
+  //   ProjectPageWidget(),
+  //   YourProjectsPageWidget(),
+  //   MorePageWidget(),
+  // ];
+
   List<Widget> _appPages = [
     ProjectPageWidget(),
-    YourProjectsPageWidget(),
     MorePageWidget(),
   ];
 

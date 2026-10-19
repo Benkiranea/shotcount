@@ -2538,25 +2538,29 @@ class _Step1WidgetState extends State<Step1Widget> {
                                             .toList()
                                             .cast<FFUploadedFile>();
                                         safeSetState(() {});
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Successfully Uploaded !',
-                                              style: GoogleFonts.inter(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .info,
-                                                fontSize: 14.0,
+                                        if (_model.pickAndAddFiles != null &&
+                                            (_model.pickAndAddFiles)!
+                                                .isNotEmpty) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Successfully Uploaded !',
+                                                style: GoogleFonts.inter(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .info,
+                                                  fontSize: 14.0,
+                                                ),
                                               ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .success,
                                             ),
-                                            duration:
-                                                Duration(milliseconds: 4000),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .success,
-                                          ),
-                                        );
+                                          );
+                                        }
 
                                         safeSetState(() {});
                                       },
