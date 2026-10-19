@@ -320,160 +320,171 @@ class _Step3WidgetState extends State<Step3Widget> {
                     ),
                   ],
                 ),
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      'Your Project is Ready',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            font: GoogleFonts.playfair(
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontStyle,
-                            ),
-                            color: FlutterFlowTheme.of(context).info,
-                            fontSize: 24.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.w600,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .fontStyle,
-                          ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                      child: Text(
-                        'Review & Approve',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              font: GoogleFonts.inter(
-                                fontWeight: FontWeight.w500,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontStyle,
-                              ),
-                              color: FlutterFlowTheme.of(context).info,
-                              fontSize: 14.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w500,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontStyle,
-                            ),
-                      ),
-                    ),
-                    FutureBuilder<List<ProjectsRow>>(
-                      future: ProjectsTable().querySingleRow(
-                        queryFn: (q) => q.eqOrNull(
-                          'id',
-                          widget.projectId,
-                        ),
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
-                        }
-                        List<ProjectsRow> billContainerProjectsRowList =
-                            snapshot.data!;
-
-                        final billContainerProjectsRow =
-                            billContainerProjectsRowList.isNotEmpty
-                                ? billContainerProjectsRowList.first
-                                : null;
-
-                        return wrapWithModel(
-                          model: _model.billContainerModel,
-                          updateCallback: () => safeSetState(() {}),
-                          child: BillContainerWidget(
-                            pdfPath: billContainerProjectsRow!.appointmentPdf!,
-                            onTap: () async {
-                              await ProjectsTable().update(
-                                data: {
-                                  'current_steps': 4,
-                                },
-                                matchingRows: (rows) => rows.eqOrNull(
-                                  'id',
-                                  widget.projectId,
-                                ),
-                              );
-
-                              context.pushNamed(
-                                Step4Widget.routeName,
-                                queryParameters: {
-                                  'projectId': serializeParam(
-                                    widget.projectId,
-                                    ParamType.String,
-                                  ),
-                                }.withoutNulls,
-                              );
-                            },
-                            openChat: () async {
-                              _model.userData = await ProfilesTable().queryRows(
-                                queryFn: (q) => q.eqOrNull(
-                                  'id',
-                                  FFAppState().userId,
-                                ),
-                              );
-                              _model.chatToken =
-                                  await ChatUserTokenHubspotCall.call(
-                                email: _model.userData?.firstOrNull?.email !=
-                                            null &&
-                                        _model.userData?.firstOrNull?.email !=
-                                            ''
-                                    ? _model.userData?.firstOrNull?.email
-                                    : 'appuser@shotcount.com',
-                                firstName: functions.getFirstName(
-                                    _model.userData!.firstOrNull!.fullName!),
-                                lastName: functions.getLastName(
-                                    _model.userData!.firstOrNull!.fullName!),
-                              );
-
-                              if ((_model.chatToken?.succeeded ?? true)) {
-                                await actions.identifyHubSpotUser(
-                                  _model.userData!.firstOrNull!.id!,
-                                  _model.userData!.firstOrNull!.deviceId!,
-                                  _model.userData!.firstOrNull!.email!,
-                                  getJsonField(
-                                    (_model.chatToken?.jsonBody ?? ''),
-                                    r'''$.token''',
-                                  ).toString(),
-                                );
-                                await actions.openHubSpotChat();
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Failed to open the chatbot.',
-                                      style: GoogleFonts.inter(
-                                        color:
-                                            FlutterFlowTheme.of(context).info,
-                                        fontSize: 14.0,
-                                      ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          'Your Project is Ready',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.playfair(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
-                                    duration: Duration(milliseconds: 4000),
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context).error,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    fontSize: 24.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
-                                );
-                              }
-
-                              safeSetState(() {});
-                            },
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 8.0),
+                          child: Text(
+                            'Review & Approve',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                                  color: FlutterFlowTheme.of(context).info,
+                                  fontSize: 14.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w500,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
                           ),
-                        );
-                      },
+                        ),
+                        FutureBuilder<List<ProjectsRow>>(
+                          future: ProjectsTable().querySingleRow(
+                            queryFn: (q) => q.eqOrNull(
+                              'id',
+                              widget.projectId,
+                            ),
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(),
+                                ),
+                              );
+                            }
+                            List<ProjectsRow> billContainerProjectsRowList =
+                                snapshot.data!;
+
+                            final billContainerProjectsRow =
+                                billContainerProjectsRowList.isNotEmpty
+                                    ? billContainerProjectsRowList.first
+                                    : null;
+
+                            return wrapWithModel(
+                              model: _model.billContainerModel,
+                              updateCallback: () => safeSetState(() {}),
+                              child: BillContainerWidget(
+                                pdfPath:
+                                    billContainerProjectsRow!.appointmentPdf!,
+                                onTap: () async {
+                                  await ProjectsTable().update(
+                                    data: {
+                                      'current_steps': 4,
+                                    },
+                                    matchingRows: (rows) => rows.eqOrNull(
+                                      'id',
+                                      widget.projectId,
+                                    ),
+                                  );
+
+                                  context.pushNamed(
+                                    Step4Widget.routeName,
+                                    queryParameters: {
+                                      'projectId': serializeParam(
+                                        widget.projectId,
+                                        ParamType.String,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                },
+                                openChat: () async {
+                                  _model.userData =
+                                      await ProfilesTable().queryRows(
+                                    queryFn: (q) => q.eqOrNull(
+                                      'id',
+                                      FFAppState().userId,
+                                    ),
+                                  );
+                                  _model.chatToken =
+                                      await ChatUserTokenHubspotCall.call(
+                                    email: _model.userData?.firstOrNull
+                                                    ?.email !=
+                                                null &&
+                                            _model.userData?.firstOrNull
+                                                    ?.email !=
+                                                ''
+                                        ? _model.userData?.firstOrNull?.email
+                                        : 'appuser@shotcount.com',
+                                    firstName: functions.getFirstName(_model
+                                        .userData!.firstOrNull!.fullName!),
+                                    lastName: functions.getLastName(_model
+                                        .userData!.firstOrNull!.fullName!),
+                                  );
+
+                                  if ((_model.chatToken?.succeeded ?? true)) {
+                                    await actions.identifyHubSpotUser(
+                                      _model.userData!.firstOrNull!.id!,
+                                      _model.userData!.firstOrNull!.deviceId!,
+                                      _model.userData!.firstOrNull!.email!,
+                                      getJsonField(
+                                        (_model.chatToken?.jsonBody ?? ''),
+                                        r'''$.token''',
+                                      ).toString(),
+                                    );
+                                    await actions.openHubSpotChat();
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Failed to open the chatbot.',
+                                          style: GoogleFonts.inter(
+                                            color: FlutterFlowTheme.of(context)
+                                                .info,
+                                            fontSize: 14.0,
+                                          ),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context).error,
+                                      ),
+                                    );
+                                  }
+
+                                  safeSetState(() {});
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ]
+                          .divide(SizedBox(height: 12.0))
+                          .addToStart(SizedBox(height: 25.0)),
                     ),
-                  ]
-                      .divide(SizedBox(height: 12.0))
-                      .addToStart(SizedBox(height: 25.0)),
+                  ),
                 ),
               ]
                   .divide(SizedBox(height: 20.0))

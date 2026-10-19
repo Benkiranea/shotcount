@@ -28,7 +28,7 @@ class YourDetailCardWidget extends StatefulWidget {
   final String? address;
   final String? status;
   final String? currentStep;
-  final int? progressValue;
+  final double? progressValue;
   final String? image;
   final String? totalStep;
 
@@ -449,7 +449,12 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                       children: [
                         TextSpan(
                           text: valueOrDefault<String>(
-                            widget.progressValue?.toString(),
+                            (valueOrDefault<double>(
+                                      widget.progressValue,
+                                      0.0,
+                                    ) *
+                                    100)
+                                .toStringAsFixed(0),
                             '0',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -518,7 +523,7 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                   ),
                   Expanded(
                     child: LinearPercentIndicator(
-                      percent: widget.progressValue!.toDouble(),
+                      percent: widget.progressValue!,
                       lineHeight: 4.0,
                       animation: true,
                       animateFromLastPercent: true,

@@ -1166,6 +1166,14 @@ class _Step5WidgetState extends State<Step5Widget> {
                                                   width: 50.0,
                                                   height: 50.0,
                                                   fit: BoxFit.cover,
+                                                  errorBuilder: (context, error,
+                                                          stackTrace) =>
+                                                      Image.asset(
+                                                    'assets/images/error_image.png',
+                                                    width: 50.0,
+                                                    height: 50.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
                                               Expanded(

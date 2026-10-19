@@ -757,6 +757,7 @@ class _Step4WidgetState extends State<Step4Widget> {
                                             .profileData!
                                             .firstOrNull!
                                             .fullName!),
+                                        projectId: widget.projectId,
                                       );
 
                                       if ((_model.hubspotBooking?.succeeded ??
