@@ -360,6 +360,48 @@ class HubspotBookMeetingCall {
   }
 }
 
+class SlotAvailabilitiesCall {
+  static Future<ApiCallResponse> call({
+    String? slug = 'info316',
+    String? date = '',
+    String? timezone = 'UTC',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "slug": ${slug == null ? 'null' : '"${escapeStringForJson(slug)}"'},
+  "date": ${date == null ? 'null' : '"${escapeStringForJson(date)}"'},
+  "timezone": ${timezone == null ? 'null' : '"${escapeStringForJson(timezone)}"'}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'slotAvailabilities',
+      apiUrl:
+          'https://cpwuclmclkbuwpnhdkha.supabase.co/functions/v1/slot-availabilities',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static dynamic timeslot(dynamic response) => getJsonField(
+        response,
+        r'''$''',
+      );
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

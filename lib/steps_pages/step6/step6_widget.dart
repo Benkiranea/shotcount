@@ -61,7 +61,7 @@ class _Step6WidgetState extends State<Step6Widget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed(IndexPageWidget.routeName);
+                        context.goNamed(IndexPageWidget.routeName);
                       },
                       child: Container(
                         width: 40.0,

@@ -7,8 +7,8 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/steps_pages/time_slot/time_slot_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'step4_model.dart';
@@ -38,17 +38,6 @@ class _Step4WidgetState extends State<Step4Widget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => Step4Model());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.timeSlots = functions
-          .generateTimeSlots(_model.selectedDate != null
-              ? _model.selectedDate!
-              : getCurrentTimestamp)
-          .toList()
-          .cast<String>();
-      safeSetState(() {});
-    });
   }
 
   @override
@@ -87,7 +76,7 @@ class _Step4WidgetState extends State<Step4Widget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.safePop();
+                        context.goNamed(YourProjectsPageWidget.routeName);
                       },
                       child: Container(
                         width: 40.0,
@@ -490,11 +479,10 @@ class _Step4WidgetState extends State<Step4Widget> {
                                         _model.selectedDate == null
                                             ? getCurrentTimestamp
                                             : _model.calendarSelectedDay?.start;
-                                    _model.timeSlots = functions
-                                        .generateTimeSlots(_model.selectedDate!)
-                                        .toList()
-                                        .cast<String>();
                                     safeSetState(() {});
+                                    safeSetState(() =>
+                                        _model.apiRequestCompleter = null);
+                                    await _model.waitForApiRequestCompleted();
                                     safeSetState(() {});
                                   },
                                   titleStyle: FlutterFlowTheme.of(context)
@@ -680,53 +668,92 @@ class _Step4WidgetState extends State<Step4Widget> {
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 6.0, 0.0, 0.0),
-                                    child: Builder(
-                                      builder: (context) {
-                                        final slots = _model.timeSlots.toList();
+                                    child: FutureBuilder<ApiCallResponse>(
+                                      future: (_model.apiRequestCompleter ??=
+                                              Completer<ApiCallResponse>()
+                                                ..complete(
+                                                    SlotAvailabilitiesCall.call(
+                                                  date: _model.selectedDate !=
+                                                          null
+                                                      ? dateTimeFormat(
+                                                          "yyyy-MM-dd",
+                                                          _model.selectedDate)
+                                                      : dateTimeFormat(
+                                                          "yyyy-MM-dd",
+                                                          getCurrentTimestamp),
+                                                )))
+                                          .future,
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            ),
+                                          );
+                                        }
+                                        final rowSlotAvailabilitiesResponse =
+                                            snapshot.data!;
 
-                                        return SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: List.generate(
-                                                slots.length, (slotsIndex) {
-                                              final slotsItem =
-                                                  slots[slotsIndex];
-                                              return TimeSlotWidget(
-                                                key: Key(
-                                                    'Key998_${slotsIndex}_of_${slots.length}'),
-                                                time: slotsItem,
-                                                fillClr: _model.selectedTime ==
-                                                        slotsItem
-                                                    ? FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondary
-                                                    : FlutterFlowTheme.of(
-                                                            context)
-                                                        .containerClr,
-                                                borderClr:
-                                                    _model.selectedTime ==
-                                                            slotsItem
+                                        return Builder(
+                                          builder: (context) {
+                                            final slots =
+                                                SlotAvailabilitiesCall.timeslot(
+                                              rowSlotAvailabilitiesResponse
+                                                  .jsonBody,
+                                            ).toList();
+
+                                            return SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: List.generate(
+                                                    slots.length, (slotsIndex) {
+                                                  final slotsItem =
+                                                      slots[slotsIndex];
+                                                  return TimeSlotWidget(
+                                                    key: Key(
+                                                        'Key998_${slotsIndex}_of_${slots.length}'),
+                                                    time: slotsItem.toString(),
+                                                    fillClr: _model
+                                                                .selectedTime ==
+                                                            slotsItem.toString()
+                                                        ? FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondary
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .containerClr,
+                                                    borderClr: _model
+                                                                .selectedTime ==
+                                                            slotsItem.toString()
                                                         ? FlutterFlowTheme.of(
                                                                 context)
                                                             .secondary
                                                         : Color(0x66252E3D),
-                                                textClr: _model.selectedTime ==
-                                                        slotsItem
-                                                    ? FlutterFlowTheme.of(
-                                                            context)
-                                                        .info
-                                                    : FlutterFlowTheme.of(
-                                                            context)
-                                                        .accent1,
-                                                onTap: () async {
-                                                  _model.selectedTime =
-                                                      slotsItem;
-                                                  safeSetState(() {});
-                                                },
-                                              );
-                                            }).divide(SizedBox(width: 10.0)),
-                                          ),
+                                                    textClr: _model
+                                                                .selectedTime ==
+                                                            slotsItem.toString()
+                                                        ? FlutterFlowTheme.of(
+                                                                context)
+                                                            .info
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .accent1,
+                                                    onTap: () async {
+                                                      _model.selectedTime =
+                                                          slotsItem.toString();
+                                                      safeSetState(() {});
+                                                    },
+                                                  );
+                                                }).divide(
+                                                    SizedBox(width: 10.0)),
+                                              ),
+                                            );
+                                          },
                                         );
                                       },
                                     ),
@@ -737,66 +764,91 @@ class _Step4WidgetState extends State<Step4Widget> {
                                       0.0, 16.0, 0.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      _model.profileData =
-                                          await ProfilesTable().queryRows(
-                                        queryFn: (q) => q.eqOrNull(
-                                          'id',
-                                          FFAppState().userId,
-                                        ),
-                                      );
-                                      _model.hubspotBooking =
-                                          await HubspotBookMeetingCall.call(
-                                        email: _model
-                                            .profileData?.firstOrNull?.email,
-                                        firstName: _model
-                                            .profileData?.firstOrNull?.fullName,
-                                        startTime: functions.timeToISO8601(
-                                            _model.selectedTime!,
-                                            _model.selectedDate!),
-                                        lastName: functions.getLastName(_model
-                                            .profileData!
-                                            .firstOrNull!
-                                            .fullName!),
-                                        projectId: widget.projectId,
-                                      );
-
-                                      if ((_model.hubspotBooking?.succeeded ??
-                                          true)) {
-                                        await ProjectsTable().update(
-                                          data: {
-                                            'appointment_date':
-                                                supaSerialize<DateTime>(
-                                                    _model.selectedDate),
-                                            'appointment_time':
-                                                _model.selectedTime,
-                                            'current_steps': 5,
-                                          },
-                                          matchingRows: (rows) => rows.eqOrNull(
+                                      if (_model.selectedTime != null &&
+                                          _model.selectedTime != '') {
+                                        _model.profileData =
+                                            await ProfilesTable().queryRows(
+                                          queryFn: (q) => q.eqOrNull(
                                             'id',
-                                            widget.projectId,
+                                            FFAppState().userId,
                                           ),
                                         );
-
-                                        context.pushNamed(
-                                          Step5Widget.routeName,
-                                          queryParameters: {
-                                            'projectId': serializeParam(
-                                              widget.projectId,
-                                              ParamType.String,
-                                            ),
-                                          }.withoutNulls,
+                                        _model.hubspotBooking =
+                                            await HubspotBookMeetingCall.call(
+                                          email: _model
+                                              .profileData?.firstOrNull?.email,
+                                          firstName: _model.profileData
+                                              ?.firstOrNull?.fullName,
+                                          startTime: functions.timeToISO8601(
+                                              _model.selectedTime!,
+                                              _model.selectedDate!),
+                                          lastName: functions.getLastName(_model
+                                              .profileData!
+                                              .firstOrNull!
+                                              .fullName!),
+                                          projectId: widget.projectId,
                                         );
+
+                                        if ((_model.hubspotBooking?.succeeded ??
+                                            true)) {
+                                          await ProjectsTable().update(
+                                            data: {
+                                              'appointment_date':
+                                                  supaSerialize<DateTime>(
+                                                      _model.selectedDate),
+                                              'appointment_time':
+                                                  _model.selectedTime,
+                                              'current_steps': 5,
+                                            },
+                                            matchingRows: (rows) =>
+                                                rows.eqOrNull(
+                                              'id',
+                                              widget.projectId,
+                                            ),
+                                          );
+
+                                          context.goNamed(
+                                            Step5Widget.routeName,
+                                            queryParameters: {
+                                              'projectId': serializeParam(
+                                                widget.projectId,
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Hubspot booking failed !',
+                                                style: GoogleFonts.inter(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .info,
+                                                  fontSize: 14.0,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                            ),
+                                          );
+                                        }
                                       } else {
+                                        ScaffoldMessenger.of(context)
+                                            .clearSnackBars();
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              'Hubspot booking failed !',
-                                              style: GoogleFonts.inter(
+                                              'Please select slot',
+                                              style: TextStyle(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .info,
-                                                fontSize: 14.0,
+                                                        .secondaryBackground,
                                               ),
                                             ),
                                             duration:
