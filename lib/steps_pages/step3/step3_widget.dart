@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
+import '/flutter_flow/ff_builtin_enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/steps_pages/bill_container/bill_container_widget.dart';
@@ -74,7 +75,7 @@ class _Step3WidgetState extends State<Step3Widget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.safePop();
+                        context.goNamed(YourProjectsPageWidget.routeName);
                       },
                       child: Container(
                         width: 40.0,
@@ -368,6 +369,54 @@ class _Step3WidgetState extends State<Step3Widget> {
                                 ),
                           ),
                         ),
+                        Align(
+                          alignment: AlignmentDirectional(1.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment:
+                                (FFMainAxisAlignment.start).flutterValue,
+                            crossAxisAlignment:
+                                (FFCrossAxisAlignment.center).flutterValue,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Icon(
+                                Icons.pinch_rounded,
+                                color: FlutterFlowTheme.of(context).primary,
+                                size: 20.0,
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 8.0),
+                                child: Text(
+                                  'Pinch PDF to zoom',
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        font: GoogleFonts.playfair(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
+                                ),
+                              ),
+                            ].divide(SizedBox(width: 2.0)),
+                          ),
+                        ),
                         FutureBuilder<List<ProjectsRow>>(
                           future: ProjectsTable().querySingleRow(
                             queryFn: (q) => q.eqOrNull(
@@ -411,7 +460,7 @@ class _Step3WidgetState extends State<Step3Widget> {
                                     ),
                                   );
 
-                                  context.pushNamed(
+                                  context.goNamed(
                                     Step4Widget.routeName,
                                     queryParameters: {
                                       'projectId': serializeParam(

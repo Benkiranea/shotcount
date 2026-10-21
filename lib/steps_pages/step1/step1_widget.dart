@@ -2624,7 +2624,7 @@ class _Step1WidgetState extends State<Step1Widget> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'You can upload up to 10 files (20MB each)',
+                                          'Select all your files or images at the same time',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(

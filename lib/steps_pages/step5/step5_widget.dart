@@ -70,7 +70,7 @@ class _Step5WidgetState extends State<Step5Widget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.safePop();
+                        context.goNamed(YourProjectsPageWidget.routeName);
                       },
                       child: Container(
                         width: 40.0,
