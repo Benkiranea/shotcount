@@ -1,4 +1,5 @@
 import '/components/app_header/app_header_widget.dart';
+import '/components/chatbot_action_card_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index_page/index_conatainer/index_conatainer_widget.dart';
@@ -573,6 +574,14 @@ class _MorePageWidgetState extends State<MorePageWidget> {
                           .addToStart(SizedBox(height: 5.0))
                           .addToEnd(SizedBox(height: 40.0)),
                     ),
+                  ),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.chatbotActionCardModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: ChatbotActionCardWidget(),
                   ),
                 ),
               ]

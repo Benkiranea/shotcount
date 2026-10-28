@@ -20,45 +20,35 @@ String timeToISO8601(
   DateTime date,
 ) {
   final parts = timeString.trim().split(' ');
-
-  if (parts.length != 2) {
-    return '';
-  }
+  if (parts.length != 2) return '';
 
   final timeParts = parts[0].split(':');
-
-  if (timeParts.length != 2) {
-    return '';
-  }
+  if (timeParts.length != 2) return '';
 
   int hour = int.tryParse(timeParts[0]) ?? 0;
   final int minute = int.tryParse(timeParts[1]) ?? 0;
-
   final period = parts[1].toUpperCase();
 
   if (period == 'PM' && hour != 12) {
     hour += 12;
   }
-
   if (period == 'AM' && hour == 12) {
     hour = 0;
   }
 
-  final result = DateTime(
+  // Check if Eastern Time is currently in Daylight Saving Time (EDT: UTC-4) or Standard Time (EST: UTC-5)
+  // US DST runs roughly from second Sunday in March to first Sunday in November
+  final bool isDST = date.month > 3 && date.month < 11;
+  final int nyUtcOffsetHours = isDST ? -4 : -5;
+
+  // Construct DateTime representing New York local time
+  final nyLocalTime = DateTime.utc(
     date.year,
     date.month,
     date.day,
-    hour,
+    hour - nyUtcOffsetHours, // Convert to UTC
     minute,
   );
 
-  final offset = result.timeZoneOffset;
-
-  final sign = offset.isNegative ? '-' : '+';
-  final offsetHours = offset.inHours.abs().toString().padLeft(2, '0');
-  final offsetMinutes =
-      (offset.inMinutes.abs() % 60).toString().padLeft(2, '0');
-
-  return '${result.toIso8601String().split('.').first}'
-      '$sign$offsetHours:$offsetMinutes';
+  return nyLocalTime.toIso8601String();
 }

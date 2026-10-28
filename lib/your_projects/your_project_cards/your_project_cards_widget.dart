@@ -95,6 +95,13 @@ class _YourProjectCardsWidgetState extends State<YourProjectCardsWidget> {
                             width: 79.0,
                             height: 79.0,
                             fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                Image.asset(
+                              'assets/images/error_image.png',
+                              width: 79.0,
+                              height: 79.0,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         Expanded(

@@ -1,5 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
+import '/components/chatbot_action_card_widget.dart';
+import '/components/slot_empty_state/slot_empty_state_widget.dart';
 import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -124,287 +126,316 @@ class _Step4WidgetState extends State<Step4Widget> {
                     ),
                   ].divide(SizedBox(width: 12.0)),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Container(
-                      width: 30.0,
-                      height: 30.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).borderClr,
-                        shape: BoxShape.circle,
-                      ),
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Icon(
-                        Icons.check,
-                        color: FlutterFlowTheme.of(context).success,
-                        size: 12.0,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        width: 1.0,
-                        height: 1.0,
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Container(
+                        width: 30.0,
+                        height: 30.0,
                         decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).info,
+                          color: FlutterFlowTheme.of(context).borderClr,
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Icon(
+                          Icons.check,
+                          color: FlutterFlowTheme.of(context).success,
+                          size: 12.0,
                         ),
                       ),
-                    ),
-                    Container(
-                      width: 30.0,
-                      height: 30.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).borderClr,
-                        shape: BoxShape.circle,
-                      ),
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Icon(
-                        Icons.check,
-                        color: FlutterFlowTheme.of(context).success,
-                        size: 12.0,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        width: 1.0,
-                        height: 1.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).info,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 30.0,
-                      height: 30.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).borderClr,
-                        shape: BoxShape.circle,
-                      ),
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Icon(
-                        Icons.check,
-                        color: FlutterFlowTheme.of(context).success,
-                        size: 12.0,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        width: 1.0,
-                        height: 1.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).info,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 30.0,
-                      height: 30.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primary,
-                        shape: BoxShape.circle,
-                      ),
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Text(
-                        '4',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              font: GoogleFonts.playfair(
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontStyle,
-                              ),
-                              color: FlutterFlowTheme.of(context).containerClr,
-                              fontSize: 24.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontStyle,
-                            ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        width: 1.0,
-                        height: 1.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).info,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 30.0,
-                      height: 30.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                      Expanded(
+                        child: Container(
                           width: 1.0,
-                        ),
-                      ),
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Text(
-                        '5',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              font: GoogleFonts.playfair(
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontStyle,
-                              ),
-                              color: FlutterFlowTheme.of(context).containerClr,
-                              fontSize: 24.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontStyle,
-                            ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        width: 1.0,
-                        height: 1.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).info,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 30.0,
-                      height: 30.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          width: 1.0,
-                        ),
-                      ),
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Text(
-                        '6',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              font: GoogleFonts.playfair(
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontStyle,
-                              ),
-                              color: FlutterFlowTheme.of(context).containerClr,
-                              fontSize: 24.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontStyle,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Container(
-                          width: 80.0,
-                          height: 80.0,
+                          height: 1.0,
                           decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).info,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 30.0,
+                        height: 30.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).borderClr,
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Icon(
+                          Icons.check,
+                          color: FlutterFlowTheme.of(context).success,
+                          size: 12.0,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          width: 1.0,
+                          height: 1.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).info,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 30.0,
+                        height: 30.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).borderClr,
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Icon(
+                          Icons.check,
+                          color: FlutterFlowTheme.of(context).success,
+                          size: 12.0,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          width: 1.0,
+                          height: 1.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).info,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 30.0,
+                        height: 30.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primary,
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Text(
+                          '4',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                font: GoogleFonts.playfair(
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                                color:
+                                    FlutterFlowTheme.of(context).containerClr,
+                                fontSize: 24.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          width: 1.0,
+                          height: 1.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).info,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 30.0,
+                        height: 30.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                            shape: BoxShape.circle,
-                          ),
-                          alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Icon(
-                            Icons.check_rounded,
-                            color: FlutterFlowTheme.of(context).success,
-                            size: 30.0,
+                            width: 1.0,
                           ),
                         ),
-                        Text(
-                          'Proposal Approved!',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    font: GoogleFonts.playfair(
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                                    color: FlutterFlowTheme.of(context).info,
-                                    fontSize: 24.0,
-                                    letterSpacing: 0.0,
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Text(
+                          '5',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                font: GoogleFonts.playfair(
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                                color:
+                                    FlutterFlowTheme.of(context).containerClr,
+                                fontSize: 24.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          width: 1.0,
+                          height: 1.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).info,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 30.0,
+                        height: 30.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            width: 1.0,
+                          ),
+                        ),
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Text(
+                          '6',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                font: GoogleFonts.playfair(
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                                color:
+                                    FlutterFlowTheme.of(context).containerClr,
+                                fontSize: 24.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            width: 80.0,
+                            height: 80.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              shape: BoxShape.circle,
+                            ),
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Icon(
+                              Icons.check_rounded,
+                              color: FlutterFlowTheme.of(context).success,
+                              size: 30.0,
+                            ),
+                          ),
+                          Text(
+                            'Proposal Approved!',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.playfair(
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .fontStyle,
                                   ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 2.0, 0.0, 0.0),
-                          child: Text(
-                            'Thank you for approving your project. Please schedule. We are looking forwards to elevating your space.',
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  font: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
                                   color: FlutterFlowTheme.of(context).info,
-                                  fontSize: 14.0,
+                                  fontSize: 24.0,
                                   letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w600,
                                   fontStyle: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .fontStyle,
                                 ),
                           ),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).containerClr,
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          child: Padding(
+                          Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                12.0, 0.0, 12.0, 0.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.asset(
-                                        'assets/images/calendar-2.png',
-                                        width: 34.0,
-                                        height: 34.0,
-                                        fit: BoxFit.cover,
-                                      ),
+                                0.0, 2.0, 0.0, 0.0),
+                            child: Text(
+                              'Thank you for approving your project. Please schedule. We are looking forwards to elevating your space.',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Schedule Your Project',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                font: GoogleFonts.playfair(
+                                    color: FlutterFlowTheme.of(context).info,
+                                    fontSize: 14.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                            ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).containerClr,
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 0.0, 12.0, 0.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Image.asset(
+                                          'assets/images/calendar-2.png',
+                                          width: 34.0,
+                                          height: 34.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Schedule Your Project',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: GoogleFonts.playfair(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 18.0,
+                                                  letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w500,
                                                   fontStyle:
                                                       FlutterFlowTheme.of(
@@ -412,24 +443,29 @@ class _Step4WidgetState extends State<Step4Widget> {
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 18.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.w500,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                              ),
-                                        ),
-                                        Text(
-                                          'Choose a date that works best for you',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                font: GoogleFonts.inter(
+                                          ),
+                                          Text(
+                                            'Choose a date that works best for you',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 12.0,
+                                                  letterSpacing: 0.0,
                                                   fontWeight:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -441,54 +477,56 @@ class _Step4WidgetState extends State<Step4Widget> {
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                fontSize: 12.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ].divide(SizedBox(width: 8.0)),
-                                ),
-                                FlutterFlowCalendar(
-                                  color: FlutterFlowTheme.of(context).secondary,
-                                  iconColor:
-                                      FlutterFlowTheme.of(context).accent1,
-                                  weekFormat: false,
-                                  weekStartsMonday: false,
-                                  rowHeight: 48.0,
-                                  onChange:
-                                      (DateTimeRange? newSelectedDate) async {
-                                    if (_model.calendarSelectedDay ==
-                                        newSelectedDate) {
-                                      return;
-                                    }
-                                    _model.calendarSelectedDay =
-                                        newSelectedDate;
-                                    _model.selectedDate =
-                                        _model.selectedDate == null
-                                            ? getCurrentTimestamp
-                                            : _model.calendarSelectedDay?.start;
-                                    safeSetState(() {});
-                                    safeSetState(() =>
-                                        _model.apiRequestCompleter = null);
-                                    await _model.waitForApiRequestCompleted();
-                                    safeSetState(() {});
-                                  },
-                                  titleStyle: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .override(
-                                        font: GoogleFonts.inter(
+                                          ),
+                                        ],
+                                      ),
+                                    ].divide(SizedBox(width: 8.0)),
+                                  ),
+                                  FlutterFlowCalendar(
+                                    color:
+                                        FlutterFlowTheme.of(context).secondary,
+                                    iconColor:
+                                        FlutterFlowTheme.of(context).accent1,
+                                    weekFormat: false,
+                                    weekStartsMonday: false,
+                                    initialDate: getCurrentTimestamp,
+                                    rowHeight: 48.0,
+                                    onChange:
+                                        (DateTimeRange? newSelectedDate) async {
+                                      if (_model.calendarSelectedDay ==
+                                          newSelectedDate) {
+                                        return;
+                                      }
+                                      _model.calendarSelectedDay =
+                                          newSelectedDate;
+                                      _model.selectedDate =
+                                          _model.selectedDate == null
+                                              ? getCurrentTimestamp
+                                              : _model
+                                                  .calendarSelectedDay?.start;
+                                      safeSetState(() {});
+                                      safeSetState(() =>
+                                          _model.apiRequestCompleter = null);
+                                      await _model.waitForApiRequestCompleted();
+                                      safeSetState(() {});
+                                    },
+                                    titleStyle: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleLarge
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .accent1,
+                                          fontSize: 17.0,
+                                          letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
                                                   .titleLarge
@@ -498,113 +536,27 @@ class _Step4WidgetState extends State<Step4Widget> {
                                                   .titleLarge
                                                   .fontStyle,
                                         ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .accent1,
-                                        fontSize: 17.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .titleLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleLarge
-                                            .fontStyle,
-                                      ),
-                                  dayOfWeekStyle: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                        font: GoogleFonts.inter(
+                                    dayOfWeekStyle: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLarge
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 13.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodyLarge
                                                   .fontStyle,
                                         ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 13.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .fontStyle,
-                                      ),
-                                  dateStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight: FontWeight.w500,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .accent1,
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                  selectedDateStyle:
-                                      FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            font: GoogleFonts.inter(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontStyle,
-                                            ),
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontStyle,
-                                          ),
-                                  inactiveDateStyle:
-                                      FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w500,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .fontStyle,
-                                            ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .accent3,
-                                            fontSize: 12.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w500,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontStyle,
-                                          ),
-                                ),
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    _model.selectedDate = getCurrentTimestamp;
-                                    safeSetState(() {});
-                                  },
-                                  child: Text(
-                                    'Go To Today',
-                                    style: FlutterFlowTheme.of(context)
+                                    dateStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
                                           font: GoogleFonts.inter(
@@ -615,7 +567,7 @@ class _Step4WidgetState extends State<Step4Widget> {
                                                     .fontStyle,
                                           ),
                                           color: FlutterFlowTheme.of(context)
-                                              .secondary,
+                                              .accent1,
                                           fontSize: 14.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
@@ -623,21 +575,79 @@ class _Step4WidgetState extends State<Step4Widget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodyMedium
                                                   .fontStyle,
-                                          decoration: TextDecoration.underline,
                                         ),
+                                    selectedDateStyle:
+                                        FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .fontStyle,
+                                              ),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontStyle,
+                                            ),
+                                    inactiveDateStyle:
+                                        FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight: FontWeight.w500,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent3,
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w500,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontStyle,
+                                            ),
                                   ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(-1.0, 0.0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 6.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Select a Time',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
+                                  Align(
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 6.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Select a Time',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent1,
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -647,186 +657,200 @@ class _Step4WidgetState extends State<Step4Widget> {
                                                       .bodyMedium
                                                       .fontStyle,
                                             ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .accent1,
-                                            fontSize: 12.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(-1.0, 0.0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 6.0, 0.0, 0.0),
-                                    child: FutureBuilder<ApiCallResponse>(
-                                      future: (_model.apiRequestCompleter ??=
-                                              Completer<ApiCallResponse>()
-                                                ..complete(
-                                                    SlotAvailabilitiesCall.call(
-                                                  date: _model.selectedDate !=
-                                                          null
-                                                      ? dateTimeFormat(
-                                                          "yyyy-MM-dd",
-                                                          _model.selectedDate)
-                                                      : dateTimeFormat(
-                                                          "yyyy-MM-dd",
-                                                          getCurrentTimestamp),
-                                                )))
-                                          .future,
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child:
-                                                  CircularProgressIndicator(),
-                                            ),
-                                          );
-                                        }
-                                        final rowSlotAvailabilitiesResponse =
-                                            snapshot.data!;
-
-                                        return Builder(
-                                          builder: (context) {
-                                            final slots =
-                                                SlotAvailabilitiesCall.timeslot(
-                                              rowSlotAvailabilitiesResponse
-                                                  .jsonBody,
-                                            ).toList();
-
-                                            return SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: List.generate(
-                                                    slots.length, (slotsIndex) {
-                                                  final slotsItem =
-                                                      slots[slotsIndex];
-                                                  return TimeSlotWidget(
-                                                    key: Key(
-                                                        'Key998_${slotsIndex}_of_${slots.length}'),
-                                                    time: slotsItem.toString(),
-                                                    fillClr: _model
-                                                                .selectedTime ==
-                                                            slotsItem.toString()
-                                                        ? FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondary
-                                                        : FlutterFlowTheme.of(
-                                                                context)
-                                                            .containerClr,
-                                                    borderClr: _model
-                                                                .selectedTime ==
-                                                            slotsItem.toString()
-                                                        ? FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondary
-                                                        : Color(0x66252E3D),
-                                                    textClr: _model
-                                                                .selectedTime ==
-                                                            slotsItem.toString()
-                                                        ? FlutterFlowTheme.of(
-                                                                context)
-                                                            .info
-                                                        : FlutterFlowTheme.of(
-                                                                context)
-                                                            .accent1,
-                                                    onTap: () async {
-                                                      _model.selectedTime =
-                                                          slotsItem.toString();
-                                                      safeSetState(() {});
-                                                    },
-                                                  );
-                                                }).divide(
-                                                    SizedBox(width: 10.0)),
+                                  Align(
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 6.0, 0.0, 0.0),
+                                      child: FutureBuilder<ApiCallResponse>(
+                                        future: (_model.apiRequestCompleter ??=
+                                                Completer<ApiCallResponse>()
+                                                  ..complete(
+                                                      SlotAvailabilitiesCall
+                                                          .call(
+                                                    date: _model.selectedDate !=
+                                                            null
+                                                        ? dateTimeFormat(
+                                                            "yyyy-MM-dd",
+                                                            _model.selectedDate)
+                                                        : dateTimeFormat(
+                                                            "yyyy-MM-dd",
+                                                            getCurrentTimestamp),
+                                                  )))
+                                            .future,
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50,
+                                                height: 50,
+                                                child:
+                                                    CircularProgressIndicator(),
                                               ),
                                             );
-                                          },
-                                        );
-                                      },
+                                          }
+                                          final rowSlotAvailabilitiesResponse =
+                                              snapshot.data!;
+
+                                          return Builder(
+                                            builder: (context) {
+                                              final slots =
+                                                  SlotAvailabilitiesCall
+                                                          .timeslot(
+                                                        rowSlotAvailabilitiesResponse
+                                                            .jsonBody,
+                                                      )?.toList() ??
+                                                      [];
+                                              if (slots.isEmpty) {
+                                                return SlotEmptyStateWidget();
+                                              }
+
+                                              return SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: List.generate(
+                                                      slots.length,
+                                                      (slotsIndex) {
+                                                    final slotsItem =
+                                                        slots[slotsIndex];
+                                                    return TimeSlotWidget(
+                                                      key: Key(
+                                                          'Key998_${slotsIndex}_of_${slots.length}'),
+                                                      time: slotsItem,
+                                                      fillClr: _model
+                                                                  .selectedTime ==
+                                                              slotsItem
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondary
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .containerClr,
+                                                      borderClr: _model
+                                                                  .selectedTime ==
+                                                              slotsItem
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondary
+                                                          : Color(0x66252E3D),
+                                                      textClr: _model
+                                                                  .selectedTime ==
+                                                              slotsItem
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .info
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .accent1,
+                                                      onTap: () async {
+                                                        _model.selectedTime =
+                                                            slotsItem;
+                                                        safeSetState(() {});
+                                                      },
+                                                    );
+                                                  }).divide(
+                                                      SizedBox(width: 10.0)),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 16.0, 0.0, 0.0),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      if (_model.selectedTime != null &&
-                                          _model.selectedTime != '') {
-                                        _model.profileData =
-                                            await ProfilesTable().queryRows(
-                                          queryFn: (q) => q.eqOrNull(
-                                            'id',
-                                            FFAppState().userId,
-                                          ),
-                                        );
-                                        _model.hubspotBooking =
-                                            await HubspotBookMeetingCall.call(
-                                          email: _model
-                                              .profileData?.firstOrNull?.email,
-                                          firstName: _model.profileData
-                                              ?.firstOrNull?.fullName,
-                                          startTime: functions.timeToISO8601(
-                                              _model.selectedTime!,
-                                              _model.selectedDate!),
-                                          lastName: functions.getLastName(_model
-                                              .profileData!
-                                              .firstOrNull!
-                                              .fullName!),
-                                          projectId: widget.projectId,
-                                        );
-
-                                        if ((_model.hubspotBooking?.succeeded ??
-                                            true)) {
-                                          await ProjectsTable().update(
-                                            data: {
-                                              'appointment_date':
-                                                  supaSerialize<DateTime>(
-                                                      _model.selectedDate),
-                                              'appointment_time':
-                                                  _model.selectedTime,
-                                              'current_steps': 5,
-                                            },
-                                            matchingRows: (rows) =>
-                                                rows.eqOrNull(
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 16.0, 0.0, 0.0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        if (_model.selectedTime != null &&
+                                            _model.selectedTime != '') {
+                                          _model.profileData =
+                                              await ProfilesTable().queryRows(
+                                            queryFn: (q) => q.eqOrNull(
                                               'id',
-                                              widget.projectId,
+                                              FFAppState().userId,
                                             ),
                                           );
-
-                                          context.goNamed(
-                                            Step5Widget.routeName,
-                                            queryParameters: {
-                                              'projectId': serializeParam(
-                                                widget.projectId,
-                                                ParamType.String,
-                                              ),
-                                            }.withoutNulls,
+                                          _model.calendlyBooking =
+                                              await CalendlyBookMeetingCall
+                                                  .call(
+                                            projectId: widget.projectId,
+                                            startTime: functions.timeToISO8601(
+                                                _model.selectedTime!,
+                                                _model.selectedDate != null
+                                                    ? _model.selectedDate!
+                                                    : getCurrentTimestamp),
                                           );
+
+                                          if ((_model
+                                                  .calendlyBooking?.succeeded ??
+                                              true)) {
+                                            await ProjectsTable().update(
+                                              data: {
+                                                'appointment_date':
+                                                    supaSerialize<DateTime>(
+                                                        _model.selectedDate),
+                                                'appointment_time':
+                                                    _model.selectedTime,
+                                                'current_steps': 5,
+                                              },
+                                              matchingRows: (rows) =>
+                                                  rows.eqOrNull(
+                                                'id',
+                                                widget.projectId,
+                                              ),
+                                            );
+
+                                            context.goNamed(
+                                              Step5Widget.routeName,
+                                              queryParameters: {
+                                                'projectId': serializeParam(
+                                                  widget.projectId,
+                                                  ParamType.String,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'Calendly Booking failed !',
+                                                  style: GoogleFonts.inter(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .info,
+                                                    fontSize: 14.0,
+                                                  ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                              ),
+                                            );
+                                          }
                                         } else {
+                                          ScaffoldMessenger.of(context)
+                                              .clearSnackBars();
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             SnackBar(
                                               content: Text(
-                                                'Hubspot booking failed !',
-                                                style: GoogleFonts.inter(
+                                                'Please select slot',
+                                                style: TextStyle(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .info,
-                                                  fontSize: 14.0,
+                                                      .secondaryBackground,
                                                 ),
                                               ),
                                               duration:
@@ -837,46 +861,38 @@ class _Step4WidgetState extends State<Step4Widget> {
                                             ),
                                           );
                                         }
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .clearSnackBars();
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Please select slot',
-                                              style: TextStyle(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                              ),
-                                            ),
-                                            duration:
-                                                Duration(milliseconds: 4000),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .error,
-                                          ),
-                                        );
-                                      }
 
-                                      safeSetState(() {});
-                                    },
-                                    text: 'Confirm and Schedule',
-                                    options: FFButtonOptions(
-                                      width: double.infinity,
-                                      height: 48.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 0.0, 16.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            font: GoogleFonts.playfair(
+                                        safeSetState(() {});
+                                      },
+                                      text: 'Confirm and Schedule',
+                                      options: FFButtonOptions(
+                                        width: double.infinity,
+                                        height: 48.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 0.0, 16.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              font: GoogleFonts.playfair(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .fontStyle,
+                                              ),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .warning,
+                                              fontSize: 18.0,
+                                              letterSpacing: 0.0,
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
@@ -886,42 +902,35 @@ class _Step4WidgetState extends State<Step4Widget> {
                                                       .titleSmall
                                                       .fontStyle,
                                             ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .warning,
-                                            fontSize: 18.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontStyle,
-                                          ),
-                                      elevation: 1.0,
-                                      borderRadius: BorderRadius.circular(12.0),
+                                        elevation: 1.0,
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ]
-                                  .divide(SizedBox(height: 4.0))
-                                  .addToStart(SizedBox(height: 12.0))
-                                  .addToEnd(SizedBox(height: 20.0)),
+                                ]
+                                    .divide(SizedBox(height: 4.0))
+                                    .addToStart(SizedBox(height: 12.0))
+                                    .addToEnd(SizedBox(height: 20.0)),
+                              ),
                             ),
                           ),
-                        ),
-                      ]
-                          .divide(SizedBox(height: 10.0))
-                          .addToStart(SizedBox(height: 25.0))
-                          .addToEnd(SizedBox(height: 20.0)),
+                        ]
+                            .divide(SizedBox(height: 10.0))
+                            .addToStart(SizedBox(height: 25.0))
+                            .addToEnd(SizedBox(height: 20.0)),
+                      ),
                     ),
                   ),
                 ),
+                wrapWithModel(
+                  model: _model.chatbotActionCardModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: ChatbotActionCardWidget(),
+                ),
               ]
-                  .divide(SizedBox(height: 20.0))
                   .addToStart(SizedBox(height: 20.0))
-                  .addToEnd(SizedBox(height: 41.0)),
+                  .addToEnd(SizedBox(height: 10.0)),
             ),
           ),
         ),

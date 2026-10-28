@@ -1,4 +1,5 @@
 import '/components/app_header/app_header_widget.dart';
+import '/components/chatbot_action_card_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
@@ -152,7 +153,7 @@ class _HeritagePageWidgetState extends State<HeritagePageWidget> {
                           ],
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.0, 1.0),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 16.0),
@@ -185,6 +186,14 @@ class _HeritagePageWidgetState extends State<HeritagePageWidget> {
                         ),
                       ],
                     ),
+                  ),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.chatbotActionCardModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: ChatbotActionCardWidget(),
                   ),
                 ),
               ]

@@ -1,4 +1,5 @@
 import '/components/app_header/app_header_widget.dart';
+import '/components/chatbot_action_card_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'about_page_widget.dart' show AboutPageWidget;
 import 'package:flutter/material.dart';
@@ -16,14 +17,19 @@ class AboutPageModel extends FlutterFlowModel<AboutPageWidget> {
           pageViewController!.page != null
       ? pageViewController!.page!.round()
       : 0;
+  // Model for ChatbotActionCard component.
+  late ChatbotActionCardModel chatbotActionCardModel;
 
   @override
   void initState(BuildContext context) {
     appHeaderModel = createModel(context, () => AppHeaderModel());
+    chatbotActionCardModel =
+        createModel(context, () => ChatbotActionCardModel());
   }
 
   @override
   void dispose() {
     appHeaderModel.dispose();
+    chatbotActionCardModel.dispose();
   }
 }

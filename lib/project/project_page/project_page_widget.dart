@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/app_header/app_header_widget.dart';
+import '/components/chatbot_action_card_widget.dart';
 import '/components/feeds/feeds_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -131,7 +132,12 @@ class _ProjectPageWidgetState extends State<ProjectPageWidget> {
                   },
                 ),
               ),
-            ].divide(SizedBox(height: 15.0)).addToStart(SizedBox(height: 20.0)),
+              wrapWithModel(
+                model: _model.chatbotActionCardModel,
+                updateCallback: () => safeSetState(() {}),
+                child: ChatbotActionCardWidget(),
+              ),
+            ].addToStart(SizedBox(height: 20.0)),
           ),
         ),
       ),

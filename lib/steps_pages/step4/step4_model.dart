@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
+import '/components/chatbot_action_card_widget.dart';
 import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
@@ -21,8 +22,10 @@ class Step4Model extends FlutterFlowModel<Step4Widget> {
   Completer<ApiCallResponse>? apiRequestCompleter;
   // Stores action output result for [Backend Call - Query Rows] action in Button widget.
   List<ProfilesRow>? profileData;
-  // Stores action output result for [Backend Call - API (hubspotBookMeeting)] action in Button widget.
-  ApiCallResponse? hubspotBooking;
+  // Stores action output result for [Backend Call - API (CalendlyBookMeeting)] action in Button widget.
+  ApiCallResponse? calendlyBooking;
+  // Model for ChatbotActionCard component.
+  late ChatbotActionCardModel chatbotActionCardModel;
 
   @override
   void initState(BuildContext context) {
@@ -30,10 +33,14 @@ class Step4Model extends FlutterFlowModel<Step4Widget> {
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
+    chatbotActionCardModel =
+        createModel(context, () => ChatbotActionCardModel());
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    chatbotActionCardModel.dispose();
+  }
 
   /// Additional helper methods.
   Future waitForApiRequestCompleted({

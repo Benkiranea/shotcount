@@ -1,3 +1,4 @@
+import '/components/chatbot_action_card_widget.dart';
 import '/flutter_flow/ff_builtin_enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -279,7 +280,7 @@ class _GreatnessPageWidgetState extends State<GreatnessPageWidget> {
                           ],
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.0, 1.0),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 60.0, 0.0, 0.0),
@@ -312,6 +313,14 @@ class _GreatnessPageWidgetState extends State<GreatnessPageWidget> {
                         ),
                       ],
                     ),
+                  ),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.chatbotActionCardModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: ChatbotActionCardWidget(),
                   ),
                 ),
               ]

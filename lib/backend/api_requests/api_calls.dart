@@ -362,15 +362,13 @@ class HubspotBookMeetingCall {
 
 class SlotAvailabilitiesCall {
   static Future<ApiCallResponse> call({
-    String? slug = 'info316',
     String? date = '',
-    String? timezone = 'UTC',
   }) async {
     final ffApiRequestBody = '''
 {
-  "slug": ${slug == null ? 'null' : '"${escapeStringForJson(slug)}"'},
+  "slug": "<slug>",
   "date": ${date == null ? 'null' : '"${escapeStringForJson(date)}"'},
-  "timezone": ${timezone == null ? 'null' : '"${escapeStringForJson(timezone)}"'}
+  "timezone": "<timezone>"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'slotAvailabilities',
@@ -396,10 +394,50 @@ class SlotAvailabilitiesCall {
     );
   }
 
-  static dynamic timeslot(dynamic response) => getJsonField(
+  static List<String>? timeslot(dynamic response) => (getJsonField(
         response,
         r'''$''',
-      );
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+}
+
+class CalendlyBookMeetingCall {
+  static Future<ApiCallResponse> call({
+    String? projectId = '',
+    String? startTime = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "projectId": ${projectId == null ? 'null' : '"${escapeStringForJson(projectId)}"'},
+  "startTime": ${startTime == null ? 'null' : '"${escapeStringForJson(startTime)}"'}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'CalendlyBookMeeting',
+      apiUrl:
+          'https://cpwuclmclkbuwpnhdkha.supabase.co/functions/v1/calendly-book-meeting',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwd3VjbG1jbGtidXdwbmhka2hhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMjA3MjIsImV4cCI6MjEwMjY5NjcyMn0.xKqHrT0FLwTt0iWWlNbYZRV5-OG2Rj9tHIoOiis9Gts',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 class ApiPagingParams {
