@@ -115,121 +115,124 @@ class _CustomerRightsPageWidgetState extends State<CustomerRightsPageWidget> {
                     ),
                   ].divide(SizedBox(width: 12.0)),
                 ),
-                Container(
-                  width: 350.0,
-                  height: 234.0,
-                  child: Stack(
-                    children: [
-                      PageView(
-                        controller: _model.pageViewController ??=
-                            PageController(initialPage: 0),
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.asset(
-                                  'assets/images/image_14.png',
-                                  width: double.infinity,
-                                  height: 234.0,
-                                  fit: BoxFit.contain,
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  child: Container(
+                    width: 350.0,
+                    height: 234.0,
+                    child: Stack(
+                      children: [
+                        PageView(
+                          controller: _model.pageViewController ??=
+                              PageController(initialPage: 0),
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/image_14.png',
+                                    width: double.infinity,
+                                    height: 234.0,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.asset(
-                                  'assets/images/image_15.png',
-                                  width: double.infinity,
-                                  height: 234.0,
-                                  fit: BoxFit.contain,
+                              ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/image_15.png',
+                                    width: double.infinity,
+                                    height: 234.0,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.asset(
-                                  'assets/images/image_16.png',
-                                  width: double.infinity,
-                                  height: 234.0,
-                                  fit: BoxFit.contain,
+                              ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/image_16.png',
+                                    width: double.infinity,
+                                    height: 234.0,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.asset(
-                                  'assets/images/image_17.png',
-                                  width: double.infinity,
-                                  height: 234.0,
-                                  fit: BoxFit.contain,
+                              ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/image_17.png',
+                                    width: double.infinity,
+                                    height: 234.0,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.asset(
-                                  'assets/images/image_18.png',
-                                  width: double.infinity,
-                                  height: 234.0,
-                                  fit: BoxFit.contain,
+                              ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/image_18.png',
+                                    width: double.infinity,
+                                    height: 234.0,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional(0.0, 1.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 16.0),
+                            child: smooth_page_indicator.SmoothPageIndicator(
+                              controller: _model.pageViewController ??=
+                                  PageController(initialPage: 0),
+                              count: 5,
+                              axisDirection: Axis.horizontal,
+                              onDotClicked: (i) async {
+                                await _model.pageViewController!.animateToPage(
+                                  i,
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.ease,
+                                );
+                                safeSetState(() {});
+                              },
+                              effect: smooth_page_indicator.SlideEffect(
+                                spacing: 3.0,
+                                radius: 8.0,
+                                dotWidth: 12.0,
+                                dotHeight: 12.0,
+                                dotColor:
+                                    FlutterFlowTheme.of(context).containerClr,
+                                activeDotColor:
+                                    FlutterFlowTheme.of(context).primary,
+                                paintStyle: PaintingStyle.fill,
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional(0.0, 1.0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 16.0),
-                          child: smooth_page_indicator.SmoothPageIndicator(
-                            controller: _model.pageViewController ??=
-                                PageController(initialPage: 0),
-                            count: 5,
-                            axisDirection: Axis.horizontal,
-                            onDotClicked: (i) async {
-                              await _model.pageViewController!.animateToPage(
-                                i,
-                                duration: Duration(milliseconds: 500),
-                                curve: Curves.ease,
-                              );
-                              safeSetState(() {});
-                            },
-                            effect: smooth_page_indicator.SlideEffect(
-                              spacing: 3.0,
-                              radius: 8.0,
-                              dotWidth: 12.0,
-                              dotHeight: 12.0,
-                              dotColor:
-                                  FlutterFlowTheme.of(context).containerClr,
-                              activeDotColor:
-                                  FlutterFlowTheme.of(context).primary,
-                              paintStyle: PaintingStyle.fill,
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 Spacer(),

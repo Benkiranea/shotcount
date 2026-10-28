@@ -823,7 +823,12 @@ class _Step4WidgetState extends State<Step4Widget> {
                                                 .showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  'Calendly Booking failed !',
+                                                  getJsonField(
+                                                    (_model.calendlyBooking
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.error''',
+                                                  ).toString(),
                                                   style: GoogleFonts.inter(
                                                     color: FlutterFlowTheme.of(
                                                             context)
