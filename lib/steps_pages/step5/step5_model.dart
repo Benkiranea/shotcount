@@ -1,3 +1,4 @@
+import '/components/chatbot_action_card_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/steps_pages/steps_container/steps_container_widget.dart';
 import '/index.dart';
@@ -13,14 +14,21 @@ class Step5Model extends FlutterFlowModel<Step5Widget> {
 
   // Model for StepsContainer component.
   late StepsContainerModel stepsContainerModel;
+  // Stores action output result for [Custom Action - saveImageToGallery] action in Image widget.
+  bool? isWallpaperImageSaved;
+  // Model for ChatbotActionCard component.
+  late ChatbotActionCardModel chatbotActionCardModel;
 
   @override
   void initState(BuildContext context) {
     stepsContainerModel = createModel(context, () => StepsContainerModel());
+    chatbotActionCardModel =
+        createModel(context, () => ChatbotActionCardModel());
   }
 
   @override
   void dispose() {
     stepsContainerModel.dispose();
+    chatbotActionCardModel.dispose();
   }
 }

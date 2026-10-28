@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
+import '/components/chatbot_action_card_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/steps_pages/bill_container/bill_container_widget.dart';
 import '/index.dart';
@@ -15,14 +16,19 @@ class Step3Model extends FlutterFlowModel<Step3Widget> {
   List<ProfilesRow>? userData;
   // Stores action output result for [Backend Call - API (chatUserTokenHubspot)] action in BillContainer widget.
   ApiCallResponse? chatToken;
+  // Model for ChatbotActionCard component.
+  late ChatbotActionCardModel chatbotActionCardModel;
 
   @override
   void initState(BuildContext context) {
     billContainerModel = createModel(context, () => BillContainerModel());
+    chatbotActionCardModel =
+        createModel(context, () => ChatbotActionCardModel());
   }
 
   @override
   void dispose() {
     billContainerModel.dispose();
+    chatbotActionCardModel.dispose();
   }
 }

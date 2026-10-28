@@ -1,9 +1,11 @@
+import '/components/large_p_d_f_view/large_p_d_f_view_widget.dart';
 import '/flutter_flow/flutter_flow_pdf_viewer.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'bill_container_model.dart';
 export 'bill_container_model.dart';
 
@@ -58,10 +60,37 @@ class _BillContainerWidgetState extends State<BillContainerWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            FlutterFlowPdfViewer(
-              networkPath: widget.pdfPath!,
-              height: 342.0,
-              horizontalScroll: false,
+            InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                await showModalBottomSheet(
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  useSafeArea: true,
+                  context: context,
+                  builder: (context) {
+                    return WebViewAware(
+                      child: Padding(
+                        padding: MediaQuery.viewInsetsOf(context),
+                        child: LargePDFViewWidget(
+                          url: widget.pdfPath!,
+                        ),
+                      ),
+                    );
+                  },
+                ).then((value) => safeSetState(() {}));
+              },
+              child: Container(
+                decoration: BoxDecoration(),
+                child: FlutterFlowPdfViewer(
+                  networkPath: widget.pdfPath!,
+                  height: 342.0,
+                  horizontalScroll: false,
+                ),
+              ),
             ),
             Column(
               mainAxisSize: MainAxisSize.max,

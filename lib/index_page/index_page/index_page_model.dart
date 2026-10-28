@@ -1,5 +1,4 @@
-import '/backend/api_requests/api_calls.dart';
-import '/backend/supabase/supabase.dart';
+import '/components/chatbot_action_card_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index_page/index_conatainer/index_conatainer_widget.dart';
 import '/index.dart';
@@ -19,10 +18,8 @@ class IndexPageModel extends FlutterFlowModel<IndexPageWidget> {
   late IndexConatainerModel indexConatainerModel4;
   // Model for IndexConatainer component.
   late IndexConatainerModel indexConatainerModel5;
-  // Stores action output result for [Backend Call - Query Rows] action in Image widget.
-  List<ProfilesRow>? userData;
-  // Stores action output result for [Backend Call - API (chatUserTokenHubspot)] action in Image widget.
-  ApiCallResponse? chatToken;
+  // Model for ChatbotActionCard component.
+  late ChatbotActionCardModel chatbotActionCardModel;
 
   @override
   void initState(BuildContext context) {
@@ -31,6 +28,8 @@ class IndexPageModel extends FlutterFlowModel<IndexPageWidget> {
     indexConatainerModel3 = createModel(context, () => IndexConatainerModel());
     indexConatainerModel4 = createModel(context, () => IndexConatainerModel());
     indexConatainerModel5 = createModel(context, () => IndexConatainerModel());
+    chatbotActionCardModel =
+        createModel(context, () => ChatbotActionCardModel());
   }
 
   @override
@@ -40,5 +39,6 @@ class IndexPageModel extends FlutterFlowModel<IndexPageWidget> {
     indexConatainerModel3.dispose();
     indexConatainerModel4.dispose();
     indexConatainerModel5.dispose();
+    chatbotActionCardModel.dispose();
   }
 }

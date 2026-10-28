@@ -125,15 +125,8 @@ class Step1Model extends FlutterFlowModel<Step1Widget> {
   TextEditingController? projectAddressTextController;
   String? Function(BuildContext, String?)?
       projectAddressTextControllerValidator;
-  String? _projectAddressTextControllerValidator(
-      BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Project Address is required';
-    }
-
-    return null;
-  }
-
+  // State field(s) for PlacePicker widget.
+  FFPlace placePickerValue = FFPlace();
   // Model for StepsContainer component.
   late StepsContainerModel stepsContainerModel2;
   // State field(s) for AboutProject widget.
@@ -188,8 +181,6 @@ class Step1Model extends FlutterFlowModel<Step1Widget> {
     emailTextControllerValidator = _emailTextControllerValidator;
     phoneTextControllerValidator = _phoneTextControllerValidator;
     projectNameTextControllerValidator = _projectNameTextControllerValidator;
-    projectAddressTextControllerValidator =
-        _projectAddressTextControllerValidator;
     stepsContainerModel2 = createModel(context, () => StepsContainerModel());
     stepsContainerModel3 = createModel(context, () => StepsContainerModel());
     stepsContainerModel4 = createModel(context, () => StepsContainerModel());

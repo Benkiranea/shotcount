@@ -1,5 +1,6 @@
 import '/backend/schema/enums/enums.dart';
 import '/components/app_header/app_header_widget.dart';
+import '/components/chatbot_action_card_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
@@ -880,6 +881,11 @@ class _TestimonialsPageWidgetState extends State<TestimonialsPageWidget> {
                       },
                     ),
                   ),
+                ),
+                wrapWithModel(
+                  model: _model.chatbotActionCardModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: ChatbotActionCardWidget(),
                 ),
               ]
                   .divide(SizedBox(height: 15.0))

@@ -1,5 +1,6 @@
 import '/backend/schema/enums/enums.dart';
 import '/components/app_header/app_header_widget.dart';
+import '/components/chatbot_action_card_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'testimonials_page_widget.dart' show TestimonialsPageWidget;
 import 'package:flutter/material.dart';
@@ -13,14 +14,19 @@ class TestimonialsPageModel extends FlutterFlowModel<TestimonialsPageWidget> {
 
   // Model for AppHeader component.
   late AppHeaderModel appHeaderModel;
+  // Model for ChatbotActionCard component.
+  late ChatbotActionCardModel chatbotActionCardModel;
 
   @override
   void initState(BuildContext context) {
     appHeaderModel = createModel(context, () => AppHeaderModel());
+    chatbotActionCardModel =
+        createModel(context, () => ChatbotActionCardModel());
   }
 
   @override
   void dispose() {
     appHeaderModel.dispose();
+    chatbotActionCardModel.dispose();
   }
 }

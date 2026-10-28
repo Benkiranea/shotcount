@@ -1,5 +1,8 @@
+import '/flutter_flow/ff_builtin_enums.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -19,6 +22,7 @@ class YourDetailCardWidget extends StatefulWidget {
     required this.progressValue,
     required this.image,
     required this.totalStep,
+    required this.imageURL,
   });
 
   final String? title;
@@ -31,6 +35,7 @@ class YourDetailCardWidget extends StatefulWidget {
   final double? progressValue;
   final String? image;
   final String? totalStep;
+  final String? imageURL;
 
   @override
   State<YourDetailCardWidget> createState() => _YourDetailCardWidgetState();
@@ -80,13 +85,74 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.network(
-                          widget.image!,
-                          width: 79.0,
-                          height: 79.0,
-                          fit: BoxFit.cover,
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.fade,
+                              child: FlutterFlowExpandedImageView(
+                                image: Image.network(
+                                  widget.image!,
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Image.asset(
+                                    'assets/images/error_image.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                allowRotation: false,
+                                tag: widget.image!,
+                                useHeroAnimation: true,
+                              ),
+                            ),
+                          );
+                          _model.isSaved = await actions.saveImageToGallery(
+                            widget.imageURL!,
+                          );
+                          if (_model.isSaved!) {
+                            ScaffoldMessenger.of(context).clearSnackBars();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Image saved to gallery',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).primary,
+                              ),
+                            );
+                          }
+
+                          safeSetState(() {});
+                        },
+                        child: Hero(
+                          tag: widget.image!,
+                          transitionOnUserGestures: true,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.network(
+                              widget.image!,
+                              width: 79.0,
+                              height: 79.0,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Image.asset(
+                                'assets/images/error_image.png',
+                                width: 79.0,
+                                height: 79.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       Expanded(
@@ -399,6 +465,9 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                 Expanded(
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment:
+                        (FFCrossAxisAlignment.start).flutterValue,
+                    textBaseline: TextBaseline.alphabetic,
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
@@ -409,13 +478,27 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      Text(
-                        valueOrDefault<String>(
-                          widget.address,
-                          'Project Address',
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              font: GoogleFonts.inter(
+                      Expanded(
+                        child: Text(
+                          valueOrDefault<String>(
+                            widget.address,
+                            'Project Address',
+                          ),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                font: GoogleFonts.inter(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                fontSize: 12.0,
+                                letterSpacing: 0.0,
                                 fontWeight: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .fontWeight,
@@ -423,16 +506,7 @@ class _YourDetailCardWidgetState extends State<YourDetailCardWidget> {
                                     .bodyMedium
                                     .fontStyle,
                               ),
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              fontSize: 12.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontWeight,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontStyle,
-                            ),
+                        ),
                       ),
                     ].divide(SizedBox(width: 4.0)),
                   ),

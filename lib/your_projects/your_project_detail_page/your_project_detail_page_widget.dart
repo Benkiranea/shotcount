@@ -1,6 +1,8 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/app_header/app_header_widget.dart';
+import '/components/chatbot_action_card_widget.dart';
+import '/components/large_p_d_f_view/large_p_d_f_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/your_projects/project_detail_card/project_detail_card_widget.dart';
@@ -10,6 +12,7 @@ import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'your_project_detail_page_model.dart';
 export 'your_project_detail_page_model.dart';
 
@@ -1695,11 +1698,17 @@ class _YourProjectDetailPageWidgetState
                                     columnGetProjectDetailsResponse.jsonBody,
                                     r'''$[0].progress_percentage''',
                                   )),
-                                  image:
-                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shot-tracker-9ge9rk/assets/fbn46h40yfhq/Rectangle_10752.png',
+                                  image: getJsonField(
+                                    columnGetProjectDetailsResponse.jsonBody,
+                                    r'''$[0].visualize_result''',
+                                  ).toString(),
                                   totalStep: getJsonField(
                                     columnGetProjectDetailsResponse.jsonBody,
                                     r'''$[0].total_steps''',
+                                  ).toString(),
+                                  imageURL: getJsonField(
+                                    columnGetProjectDetailsResponse.jsonBody,
+                                    r'''$[0].visualize_result''',
                                   ).toString(),
                                 ),
                               ),
@@ -2148,7 +2157,7 @@ class _YourProjectDetailPageWidgetState
                                                     ),
                                                     Container(
                                                       width: 1.0,
-                                                      height: 25.0,
+                                                      height: 45.0,
                                                       decoration: BoxDecoration(
                                                         color:
                                                             FlutterFlowTheme.of(
@@ -2473,7 +2482,7 @@ class _YourProjectDetailPageWidgetState
                                                     ),
                                                     Container(
                                                       width: 1.0,
-                                                      height: 25.0,
+                                                      height: 45.0,
                                                       decoration: BoxDecoration(
                                                         color:
                                                             FlutterFlowTheme.of(
@@ -2788,7 +2797,7 @@ class _YourProjectDetailPageWidgetState
                                                     ),
                                                     Container(
                                                       width: 1.0,
-                                                      height: 25.0,
+                                                      height: 45.0,
                                                       decoration: BoxDecoration(
                                                         color:
                                                             FlutterFlowTheme.of(
@@ -3057,7 +3066,7 @@ class _YourProjectDetailPageWidgetState
                                                     ),
                                                     Container(
                                                       width: 1.0,
-                                                      height: 25.0,
+                                                      height: 45.0,
                                                       decoration: BoxDecoration(
                                                         color:
                                                             FlutterFlowTheme.of(
@@ -3347,7 +3356,7 @@ class _YourProjectDetailPageWidgetState
                                                     ),
                                                     Container(
                                                       width: 1.0,
-                                                      height: 25.0,
+                                                      height: 45.0,
                                                       decoration: BoxDecoration(
                                                         color:
                                                             FlutterFlowTheme.of(
@@ -3632,7 +3641,7 @@ class _YourProjectDetailPageWidgetState
                                                     ),
                                                     Container(
                                                       width: 1.0,
-                                                      height: 25.0,
+                                                      height: 45.0,
                                                       decoration: BoxDecoration(
                                                         color:
                                                             FlutterFlowTheme.of(
@@ -4074,6 +4083,96 @@ class _YourProjectDetailPageWidgetState
                                                                       .fontStyle,
                                                                 ),
                                                           ),
+                                                          if (getJsonField(
+                                                                columnGetProjectDetailsResponse
+                                                                    .jsonBody,
+                                                                r'''$[0].appointment_pdf''',
+                                                              ) !=
+                                                              null)
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                await showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  useSafeArea:
+                                                                      true,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return WebViewAware(
+                                                                      child:
+                                                                          GestureDetector(
+                                                                        onTap:
+                                                                            () {
+                                                                          FocusScope.of(context)
+                                                                              .unfocus();
+                                                                          FocusManager
+                                                                              .instance
+                                                                              .primaryFocus
+                                                                              ?.unfocus();
+                                                                        },
+                                                                        child:
+                                                                            Padding(
+                                                                          padding:
+                                                                              MediaQuery.viewInsetsOf(context),
+                                                                          child:
+                                                                              LargePDFViewWidget(
+                                                                            url:
+                                                                                getJsonField(
+                                                                              columnGetProjectDetailsResponse.jsonBody,
+                                                                              r'''$[0].appointment_pdf''',
+                                                                            ).toString(),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    safeSetState(
+                                                                        () {}));
+                                                              },
+                                                              child: Text(
+                                                                'View Proposal ->',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      font: GoogleFonts
+                                                                          .playfair(
+                                                                        fontWeight:
+                                                                            FontWeight.w600,
+                                                                        fontStyle: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .fontStyle,
+                                                                      ),
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      fontStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .fontStyle,
+                                                                    ),
+                                                              ),
+                                                            ),
                                                         ].divide(SizedBox(
                                                             height: 2.0)),
                                                       ),
@@ -4584,8 +4683,10 @@ class _YourProjectDetailPageWidgetState
                                               yourProjectsItem,
                                               r'''$.current_steps''',
                                             ).toString(),
-                                            image:
-                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shot-tracker-9ge9rk/assets/fbn46h40yfhq/Rectangle_10752.png',
+                                            image: getJsonField(
+                                              yourProjectsItem,
+                                              r'''$.visualize_result''',
+                                            ).toString(),
                                             totalStep: getJsonField(
                                               yourProjectsItem,
                                               r'''$.total_steps''',
@@ -4631,10 +4732,18 @@ class _YourProjectDetailPageWidgetState
                         ),
                       ),
                     ),
+                    Align(
+                      alignment: AlignmentDirectional(0.0, 0.0),
+                      child: wrapWithModel(
+                        model: _model.chatbotActionCardModel,
+                        updateCallback: () => safeSetState(() {}),
+                        child: ChatbotActionCardWidget(),
+                      ),
+                    ),
                   ]
                       .divide(SizedBox(height: 6.0))
                       .addToStart(SizedBox(height: 20.0))
-                      .addToEnd(SizedBox(height: 20.0)),
+                      .addToEnd(SizedBox(height: 10.0)),
                 );
               },
             ),

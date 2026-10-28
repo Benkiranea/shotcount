@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/app_header/app_header_widget.dart';
+import '/components/chatbot_action_card_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/your_projects/your_project_cards/your_project_cards_widget.dart';
@@ -66,131 +67,149 @@ class _YourProjectsPageWidgetState extends State<YourProjectsPageWidget> {
                     heading: 'YOUR PROJECTS',
                   ),
                 ),
-                Text(
-                  'We’re here to help.\nReach shotcount in the way that is most convenient for you.',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        font: GoogleFonts.inter(
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                  child: Text(
+                    'We’re here to help.\nReach shotcount in the way that is most convenient for you.',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          font: GoogleFonts.inter(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
+                          color: FlutterFlowTheme.of(context).info,
+                          fontSize: 12.0,
+                          letterSpacing: 0.0,
                           fontWeight: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .fontWeight,
                           fontStyle:
                               FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                         ),
-                        color: FlutterFlowTheme.of(context).info,
-                        fontSize: 12.0,
-                        letterSpacing: 0.0,
-                        fontWeight:
-                            FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                        fontStyle:
-                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                      ),
-                ),
-                Expanded(
-                  child: FutureBuilder<ApiCallResponse>(
-                    future: GetAllProjectsCall.call(
-                      pUserId: FFAppState().userId,
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: CircularProgressIndicator(),
-                          ),
-                        );
-                      }
-                      final listViewGetAllProjectsResponse = snapshot.data!;
-
-                      return Builder(
-                        builder: (context) {
-                          final projectCards = getJsonField(
-                            listViewGetAllProjectsResponse.jsonBody,
-                            r'''$''',
-                          ).toList();
-
-                          return ListView.separated(
-                            padding: EdgeInsets.fromLTRB(
-                              0,
-                              5.0,
-                              0,
-                              12.0,
-                            ),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: projectCards.length,
-                            separatorBuilder: (_, __) => SizedBox(height: 12.0),
-                            itemBuilder: (context, projectCardsIndex) {
-                              final projectCardsItem =
-                                  projectCards[projectCardsIndex];
-                              return YourProjectCardsWidget(
-                                key: Key(
-                                    'Keyikf_${projectCardsIndex}_of_${projectCards.length}'),
-                                title: getJsonField(
-                                  projectCardsItem,
-                                  r'''$.project_title''',
-                                ).toString(),
-                                description: (getJsonField(
-                                  projectCardsItem,
-                                  r'''$.project_types''',
-                                  true,
-                                ) as List?)
-                                    ?.map<String>((e) => e.toString())
-                                    .toList()
-                                    .cast<String>(),
-                                date: getJsonField(
-                                  projectCardsItem,
-                                  r'''$.updated_date''',
-                                ).toString(),
-                                image:
-                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shot-tracker-9ge9rk/assets/fbn46h40yfhq/Rectangle_10752.png',
-                                progresText: getJsonField(
-                                  projectCardsItem,
-                                  r'''$.progress_text''',
-                                ).toString(),
-                                status: getJsonField(
-                                  projectCardsItem,
-                                  r'''$.status''',
-                                ).toString(),
-                                currentStep: getJsonField(
-                                  projectCardsItem,
-                                  r'''$.current_steps''',
-                                ).toString(),
-                                totalStep: getJsonField(
-                                  projectCardsItem,
-                                  r'''$.total_steps''',
-                                ).toString(),
-                                progressPercentage:
-                                    functions.percentToDecimal(getJsonField(
-                                  projectCardsItem,
-                                  r'''$.progress_percentage''',
-                                )),
-                                onTap: () async {
-                                  context.pushNamed(
-                                    YourProjectDetailPageWidget.routeName,
-                                    queryParameters: {
-                                      'projectId': serializeParam(
-                                        getJsonField(
-                                          projectCardsItem,
-                                          r'''$.project_id''',
-                                        ).toString(),
-                                        ParamType.String,
-                                      ),
-                                    }.withoutNulls,
-                                  );
-                                },
-                              );
-                            },
-                          );
-                        },
-                      );
-                    },
                   ),
                 ),
-              ]
-                  .divide(SizedBox(height: 15.0))
-                  .addToStart(SizedBox(height: 20.0)),
+                Expanded(
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                    child: FutureBuilder<ApiCallResponse>(
+                      future: GetAllProjectsCall.call(
+                        pUserId: FFAppState().userId,
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                        }
+                        final listViewGetAllProjectsResponse = snapshot.data!;
+
+                        return Builder(
+                          builder: (context) {
+                            final projectCards = getJsonField(
+                              listViewGetAllProjectsResponse.jsonBody,
+                              r'''$''',
+                            ).toList();
+
+                            return ListView.separated(
+                              padding: EdgeInsets.fromLTRB(
+                                0,
+                                5.0,
+                                0,
+                                12.0,
+                              ),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: projectCards.length,
+                              separatorBuilder: (_, __) =>
+                                  SizedBox(height: 12.0),
+                              itemBuilder: (context, projectCardsIndex) {
+                                final projectCardsItem =
+                                    projectCards[projectCardsIndex];
+                                return YourProjectCardsWidget(
+                                  key: Key(
+                                      'Keyikf_${projectCardsIndex}_of_${projectCards.length}'),
+                                  title: getJsonField(
+                                    projectCardsItem,
+                                    r'''$.project_title''',
+                                  ).toString(),
+                                  description: (getJsonField(
+                                    projectCardsItem,
+                                    r'''$.project_types''',
+                                    true,
+                                  ) as List?)
+                                      ?.map<String>((e) => e.toString())
+                                      .toList()
+                                      .cast<String>(),
+                                  date: getJsonField(
+                                    projectCardsItem,
+                                    r'''$.updated_date''',
+                                  ).toString(),
+                                  image: getJsonField(
+                                    projectCardsItem,
+                                    r'''$.visualize_result''',
+                                  ).toString(),
+                                  progresText: getJsonField(
+                                    projectCardsItem,
+                                    r'''$.progress_text''',
+                                  ).toString(),
+                                  status: getJsonField(
+                                    projectCardsItem,
+                                    r'''$.status''',
+                                  ).toString(),
+                                  currentStep: getJsonField(
+                                    projectCardsItem,
+                                    r'''$.current_steps''',
+                                  ).toString(),
+                                  totalStep: getJsonField(
+                                    projectCardsItem,
+                                    r'''$.total_steps''',
+                                  ).toString(),
+                                  progressPercentage:
+                                      functions.percentToDecimal(getJsonField(
+                                    projectCardsItem,
+                                    r'''$.progress_percentage''',
+                                  )),
+                                  onTap: () async {
+                                    context.pushNamed(
+                                      YourProjectDetailPageWidget.routeName,
+                                      queryParameters: {
+                                        'projectId': serializeParam(
+                                          getJsonField(
+                                            projectCardsItem,
+                                            r'''$.project_id''',
+                                          ).toString(),
+                                          ParamType.String,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.chatbotActionCardModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: ChatbotActionCardWidget(),
+                  ),
+                ),
+              ].addToStart(SizedBox(height: 20.0)),
             ),
           ),
         ),

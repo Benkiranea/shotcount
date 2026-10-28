@@ -1,3 +1,4 @@
+import '/components/chatbot_action_card_widget.dart';
 import '/flutter_flow/ff_builtin_enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -230,6 +231,12 @@ class _CustomerRightsPageWidgetState extends State<CustomerRightsPageWidget> {
                       ),
                     ],
                   ),
+                ),
+                Spacer(),
+                wrapWithModel(
+                  model: _model.chatbotActionCardModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: ChatbotActionCardWidget(),
                 ),
               ].addToStart(SizedBox(height: 20.0)),
             ),
