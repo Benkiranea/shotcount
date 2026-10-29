@@ -38,6 +38,7 @@ dependencies:
   cross_file: 0.3.5+1
   csslib: 1.0.2
   device_info_plus: ^13.2.0
+  easy_debounce: 2.0.1
   equatable: 2.0.7
   file_picker: 10.1.9
   file_saver: 0.2.14
