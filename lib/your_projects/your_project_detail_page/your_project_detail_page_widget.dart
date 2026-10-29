@@ -4083,23 +4083,23 @@ class _YourProjectDetailPageWidgetState
                                                                       .fontStyle,
                                                                 ),
                                                           ),
-                                                          if (getJsonField(
-                                                                columnGetProjectDetailsResponse
-                                                                    .jsonBody,
-                                                                r'''$[0].appointment_pdf''',
-                                                              ) !=
-                                                              null)
-                                                            InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
+                                                          InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              if (getJsonField(
+                                                                    columnGetProjectDetailsResponse
+                                                                        .jsonBody,
+                                                                    r'''$[0].appointment_pdf''',
+                                                                  ) !=
+                                                                  null) {
                                                                 await showModalBottomSheet(
                                                                   isScrollControlled:
                                                                       true,
@@ -4143,26 +4143,16 @@ class _YourProjectDetailPageWidgetState
                                                                 ).then((value) =>
                                                                     safeSetState(
                                                                         () {}));
-                                                              },
-                                                              child: Text(
-                                                                'View Proposal ->',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      font: GoogleFonts
-                                                                          .playfair(
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
-                                                                        fontStyle: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .fontStyle,
-                                                                      ),
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      letterSpacing:
-                                                                          0.0,
+                                                              }
+                                                            },
+                                                            child: Text(
+                                                              'View Proposal ->',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    font: GoogleFonts
+                                                                        .playfair(
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w600,
@@ -4171,8 +4161,33 @@ class _YourProjectDetailPageWidgetState
                                                                           .bodyMedium
                                                                           .fontStyle,
                                                                     ),
-                                                              ),
+                                                                    color: valueOrDefault<
+                                                                        Color>(
+                                                                      getJsonField(
+                                                                                columnGetProjectDetailsResponse.jsonBody,
+                                                                                r'''$[0].appointment_pdf''',
+                                                                              ) !=
+                                                                              null
+                                                                          ? FlutterFlowTheme.of(context)
+                                                                              .primary
+                                                                          : FlutterFlowTheme.of(context)
+                                                                              .alternate,
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                    ),
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
                                                             ),
+                                                          ),
                                                         ].divide(SizedBox(
                                                             height: 2.0)),
                                                       ),
