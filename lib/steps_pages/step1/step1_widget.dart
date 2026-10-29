@@ -13,6 +13,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -902,7 +903,7 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                     '${_model.image}',
                                                     width: double.infinity,
                                                     height: 260.0,
-                                                    fit: BoxFit.contain,
+                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
                                               ),
@@ -1981,9 +1982,16 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                   .projectAddressTextController,
                                               focusNode: _model
                                                   .projectAddressFocusNode,
+                                              onChanged: (_) =>
+                                                  EasyDebounce.debounce(
+                                                '_model.projectAddressTextController',
+                                                Duration(milliseconds: 2000),
+                                                () async {
+                                                  safeSetState(() {});
+                                                },
+                                              ),
                                               autofocus: false,
                                               enabled: true,
-                                              readOnly: true,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 isDense: false,
