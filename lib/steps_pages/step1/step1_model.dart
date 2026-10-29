@@ -120,13 +120,13 @@ class Step1Model extends FlutterFlowModel<Step1Widget> {
     return null;
   }
 
+  // State field(s) for PlacePicker widget.
+  FFPlace placePickerValue = FFPlace();
   // State field(s) for ProjectAddress widget.
   FocusNode? projectAddressFocusNode;
   TextEditingController? projectAddressTextController;
   String? Function(BuildContext, String?)?
       projectAddressTextControllerValidator;
-  // State field(s) for PlacePicker widget.
-  FFPlace placePickerValue = FFPlace();
   // Model for StepsContainer component.
   late StepsContainerModel stepsContainerModel2;
   // State field(s) for AboutProject widget.

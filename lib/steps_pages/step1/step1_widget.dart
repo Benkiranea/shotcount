@@ -11,6 +11,7 @@ import '/flutter_flow/upload_data.dart';
 import '/steps_pages/steps_container/steps_container_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -1903,8 +1904,77 @@ class _Step1WidgetState extends State<Step1Widget> {
                                               .flutterValue,
                                       textBaseline: TextBaseline.alphabetic,
                                       children: [
-                                        if (false)
-                                          Container(
+                                        FlutterFlowPlacePicker(
+                                          iOSGoogleMapsApiKey:
+                                              'AIzaSyCnbzcMOhQjjH_Mb9SyKRBeSXc4Vdw9WXU',
+                                          androidGoogleMapsApiKey:
+                                              'AIzaSyCnbzcMOhQjjH_Mb9SyKRBeSXc4Vdw9WXU',
+                                          webGoogleMapsApiKey:
+                                              'AIzaSyCnbzcMOhQjjH_Mb9SyKRBeSXc4Vdw9WXU',
+                                          onSelect: (place) async {
+                                            safeSetState(() => _model
+                                                .placePickerValue = place);
+                                          },
+                                          defaultText: 'Select Project Address',
+                                          icon: Icon(
+                                            Icons.place,
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                            size: 16.0,
+                                          ),
+                                          buttonOptions: FFButtonOptions(
+                                            width: double.infinity,
+                                            height: 40.0,
+                                            color: FlutterFlowTheme.of(context)
+                                                .containerClr,
+                                            textStyle: FlutterFlowTheme.of(
+                                                    context)
+                                                .labelMedium
+                                                .override(
+                                                  font: GoogleFonts.playfair(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  fontSize: 14.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                            elevation: 0.0,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 10.0, 0.0, 0.0),
+                                          child: Container(
                                             width: double.infinity,
                                             child: TextFormField(
                                               controller: _model
@@ -1946,7 +2016,8 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                               .labelMedium
                                                               .fontStyle,
                                                     ),
-                                                hintText: 'Project Address',
+                                                hintText:
+                                                    'Address Line 2 (optional)',
                                                 hintStyle: FlutterFlowTheme.of(
                                                         context)
                                                     .labelMedium
@@ -2071,71 +2142,6 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                   .asValidator(context),
                                             ),
                                           ),
-                                        FlutterFlowPlacePicker(
-                                          iOSGoogleMapsApiKey:
-                                              'AIzaSyCnbzcMOhQjjH_Mb9SyKRBeSXc4Vdw9WXU',
-                                          androidGoogleMapsApiKey:
-                                              'AIzaSyCnbzcMOhQjjH_Mb9SyKRBeSXc4Vdw9WXU',
-                                          webGoogleMapsApiKey:
-                                              'AIzaSyCnbzcMOhQjjH_Mb9SyKRBeSXc4Vdw9WXU',
-                                          onSelect: (place) async {
-                                            safeSetState(() => _model
-                                                .placePickerValue = place);
-                                          },
-                                          defaultText: 'Select Project Address',
-                                          icon: Icon(
-                                            Icons.place,
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            size: 16.0,
-                                          ),
-                                          buttonOptions: FFButtonOptions(
-                                            width: double.infinity,
-                                            height: 40.0,
-                                            color: FlutterFlowTheme.of(context)
-                                                .containerClr,
-                                            textStyle: FlutterFlowTheme.of(
-                                                    context)
-                                                .labelMedium
-                                                .override(
-                                                  font: GoogleFonts.playfair(
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .alternate,
-                                                  fontSize: 14.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelMedium
-                                                          .fontStyle,
-                                                ),
-                                            elevation: 0.0,
-                                            borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
                                         ),
                                         if (_model.placePickerValue.address !=
                                                 '')
@@ -2144,7 +2150,11 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 2.0, 0.0, 0.0),
                                             child: Text(
-                                              '${_model.placePickerValue.address}, ${_model.placePickerValue.city}, ${_model.placePickerValue.state}, ${_model.placePickerValue.zipCode}, ${_model.placePickerValue.country}',
+                                              functions.getAddressText(
+                                                  _model.placePickerValue,
+                                                  _model
+                                                      .projectAddressTextController
+                                                      .text)!,
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -3593,8 +3603,11 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                     .uploadFilesToSupabase,
                                                 'current_steps': 2,
                                                 'status': 'In Review',
-                                                'address':
-                                                    '${_model.placePickerValue.address}, ${_model.placePickerValue.city}, ${_model.placePickerValue.state}, ${_model.placePickerValue.zipCode}, ${_model.placePickerValue.country}',
+                                                'address': functions.getAddressText(
+                                                    _model.placePickerValue,
+                                                    _model
+                                                        .projectAddressTextController
+                                                        .text),
                                                 'project_types':
                                                     _model.selectedProjectTypes,
                                               });
