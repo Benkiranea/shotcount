@@ -903,7 +903,7 @@ class _Step1WidgetState extends State<Step1Widget> {
                                                     '${_model.image}',
                                                     width: double.infinity,
                                                     height: 260.0,
-                                                    fit: BoxFit.cover,
+                                                    fit: BoxFit.contain,
                                                   ),
                                                 ),
                                               ),
